@@ -2,7 +2,6 @@ import { useRef, useEffect } from "react";
 import { WavesLogic } from "./logic";
 import styles from "./Waves.module.scss";
 
-// TODO: fix direction enum
 export enum WavesDirection {
   Up,
   Down,
