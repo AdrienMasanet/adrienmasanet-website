@@ -117,9 +117,16 @@ export class WavesLogic {
     this.waves.forEach((wave, waveIndex) => {
       //Sets the fill color of the wave and its opacity
       this.context.fillStyle = wave.color;
+      this.context.beginPath();
+      this.context.moveTo(0, this.canvasHeight); // Move drawing cursor to the bottom left of the canvas to draw the wave then we will move to the first segment
 
       wave.segments.forEach((segment, segmentIndex) => {
-        //ASSIGN NEXT POSITION
+        // If first segment, we make a line from the bottom left of the canvas (see upper) to the first segment coordinates
+        if (segmentIndex === 0) {
+          this.context.lineTo(segment.x, segment.y);
+        }
+
+        // ASSIGN NEXT POSITION
         // Ckeck if the segment hasn't got a next position or if it has reached it (with a dead zone of 2px)
         if (!segment.nextPosition || (Math.abs(segment.nextPosition.x - segment.x) < 2 && Math.abs(segment.nextPosition.y - segment.y) < 2)) {
           segment.acceleration = 0;
@@ -137,7 +144,7 @@ export class WavesLogic {
           };
         }
 
-        //MOVE SEGMENT
+        // MOVE SEGMENT
         // Rotates slowly the segment towards its next position
         const direction = Math.atan2(segment.nextPosition.y - segment.y, segment.nextPosition.x - segment.x);
 
@@ -176,20 +183,20 @@ export class WavesLogic {
           this.context.fillStyle = wave.color;
         }
 
-        //DRAW SEGMENT
-        // If there is a segment after this one, draw a line between them
+        // DRAW SEGMENT CURVE
         let nextSegment: Segment | null = wave.segments[segmentIndex + 1];
         if (nextSegment) {
-          this.context.beginPath();
-          this.context.moveTo(segment.x, segment.y);
+          // If there is a segment after this one, we draw a bezier curve between this segment and the next one
           this.context.bezierCurveTo(segment.x - 4 + (nextSegment.x - segment.x) / 2, segment.y, segment.x + (nextSegment.x - segment.x) / 2, nextSegment.y, nextSegment.x, nextSegment.y);
-          // Close the path to fill the wave
-          this.context.lineTo(nextSegment.x, this.canvasHeight);
-          this.context.lineTo(segment.x, this.canvasHeight);
-          this.context.closePath();
-          this.context.fill();
+        } else {
+          // If there is no segment after this one, this is the last segment, we draw a line to the bottom right of the canvas to close the wave
+          this.context.lineTo(this.canvasWidth, this.canvasHeight);
         }
       });
+
+      // This is the end of the wave, we close the path and fill it
+      this.context.closePath();
+      this.context.fill();
     });
 
     requestAnimationFrame(this.update);
