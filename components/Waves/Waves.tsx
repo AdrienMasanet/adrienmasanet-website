@@ -16,7 +16,7 @@ type WavesProps = {
   wavesTurbulences?: number | undefined;
 };
 
-const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 300, wavesSpeed = 15, wavesTurbulences = 120 }: WavesProps) => {
+const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70 }: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {

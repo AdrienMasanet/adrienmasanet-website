@@ -95,9 +95,12 @@ export class WavesLogic {
         throw new Error("Invalid color. Format must be HEX like : #RRGGBB");
       }
 
+      // Defines the opacity of the wave, the last wave will be 100% opaque and the others will be less opaque
+      const nextWaveOpacity = i < numberOfWaves - 1 ? 1 / numberOfWaves : 1;
+
       this.waves.push({
         segments: newWaveSegments,
-        color: "rgba(" + hexToRgb(color)?.r + ", " + hexToRgb(color)?.g + ", " + hexToRgb(color)?.b + ", " + 1 / numberOfWaves + ")",
+        color: "rgba(" + hexToRgb(color)?.r + ", " + hexToRgb(color)?.g + ", " + hexToRgb(color)?.b + ", " + nextWaveOpacity + ")",
         minHeight: minHeight,
         maxHeight: maxHeight,
         speed: speed / numberOfWaves,
