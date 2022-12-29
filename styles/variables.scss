@@ -1,0 +1,19 @@
+// Colors
+$cl-white: #eee6e6;
+$cl-white-50: rgba(#eee6e6, 0.5);
+$cl-white-10: rgba(#eee6e6, 0.1);
+$cl-darkblue: #1f1c9a;
+$cl-blue: #214ff0;
+$cl-black: #000000;
+
+// Gradients
+$gd-blue: linear-gradient(76.85deg, rgba($cl-blue, 0) 17.17%, rgba($cl-blue, 0.8) 77.98%);
+$gd-golden: linear-gradient(180deg, #f0e6b1 40.1%, #d9a542 62.5%, #edb547 100%);
+$gd-silver: linear-gradient(180deg, #ffffff 35.94%, #dadcdf 55.73%, #a2a2a2 100%);
+$gd-bronze: linear-gradient(180deg, #e3c2b4 33.33%, #96593f 76.04%, #96593f 100%);
+
+// Shadows
+$sd-hard-darkblue-lg: 3px 3px 0px $cl-darkblue;
+$sd-hard-darkblue-sm: 1px 1px 0px $cl-darkblue;
+$sd-hard-white-sm: 1px 1px 0px $cl-white;
+$sd-base-md: 0px 8px 10px rgba($cl-black, 0.25);
