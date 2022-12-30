@@ -1,0 +1,21 @@
+@import "./variables";
+
+:export {
+  scssThemeClWhite: $cl-white;
+  scssThemeClWhite50: $cl-white-50;
+  scssThemeClWhite10: $cl-white-10;
+  scssThemeClDarkblue: $cl-darkblue;
+  scssThemeClBlue: $cl-blue;
+  scssThemeClBlack: $cl-black;
+  scssThemeGdBlue: $gd-blue;
+  scssThemeGdGolden: $gd-golden;
+  scssThemeGdSilver: $gd-silver;
+  scssThemeGdBronze: $gd-bronze;
+  scssThemeSdHardDarkblueLg: $sd-hard-darkblue-lg;
+  scssThemeSdHardDarkblueMd: $sd-hard-darkblue-md;
+  scssThemeSdHardDarkblueSm: $sd-hard-darkblue-sm;
+  scssThemeSdHardWhiteSm: $sd-hard-white-sm;
+  scssThemeSdBaseMd: $sd-base-md;
+  scssThemeSdBaseSm: $sd-base-sm;
+  scssThemeDefaultBorderRadius: $default-border-radius;
+}
