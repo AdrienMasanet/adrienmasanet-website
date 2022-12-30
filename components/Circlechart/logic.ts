@@ -2,7 +2,7 @@ import * as THREE from "three";
 import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 import { CircleChartElement, CircleChartElementObject } from "./types";
 
-const extrudeSettings = { depth: 0.1, bevelEnabled: true, bevelSegments: 5, samples: 1, curveSegments: 20, bevelSize: 0.04, bevelThickness: 0.04 };
+const extrudeSettings = { depth: 0.1, bevelEnabled: true, bevelSegments: 1, samples: 1, curveSegments: 30, bevelSize: 0.04, bevelThickness: 0.04 };
 
 export class CircleChartLogic {
   private containerRef: React.RefObject<HTMLDivElement>;
@@ -13,13 +13,17 @@ export class CircleChartLogic {
   private raycaster: THREE.Raycaster;
   private graphMesh: THREE.Mesh;
   private elementsMeshes: CircleChartElementObject[] = [];
+  private scale: number;
   private mouse: THREE.Vector2;
   private styles: any;
+  private labelsDistance: number;
 
-  constructor(containerRef: React.RefObject<HTMLDivElement>, width: number, height: number, elements: CircleChartElement[], gapBetweenElements: number, styles: { readonly [key: string]: string }) {
+  constructor(containerRef: React.RefObject<HTMLDivElement>, width: number, height: number, scale: number, elements: CircleChartElement[], gapBetweenElements: number, styles: { readonly [key: string]: string }, labelsDistance: number) {
     // Append the ThreeJs canvas to the React component's container ref
     this.containerRef = containerRef;
     this.styles = styles;
+    this.labelsDistance = labelsDistance;
+    this.scale = scale;
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(20, width / height, 0.1, 1000);
@@ -62,22 +66,29 @@ export class CircleChartLogic {
   }
 
   makeLights() {
-    const light = new THREE.PointLight(0xffffff, 1, 100);
-    light.position.set(0, 0, 0);
-    this.scene.add(light);
+    // Create a professional lighting to make the graph look really nice
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+    this.scene.add(ambientLight);
 
-    const light2 = new THREE.PointLight(0xffffff, 1, 70);
-    light2.position.set(1, 1, 5);
-    this.scene.add(light2);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.25);
+    directionalLight.position.set(0, 0, 1);
+    this.scene.add(directionalLight);
 
-    const light3 = new THREE.PointLight(0xffffff, 1, 10);
-    light3.position.set(-10, -2, -2);
-    this.scene.add(light3);
+    const pointLight = new THREE.PointLight(0xffffff, 0.25);
+    pointLight.position.set(0, 0, 1);
+    this.scene.add(pointLight);
 
-    const light4 = new THREE.DirectionalLight(0xffffff, 0.11);
-    light4.position.set(-1, 1, 10);
-    light4.target.position.set(0, 0, 0);
-    this.scene.add(light4);
+    const spotLight = new THREE.SpotLight(0xffffff, 0.5);
+    spotLight.position.set(0, 0, 1);
+    spotLight.angle = Math.PI / 3;
+    this.scene.add(spotLight);
+
+    const hemisphereLight = new THREE.HemisphereLight(0xffffff, 0x000000, 0.25);
+    this.scene.add(hemisphereLight);
+
+    const rectAreaLight = new THREE.RectAreaLight(0xffffff, 0.5, 1, 1);
+    rectAreaLight.position.set(0, 0, 1);
+    this.scene.add(rectAreaLight);
   }
 
   makeGraph(elements: CircleChartElement[], gapBetweenElements: number) {
@@ -92,22 +103,25 @@ export class CircleChartLogic {
       // Calculate the angle offset of the current ring considering the gap and the total added percentages of the previous elements
       const angleOffset = (Math.PI * 2 * totalAddedPercentage) / 100;
 
-      baseRingShape.absarc(0, 0, 1, angleOffset + gapBetweenElements, angleLength + angleOffset - gapBetweenElements, false);
-      baseRingShape.absarc(0, 0, 1.5, angleLength + angleOffset - gapBetweenElements, angleOffset + gapBetweenElements, true);
+      baseRingShape.absarc(0, 0, this.scale, angleOffset + gapBetweenElements, angleLength + angleOffset - gapBetweenElements, false);
+      baseRingShape.absarc(0, 0, this.scale * 1.5, angleLength + angleOffset - gapBetweenElements, angleOffset + gapBetweenElements, true);
       baseRingShape.closePath();
 
       const geometry = new THREE.ExtrudeGeometry(baseRingShape, extrudeSettings);
-      const material = new THREE.MeshPhongMaterial({ color: element.color, wireframe: false });
+      // Soften edge so it doesn't look like a sharp edge
+      geometry.computeVertexNormals();
+      const material = new THREE.MeshPhongMaterial({ color: element.color, wireframe: false, flatShading: false });
       const mesh = new THREE.Mesh(geometry, material);
+
       this.graphMesh.add(mesh);
 
       const elementLabelDiv = document.createElement("div");
       elementLabelDiv.className = this.styles["label"];
-      elementLabelDiv.textContent = element.name + " " + element.percentage + "%";
+      elementLabelDiv.innerText = element.name + "\n" + element.percentage + "%";
       const elementLabel = new CSS2DObject(elementLabelDiv);
       // Calculate the angle between the center of the canvas and the center of the bas
       const angle = angleOffset + angleLength / 2;
-      elementLabel.position.set(Math.cos(angle) * 1.4, Math.sin(angle) * 1.4, 0);
+      elementLabel.position.set(Math.cos(angle) * this.labelsDistance * this.scale, Math.sin(angle) * this.labelsDistance * this.scale, 0);
       mesh.add(elementLabel);
 
       // Create an object that will hold the element data and the mesh
@@ -129,7 +143,7 @@ export class CircleChartLogic {
     // Get rid of the mouse move listener
     window.removeEventListener("mousemove", this.onMouseMove);
 
-    // Remoev all HTML children from the container ref to avoid duplicate elements
+    // Remove all HTML children from the container ref to avoid duplicate elements
     while (this.containerRef.current?.firstChild) {
       this.containerRef.current.removeChild(this.containerRef.current.firstChild);
     }

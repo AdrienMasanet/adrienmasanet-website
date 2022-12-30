@@ -19,7 +19,7 @@ const CircleChart = ({ width, height, elements }: CirclechartProps) => {
       return;
     }
 
-    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, elements, 0.075, styles);
+    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, 0.75, elements, 0.075, styles, 2);
 
     return () => {
       circleChartLogicRef.current && circleChartLogicRef.current.destroy();
