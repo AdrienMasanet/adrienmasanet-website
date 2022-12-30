@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { WavesLogic } from "./logic";
 import styles from "./Waves.module.scss";
 
@@ -14,10 +14,20 @@ type WavesProps = {
   wavesSmoothing?: number | undefined;
   wavesSpeed?: number | undefined;
   wavesTurbulences?: number | undefined;
+  absolute?: boolean;
 };
 
-const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70 }: WavesProps) => {
+const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const [yOffset, setyOffset] = useState("0px");
+
+  useEffect(() => {
+    if (canvasRef.current && absolute && wavesDirection === WavesDirection.Down) {
+      setyOffset(`-${canvasRef.current?.height - 2}px`);
+    } else {
+      setyOffset("0px");
+    }
+  }, [canvasRef, absolute, wavesDirection]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -38,10 +48,12 @@ const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 2
       canvasContext.scale(1, -1);
     }
 
-    new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
-  }, [canvasRef]);
+    console.log(canvasRef.current?.clientHeight);
 
-  return <canvas className={styles.canvas} height={200} ref={canvasRef} />;
+    new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
+  }, [canvasRef, wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences]);
+
+  return <canvas style={{ position: absolute ? "absolute" : "relative", marginTop: yOffset }} className={styles.canvas} height={200} ref={canvasRef} />;
 };
 
 export default Waves;
