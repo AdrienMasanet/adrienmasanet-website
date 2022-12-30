@@ -93,6 +93,7 @@ export class CircleChartLogic {
 
   makeGraph(elements: CircleChartElement[], gapBetweenElements: number) {
     let totalAddedPercentage = 0;
+    gapBetweenElements /= 10;
 
     // Create a ring for each element
     elements.forEach((element) => {
@@ -103,13 +104,13 @@ export class CircleChartLogic {
       // Calculate the angle offset of the current ring considering the gap and the total added percentages of the previous elements
       const angleOffset = (Math.PI * 2 * totalAddedPercentage) / 100;
 
-      baseRingShape.absarc(0, 0, this.scale, angleOffset + gapBetweenElements, angleLength + angleOffset - gapBetweenElements, false);
+      baseRingShape.absarc(0, 0, this.scale, angleOffset + gapBetweenElements * 1.5, angleLength + angleOffset - gapBetweenElements * 1.5, false);
       baseRingShape.absarc(0, 0, this.scale * 1.5, angleLength + angleOffset - gapBetweenElements, angleOffset + gapBetweenElements, true);
       baseRingShape.closePath();
 
       const geometry = new THREE.ExtrudeGeometry(baseRingShape, extrudeSettings);
-      // Soften edge so it doesn't look like a sharp edge
       geometry.computeVertexNormals();
+
       const material = new THREE.MeshPhongMaterial({ color: element.color, wireframe: false, flatShading: false });
       const mesh = new THREE.Mesh(geometry, material);
 
@@ -119,7 +120,7 @@ export class CircleChartLogic {
       elementLabelDiv.className = this.styles["label"];
       elementLabelDiv.innerText = element.name + "\n" + element.percentage + "%";
       const elementLabel = new CSS2DObject(elementLabelDiv);
-      // Calculate the angle between the center of the canvas and the center of the bas
+      // Calculate the angle between the center of the canvas and the center of the element's ring 3d mesh
       const angle = angleOffset + angleLength / 2;
       elementLabel.position.set(Math.cos(angle) * this.labelsDistance * this.scale, Math.sin(angle) * this.labelsDistance * this.scale, 0);
       mesh.add(elementLabel);
@@ -157,8 +158,6 @@ export class CircleChartLogic {
 
     this.animateOpening();
     this.animateMouseSwing();
-    this.animateMouseHoverElement();
-    //this.animateElementsTexts();
 
     this.renderer.render(this.scene, this.camera);
     this.labelRenderer.render(this.scene, this.camera);
@@ -177,19 +176,6 @@ export class CircleChartLogic {
     this.graphMesh.rotation.x = THREE.MathUtils.lerp(this.graphMesh.rotation.x, -this.mouse.y * 0.5, 0.01);
     this.graphMesh.rotation.y = THREE.MathUtils.lerp(this.graphMesh.rotation.y, this.mouse.x * 0.5, 0.01);
   }
-
-  animateMouseHoverElement() {
-    this.elementsMeshes.forEach((element) => {
-      const intersects = this.raycaster.intersectObject(element.mesh);
-
-      if (intersects.length > 0) {
-        console.log(element.data.name);
-      } else {
-      }
-    });
-  }
-
-  animateElementsTexts() {}
 
   onMouseMove(event: MouseEvent) {
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;

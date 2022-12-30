@@ -6,11 +6,12 @@ import styles from "./CircleChart.module.scss";
 type CirclechartProps = {
   width: number;
   height: number;
+  scale: number;
   elements: CircleChartElement[];
   gapBetweenElements?: number;
 };
 
-const CircleChart = ({ width, height, elements }: CirclechartProps) => {
+const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75 }: CirclechartProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   let circleChartLogicRef = useRef<CircleChartLogic | null>(null);
 
@@ -19,7 +20,7 @@ const CircleChart = ({ width, height, elements }: CirclechartProps) => {
       return;
     }
 
-    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, 0.75, elements, 0.075, styles, 2);
+    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, scale, elements, gapBetweenElements, styles, 2);
 
     return () => {
       circleChartLogicRef.current && circleChartLogicRef.current.destroy();
