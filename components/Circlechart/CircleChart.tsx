@@ -6,7 +6,7 @@ import styles from "./CircleChart.module.scss";
 type CirclechartProps = {
   width: number;
   height: number;
-  scale: number;
+  scale?: number;
   elements: CircleChartElement[];
   gapBetweenElements?: number;
 };

@@ -164,7 +164,7 @@ export class CircleChartLogic {
   }
 
   animateOpening() {
-    this.camera.position.z = THREE.MathUtils.lerp(this.camera.position.z, 12, 0.003);
+    this.camera.position.z = THREE.MathUtils.lerp(this.camera.position.z, 11, 0.003);
     this.graphMesh.rotation.x = THREE.MathUtils.lerp(this.graphMesh.rotation.x, -0.6, 0.01);
     this.graphMesh.rotation.y = THREE.MathUtils.lerp(this.graphMesh.rotation.y, -0.2, 0.007);
 
