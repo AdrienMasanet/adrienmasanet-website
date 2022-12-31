@@ -8,7 +8,7 @@ export enum WavesDirection {
 }
 
 type WavesProps = {
-  wavesDirection: WavesDirection;
+  wavesDirection?: WavesDirection;
   wavesNumber?: number | undefined;
   wavesColor: string;
   wavesSmoothing?: number | undefined;
@@ -17,26 +17,19 @@ type WavesProps = {
   absolute?: boolean;
 };
 
-const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
+const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [yOffset, setyOffset] = useState("0px");
+  const wavesLogicRef = useRef<WavesLogic | null>(null);
+  const [yOffset, setYOffset] = useState("0px");
+  const timeoutRedrawRef = useRef<NodeJS.Timeout | null>(null);
 
-  useEffect(() => {
-    if (canvasRef.current && absolute && wavesDirection === WavesDirection.Down) {
-      setyOffset(`-${canvasRef.current?.height - 2}px`);
-    } else {
-      setyOffset("0px");
-    }
-  }, [canvasRef, absolute, wavesDirection]);
-
-  useEffect(() => {
+  const initializeCanvas = () => {
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
     }
 
-    // Set canvas size to parent size if parent is available, otherwise use 0
-    canvas.width = canvas.parentElement?.clientWidth || 0;
+    canvas.width = canvas.parentElement?.offsetWidth || 0;
 
     const canvasContext = canvas.getContext("2d");
     if (!canvasContext) {
@@ -48,10 +41,42 @@ const Waves = ({ wavesDirection, wavesNumber = 3, wavesColor, wavesSmoothing = 2
       canvasContext.scale(1, -1);
     }
 
-    console.log(canvasRef.current?.clientHeight);
+    wavesLogicRef.current = new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
+  };
 
-    new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
-  }, [canvasRef, wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences]);
+  useEffect(() => {
+    if (canvasRef.current && absolute && wavesDirection === WavesDirection.Down) {
+      setYOffset(`-${canvasRef.current?.height - 2}px`);
+    } else {
+      setYOffset("0px");
+    }
+  }, [canvasRef, absolute, wavesDirection]);
+
+  useEffect(() => {
+    // We need to update the width of the canvas when resizing the window
+    window.addEventListener("resize", () => {
+      // Use a timeout to avoid redrawing the canvas too often which would be performance heavy
+      if (timeoutRedrawRef.current) {
+        clearTimeout(timeoutRedrawRef.current);
+      }
+
+      timeoutRedrawRef.current = setTimeout(() => {
+        initializeCanvas();
+      }, 10);
+    });
+
+    initializeCanvas();
+
+    return () => {
+      window.removeEventListener("resize", () => {
+        initializeCanvas();
+      });
+
+      if (timeoutRedrawRef.current) {
+        clearTimeout(timeoutRedrawRef.current);
+      }
+    };
+  }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences]);
 
   return <canvas style={{ position: absolute ? "absolute" : "relative", marginTop: yOffset }} className={styles.canvas} height={200} ref={canvasRef} />;
 };

@@ -37,8 +37,6 @@ export class WavesLogic {
   private canvasWidth: number;
   private canvasHeight: number;
   private waves: Wave[] = [];
-  private turbulence: number;
-  private speed: number;
   private gapTop: number = 100;
   private gapBottom: number = 0;
 
@@ -50,8 +48,6 @@ export class WavesLogic {
     this.context = context;
     this.canvasWidth = context.canvas.width;
     this.canvasHeight = context.canvas.height;
-    this.turbulence = turbulence;
-    this.speed = speed;
 
     for (let i = 0; i < numberOfWaves; i++) {
       // Sets the minHeight and maxHeight of the wave
