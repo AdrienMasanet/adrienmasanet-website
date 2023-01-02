@@ -1,11 +1,7 @@
 import { useRef, useEffect, useState } from "react";
 import { WavesLogic } from "./logic";
+import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
-
-export enum WavesDirection {
-  Up,
-  Down,
-}
 
 type WavesProps = {
   wavesDirection?: WavesDirection;

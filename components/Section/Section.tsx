@@ -1,5 +1,6 @@
 import styles from "./Section.module.scss";
-import Waves, { WavesDirection } from "../Waves/Waves";
+import Waves from "../Waves/Waves";
+import { WavesDirection } from "../Waves/types";
 
 type SectionProps = {
   title: string;
