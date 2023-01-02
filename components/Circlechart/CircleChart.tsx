@@ -3,7 +3,7 @@ import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";
 import styles from "./CircleChart.module.scss";
 
-type CirclechartProps = {
+type CircleChartProps = {
   width: number;
   height: number;
   scale?: number;
@@ -11,7 +11,7 @@ type CirclechartProps = {
   gapBetweenElements?: number;
 };
 
-const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75 }: CirclechartProps) => {
+const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75 }: CircleChartProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   let circleChartLogicRef = useRef<CircleChartLogic | null>(null);
 
