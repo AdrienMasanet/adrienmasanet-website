@@ -1,4 +1,5 @@
 import { useRef, useEffect, useState } from "react";
+import { CircleChartLogic } from "../Circlechart/logic";
 import { WavesLogic } from "./logic";
 import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
@@ -19,6 +20,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
   const wavesLogicRef = useRef<WavesLogic | null>(null);
   const [yOffset, setYOffset] = useState("0px");
   const timeoutRedrawRef = useRef<NodeJS.Timeout | null>(null);
+  const startScreenWidth = useRef(0);
 
   const initializeCanvas = () => {
     const canvas = canvasRef.current;
@@ -41,7 +43,27 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     wavesLogicRef.current = new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
   };
 
+  const resizeCanvas = () => {
+    if (startScreenWidth.current === window.innerWidth) {
+      return;
+    }
+
+    // Set again the initial width of the screen to avoid redrawing the canvas when resizing the window only on the height
+    startScreenWidth.current = window.innerWidth;
+
+    // Use a timeout to avoid redrawing the canvas too often which would be performance heavy
+    if (timeoutRedrawRef.current) {
+      clearTimeout(timeoutRedrawRef.current);
+    }
+
+    timeoutRedrawRef.current = setTimeout(initializeCanvas, 10);
+  };
+
   useEffect(() => {
+    // We need to store the initial width of the screen to avoid redrawing the canvas when resizing the window only on the height
+    startScreenWidth.current = window.innerWidth;
+
+    // Add an offset to the canvas to make it appear as if it was under the previous element
     if (canvasRef.current && absolute && wavesDirection === WavesDirection.Down) {
       setYOffset(`-${canvasRef.current?.height - 2}px`);
     } else {
@@ -51,19 +73,12 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
 
   useEffect(() => {
     // We need to update the width of the canvas when resizing the window
-    window.addEventListener("resize", () => {
-      // Use a timeout to avoid redrawing the canvas too often which would be performance heavy
-      if (timeoutRedrawRef.current) {
-        clearTimeout(timeoutRedrawRef.current);
-      }
-
-      timeoutRedrawRef.current = setTimeout(initializeCanvas, 10);
-    });
+    window.addEventListener("resize", resizeCanvas);
 
     initializeCanvas();
 
     return () => {
-      window.removeEventListener("resize", initializeCanvas);
+      window.removeEventListener("resize", resizeCanvas);
 
       if (timeoutRedrawRef.current) {
         clearTimeout(timeoutRedrawRef.current);
