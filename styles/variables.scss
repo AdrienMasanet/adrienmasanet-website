@@ -1,10 +1,11 @@
 // Colors
 $cl-white: #eee6e6;
-$cl-white-50: rgba(#eee6e6, 0.5);
-$cl-white-10: rgba(#eee6e6, 0.1);
+$cl-white-50: rgba($cl-white, 0.5);
+$cl-white-10: rgba($cl-white, 0.1);
 $cl-darkblue: #1f1c9a;
-$cl-blue: #214ff0;
+$cl-blue: lighten($cl-darkblue, 25%);
 $cl-black: #000000;
+$cl-black-50: rgba($cl-black, 0.5);
 $cl-gold: #edb547;
 $cl-silver: #a2a2a2;
 $cl-bronze: #79442d;
@@ -20,7 +21,8 @@ $sd-hard-darkblue-lg: 3px 3px 0px $cl-darkblue;
 $sd-hard-darkblue-md: 2px 2px 0px $cl-darkblue;
 $sd-hard-darkblue-sm: 1px 1px 0px $cl-darkblue;
 $sd-hard-white-sm: 1px 1px 0px $cl-white;
-$sd-base-md: 0px 8px 10px rgba($cl-black, 0.25);
+$sd-base-lg: 2px 8px 20px rgba($cl-black, 0.5);
+$sd-base-md: 0px 8px 10px rgba($cl-black, 0.5);
 $sd-base-sm: 1px 1px 2px rgba($cl-black, 0.5);
 
 // Else
