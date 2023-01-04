@@ -1,5 +1,5 @@
 export enum MedalRank {
-  Bronze,
-  Silver,
-  Gold,
+  Gold = "gold",
+  Silver = "silver",
+  Bronze = "bronze",
 }
