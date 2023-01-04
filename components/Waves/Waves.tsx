@@ -5,14 +5,15 @@ import styles from "./Waves.module.scss";
 
 type WavesProps = {
   wavesDirection?: WavesDirection;
-  wavesNumber?: number | undefined;
+  wavesNumber?: number;
   wavesColor: string;
-  wavesSmoothing?: number | undefined;
+  wavesSmoothing?: number;
   wavesSpeed?: number | undefined;
-  wavesTurbulences?: number | undefined;
+  wavesTurbulences?: number;
   absolute?: boolean;
 };
 
+// TODO : Animate only when the element is in the viewport thanks to IntersectionObserver
 const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wavesLogicRef = useRef<WavesLogic | null>(null);
@@ -56,17 +57,13 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
         clearTimeout(timeoutRedrawRef.current);
       }
 
-      timeoutRedrawRef.current = setTimeout(() => {
-        initializeCanvas();
-      }, 10);
+      timeoutRedrawRef.current = setTimeout(initializeCanvas, 10);
     });
 
     initializeCanvas();
 
     return () => {
-      window.removeEventListener("resize", () => {
-        initializeCanvas();
-      });
+      window.removeEventListener("resize", initializeCanvas);
 
       if (timeoutRedrawRef.current) {
         clearTimeout(timeoutRedrawRef.current);
