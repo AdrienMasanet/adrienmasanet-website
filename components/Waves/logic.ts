@@ -10,12 +10,16 @@ export class WavesLogic {
   private waves: Wave[] = [];
   private gapTop: number = 100;
   private gapBottom: number = 0;
+  public uuid: string;
+  private active: boolean;
 
   constructor(context: CanvasRenderingContext2D, color: string, numberOfWaves: number, wavesSmoothing: number, speed: number, turbulence: number) {
     if (!context) {
       throw new Error("Canvas context is required to draw waves");
     }
 
+    this.active = true;
+    this.uuid = Math.random().toString(36).substring(7);
     this.context = context;
     this.canvasWidth = context.canvas.width;
     this.canvasHeight = context.canvas.height;
@@ -82,6 +86,10 @@ export class WavesLogic {
   };
 
   update = () => {
+    if (!this.active) {
+      return;
+    }
+
     this.context.clearRect(0, 0, this.canvasWidth, this.canvasHeight);
 
     this.waves.forEach((wave, waveIndex) => {
@@ -170,5 +178,14 @@ export class WavesLogic {
     });
 
     requestAnimationFrame(this.update);
+  };
+
+  disable = () => {
+    this.active = false;
+  };
+
+  enable = () => {
+    this.active = true;
+    this.update();
   };
 }

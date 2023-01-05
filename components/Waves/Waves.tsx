@@ -1,8 +1,9 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { CircleChartLogic } from "../Circlechart/logic";
 import { WavesLogic } from "./logic";
 import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
+import { useInView } from "react-intersection-observer";
 
 type WavesProps = {
   wavesDirection?: WavesDirection;
@@ -14,13 +15,22 @@ type WavesProps = {
   absolute?: boolean;
 };
 
-// TODO : Animate only when the element is in the viewport thanks to IntersectionObserver
 const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wavesLogicRef = useRef<WavesLogic | null>(null);
   const [yOffset, setYOffset] = useState("0px");
   const timeoutRedrawRef = useRef<NodeJS.Timeout | null>(null);
   const startScreenWidth = useRef(0);
+  const { ref: canvasRefIntersectionObserver, inView } = useInView();
+
+  // We set the 2 refs in a useCallback that will set the component logic ref and the IntersectionObserver ref
+  const setCanvasDoubleRefs = useCallback(
+    (node: HTMLCanvasElement | null) => {
+      canvasRef.current = node;
+      canvasRefIntersectionObserver(node);
+    },
+    [canvasRefIntersectionObserver]
+  );
 
   const initializeCanvas = () => {
     const canvas = canvasRef.current;
@@ -83,10 +93,23 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
       if (timeoutRedrawRef.current) {
         clearTimeout(timeoutRedrawRef.current);
       }
+
+      if (wavesLogicRef.current) {
+        wavesLogicRef.current.disable();
+        wavesLogicRef.current = null;
+      }
     };
   }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences]);
 
-  return <canvas style={{ position: absolute ? "absolute" : "relative", marginTop: yOffset }} className={styles.canvas} height={200} ref={canvasRef} />;
+  useEffect(() => {
+    if (inView && wavesLogicRef.current) {
+      wavesLogicRef.current.enable();
+    } else if (!inView && wavesLogicRef.current) {
+      wavesLogicRef.current.disable();
+    }
+  }, [inView]);
+
+  return <canvas style={{ position: absolute ? "absolute" : "relative", marginTop: yOffset }} className={styles.canvas} height={200} ref={setCanvasDoubleRefs} />;
 };
 
 export default Waves;
