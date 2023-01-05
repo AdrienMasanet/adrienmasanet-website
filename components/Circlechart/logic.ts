@@ -17,8 +17,10 @@ export class CircleChartLogic {
   private mouse: THREE.Vector2;
   private styles: any;
   private labelsDistance: number;
+  private active: boolean;
 
   constructor(containerRef: React.RefObject<HTMLDivElement>, width: number, height: number, scale: number, elements: CircleChartElement[], gapBetweenElements: number, styles: { readonly [key: string]: string }, labelsDistance: number) {
+    this.active = true;
     // Append the ThreeJs canvas to the React component's container ref
     this.containerRef = containerRef;
     this.styles = styles;
@@ -151,7 +153,9 @@ export class CircleChartLogic {
   }
 
   update() {
-    requestAnimationFrame(this.update.bind(this));
+    if (!this.active) {
+      return;
+    }
 
     this.camera.updateMatrixWorld();
     this.raycaster.setFromCamera(this.mouse, this.camera);
@@ -161,6 +165,8 @@ export class CircleChartLogic {
 
     this.renderer.render(this.scene, this.camera);
     this.labelRenderer.render(this.scene, this.camera);
+
+    requestAnimationFrame(this.update.bind(this));
   }
 
   animateOpening() {
@@ -180,5 +186,14 @@ export class CircleChartLogic {
   onMouseMove(event: MouseEvent) {
     this.mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
     this.mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+  }
+
+  disable() {
+    this.active = false;
+  }
+
+  enable() {
+    this.active = true;
+    this.update();
   }
 }

@@ -1,6 +1,7 @@
 @import "../../styles/variables";
 
 .circlechart {
+  position: relative;
   filter: drop-shadow(3px 4px 7px rgba($color: #000000, $alpha: 0.2));
   margin: auto;
   width: fit-content;
