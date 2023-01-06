@@ -23,7 +23,7 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
 
   return (
     <>
-      <div className={`${styles.categorycontainer} ${isScrolling ? styles.grabbing : ""} ${position == 0 ? styles.reviewing : ""}`} style={{ transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"} `, opacity: position == 0 ? 1 : 1 / Math.abs(position * 5), zIndex: position == 0 ? 10 : 0 }}>
+      <div className={`${styles.categorycontainer} ${isScrolling ? styles.grabbing : ""} ${position == 0 && !isScrolling ? styles.reviewing : ""}`} style={{ transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"} `, opacity: position == 0 ? 1 : 1 / Math.abs(position * 5), zIndex: position == 0 ? 10 : 0 }}>
         <h3 className={styles.title}>{category.name}</h3>
         <hr className={styles.divider} />
         <div className={styles.itemscontainer}>

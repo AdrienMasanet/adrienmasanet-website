@@ -28,20 +28,18 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
       }
 
       if (isDragging) {
-        setPreviousTouchX(event.touches[0].clientX);
-
         if (!previousTouchX) {
+          setPreviousTouchX(event.touches[0].clientX);
           return;
         }
-        let newCurrentDragSpeed = -(event.touches[0].clientX - previousTouchX) / 100;
-        setCurrentDragDistance(newCurrentDragSpeed);
 
-        if (!animationFrameId.current) {
-          animationFrameId.current = requestAnimationFrame(() => {
-            scrollSlider(newCurrentDragSpeed, false, false);
-            animationFrameId.current = null;
-          });
+        if (animationFrameId.current) {
+          return;
         }
+
+        animationFrameId.current = requestAnimationFrame(() => {
+          animateTouchGrabbing(event.touches[0].clientX);
+        });
       }
     }
   };
@@ -57,26 +55,30 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
     }
   };
 
+  const animateTouchGrabbing = (movementX: number) => {
+    setPreviousTouchX(movementX);
+    let newCurrentDragSpeed = -(movementX - previousTouchX) / 100;
+    setCurrentDragDistance(newCurrentDragSpeed);
+    scrollSlider(newCurrentDragSpeed, false, false);
+    animationFrameId.current = null;
+  };
+
   const handleMouseDown = (event: React.MouseEvent<HTMLDivElement>) => {
     setIsHoldingClick(true);
   };
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (isHoldingClick) {
-      if (event.movementX > 1 || event.movementX < -1) {
+      if (event.movementX !== 0) {
         setIsDragging(true);
       }
 
       if (isDragging) {
-        let newCurrentDragSpeed = -event.movementX / 50;
-        setCurrentDragDistance(newCurrentDragSpeed);
-
-        if (!animationFrameId.current) {
-          animationFrameId.current = requestAnimationFrame(() => {
-            scrollSlider(newCurrentDragSpeed, false, false);
-            animationFrameId.current = null;
-          });
+        if (animationFrameId.current) {
+          return;
         }
+
+        animationFrameId.current = requestAnimationFrame(() => animateMouseGrabbing(event.movementX));
       }
     }
   };
@@ -91,7 +93,15 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
     }
   };
 
+  const animateMouseGrabbing = (movementX: number) => {
+    let newCurrentDragSpeed = -movementX / 50;
+    setCurrentDragDistance(newCurrentDragSpeed);
+    scrollSlider(newCurrentDragSpeed, false, false);
+    animationFrameId.current = null;
+  };
+
   useEffect(() => {
+    // If the user is not dragging anymore, we scroll the slider to the closest category
     if (isDragging === false) {
       scrollSlider(currentDragSpeed, true, false);
     }
@@ -122,7 +132,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
   };
 
   return (
-    <div onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+    <div onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} onMouseLeave={handleMouseUp} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
       <div className={`${styles.maincontainer} ${isDragging ? styles.grabbing : ""}`}>
         <div className={`${styles.arrow} ${styles.left}`} onClick={() => scrollSlider(-1)}>
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
