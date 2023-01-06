@@ -1,7 +1,7 @@
 import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
 import ElementsShowcaseElementItem from "./ElementsShowcaseElementItem";
 import styles from "./ElementsShowcase.module.scss";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import Image from "next/image";
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
 
@@ -15,7 +15,7 @@ type ElementsShowcaseCategoryContainerProps = {
 const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: ElementsShowcaseCategoryContainerProps) => {
   const [itemReviewing, setItemReviewing] = useState<ElementsShowcaseItem | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (position !== 0) {
       setItemReviewing(null);
     }
@@ -23,7 +23,17 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
 
   return (
     <>
-      <div className={`${styles.categorycontainer} ${isScrolling ? styles.grabbing : ""} ${position == 0 && !isScrolling ? styles.reviewing : ""}`} style={{ transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"} `, opacity: position == 0 ? 1 : 1 / Math.abs(position * 5), zIndex: position == 0 ? 10 : 0 }}>
+      <div
+        className={`
+      ${styles.categorycontainer}
+      ${isScrolling ? styles.grabbing : ""}
+      ${position == 0 && !isScrolling ? styles.reviewing : ""}`}
+        style={{
+          transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"} `,
+          opacity: position == 0 ? 1 : 1 / Math.abs(position * 5),
+          zIndex: position == 0 ? 10 : 0, // This is to make sure the reviewing category is always on top of the other categories
+        }}
+      >
         <h3 className={styles.title}>{category.name}</h3>
         <hr className={styles.divider} />
         <div className={styles.itemscontainer}>
@@ -41,7 +51,18 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
           ))}
         </div>
       </div>
-      <div className={`${styles.categorycontainer} ${styles.flipped} ${position == 0 ? styles.reviewing : ""}`} style={{ transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(0deg)" : "rotateY(180deg)"} `, opacity: position == 0 ? 1 : 1 / Math.abs(position * 5) }}>
+      <div
+        className={`
+      ${styles.flipped}
+      ${styles.categorycontainer}
+      ${isScrolling ? styles.grabbing : ""}
+      ${position == 0 ? styles.reviewing : ""}`}
+        style={{
+          transform: `translate3d(${-50 + position * 100}%, ${-50 + Math.abs(position) * 10}%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${itemReviewing ? "rotateY(0deg)" : "rotateY(180deg)"}`,
+          opacity: position == 0 ? 1 : 1 / Math.abs(position * 5),
+          zIndex: position == 0 ? 10 : 0,
+        }}
+      >
         {itemReviewing && (
           <>
             <div className={styles.backarrow} onClick={() => setItemReviewing(null)}>
