@@ -27,10 +27,13 @@ $sd-base-lg: 2px 8px 20px rgba($cl-black, 0.2);
 $sd-base-md: 0px 8px 10px rgba($cl-black, 0.2);
 $sd-base-sm: 1px 1px 2px rgba($cl-black, 0.2);
 
-// Screen sizes
+// Breakpoints
 $ss-mobile: 480px;
 $ss-tablet: 768px;
 $ss-desktop: 1024px;
+
+// Easings
+$eg-out-cubic: cubic-bezier(0.08, 0.04, 0, 1);
 
 // Else
 $default-border-radius: 7px;
