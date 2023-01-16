@@ -1,0 +1,69 @@
+@import "../../styles/variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 30em;
+  margin: 0 auto 5em auto;
+  gap: 2em;
+
+  .formelement {
+    resize: none;
+    background: $cl-white;
+    color: $cl-darkblue;
+    border: solid 1px $cl-darkblue-10;
+    padding: 0.5em;
+    transition: all 0.75s $eg-out-cubic;
+
+    &::placeholder {
+      color: $cl-darkblue-10;
+    }
+
+    &:focus {
+      outline: solid 1px $cl-blue;
+      box-shadow: inset 1px 1px 5px rgba($cl-darkblue, 0.25), 2px 2px 15px rgba($cl-blue, 0.25);
+      size: 1.21;
+    }
+  }
+
+  button {
+    background: $cl-darkblue;
+    color: $cl-white;
+    border: none;
+    padding: 0.5em 1em;
+    font-size: 1.25em;
+    font-weight: 700;
+    cursor: pointer;
+    width: fit-content;
+    margin: auto;
+    border: solid 1px $cl-darkblue;
+    text-shadow: $sd-hard-darkblue-sm;
+    background-image: radial-gradient($cl-blue, $cl-darkblue);
+    background-size: 200% 200%;
+    transition: all 0.5s $eg-out-cubic;
+    user-select: none;
+
+    &:hover {
+      box-shadow: 1px 3px 15px rgba($cl-blue, 0.4);
+    }
+  }
+
+  * {
+    border-radius: $default-border-radius;
+  }
+}
+
+.inlineinputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  gap: 1em;
+}
+
+.inputname {
+  flex: 0.6;
+}
+
+.inputcompany {
+  flex: 0.4;
+}
