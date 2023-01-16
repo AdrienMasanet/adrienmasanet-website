@@ -7,6 +7,12 @@
   margin: 0;
   font-family: "GT Walsheim Pro";
   font-weight: 100;
+
+  ::selection {
+    background: rgba($cl-black, 0.2);
+    color: $cl-white;
+    text-shadow: $sd-hard-darkblue-sm;
+  }
 }
 
 html,
@@ -24,6 +30,28 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
+
+  &::after {
+    display: block;
+    content: "";
+    border-bottom: solid 1px $cl-darkblue;
+    transform: scaleX(0);
+    transition: transform 0.5s $eg-out-cubic;
+    width: 100%;
+  }
+
+  &:hover::after {
+    transform: scaleX(1);
+  }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px $cl-white inset;
+  -webkit-text-fill-color: $cl-darkblue;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -62,4 +90,19 @@ a {
   @media screen and (max-width: $ss-mobile) {
     margin: 0 1.5em;
   }
+}
+
+.spacer-sm {
+  height: 2em;
+  visibility: hidden;
+}
+
+.spacer-md {
+  height: 5em;
+  visibility: hidden;
+}
+
+.spacer-lg {
+  height: 15em;
+  visibility: hidden;
 }
