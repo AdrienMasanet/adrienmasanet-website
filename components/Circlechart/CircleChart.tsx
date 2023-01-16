@@ -10,10 +10,11 @@ type CircleChartProps = {
   scale?: number;
   elements: CircleChartElement[];
   gapBetweenElements?: number;
+  labelsDistance?: number;
 };
 
 // TODO : Animate only when the element is in the viewport thanks to IntersectionObserver
-const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75 }: CircleChartProps) => {
+const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75, labelsDistance = 2 }: CircleChartProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   let circleChartLogicRef = useRef<CircleChartLogic | null>(null);
   const { ref: containerRefIntersectionObserver, inView } = useInView();
@@ -32,12 +33,12 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
       return;
     }
 
-    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, scale, elements, gapBetweenElements, styles, 2);
+    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, scale, elements, gapBetweenElements, styles, labelsDistance);
 
     return () => {
       circleChartLogicRef.current && circleChartLogicRef.current.destroy();
     };
-  }, [width, height, elements]);
+  }, [containerRef, width, height, scale, elements, gapBetweenElements, labelsDistance]);
 
   useEffect(() => {
     if (inView && circleChartLogicRef.current) {
