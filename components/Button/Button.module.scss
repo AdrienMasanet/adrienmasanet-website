@@ -1,0 +1,44 @@
+@import "../../styles/variables";
+
+.container {
+  position: relative;
+  padding: 0.5em 1em;
+  font-size: 1.25em;
+  font-weight: 700;
+  cursor: pointer;
+  width: fit-content;
+  margin: auto;
+  background-size: 200% 200%;
+  transition: all 0.5s $eg-out-cubic;
+  user-select: none;
+  overflow: hidden;
+
+  &.primary {
+    background: $cl-darkblue;
+    color: $cl-white;
+    border: solid 1px $cl-darkblue;
+    text-shadow: $sd-hard-darkblue-md;
+    background-image: radial-gradient($cl-blue, $cl-darkblue);
+  }
+
+  &:hover {
+    box-shadow: 1px 3px 15px rgba($cl-blue, 0.4);
+  }
+
+  .shinyeffect {
+    position: absolute;
+    width: 1em;
+    height: 1em;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 10%, rgba(255, 255, 255, 0) 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 6s $eg-out-cubic, width 3s $eg-out-cubic, height 3s $eg-out-cubic;
+
+    &.active {
+      opacity: 0.3;
+      width: 12em;
+      height: 12em;
+    }
+  }
+}
