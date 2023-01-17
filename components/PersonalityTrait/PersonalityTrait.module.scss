@@ -1,0 +1,96 @@
+@import "../../styles/variables";
+
+$image-rotation-anim: 25deg;
+$image-translation-anim: 2em;
+
+.container {
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  margin-bottom: 3em;
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+
+    .name {
+      text-align: right;
+    }
+
+    .image {
+      translate: -5em 0;
+      rotate: -$image-rotation-anim;
+
+      @media screen and (max-width: $ss-tablet) {
+        translate: $image-translation-anim 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: $ss-tablet) {
+    display: block;
+
+    .image {
+      position: absolute;
+      width: 5em;
+      height: auto;
+      left: inherit;
+      right: 2em;
+      top: -2em;
+    }
+
+    &:nth-child(even) {
+      flex-direction: row-reverse;
+
+      .image {
+        left: 2em;
+        right: inherit;
+      }
+    }
+  }
+}
+
+.nameanddescriptioncontainer {
+  border-radius: $default-border-radius;
+  background: $cl-darkblue-004;
+  padding: 1em;
+}
+
+.name {
+  position: relative;
+  font-size: 1.75em;
+  margin-bottom: 0.5em;
+  z-index: 1;
+  // Surround the text with a white border in every direction using text shadow to follow this matrix:
+  /*
+  111
+  101
+  111
+  */
+  text-shadow: 1px 1px 0 $cl-white, -1px 1px 0 $cl-white, 1px -1px 0 $cl-white, -1px -1px 0 $cl-white, 1px 0 0 $cl-white, -1px 0 0 $cl-white, 0 1px 0 $cl-white, 0 -1px 0 $cl-white;
+}
+
+.description {
+  font-size: 1em;
+  max-width: 30em;
+}
+
+.image {
+  max-width: 10em;
+  max-height: 10em;
+  margin: auto;
+  transition: all 2s ease-in-out;
+  translate: $image-translation-anim 0;
+  rotate: $image-rotation-anim;
+  opacity: 0;
+
+  @media screen and (max-width: $ss-tablet) {
+    translate: -5em 0;
+  }
+
+  &.active {
+    translate: 0 0 !important;
+    rotate: 0deg !important;
+    opacity: 1;
+  }
+}
