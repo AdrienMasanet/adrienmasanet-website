@@ -28,3 +28,13 @@
     font-size: 1.25em;
   }
 }
+
+.children {
+  @media screen and (max-width: $ss-mobile) {
+    padding: 0 1em;
+  }
+
+  @media screen and (min-width: $ss-tablet) {
+    padding: 0 2em;
+  }
+}
