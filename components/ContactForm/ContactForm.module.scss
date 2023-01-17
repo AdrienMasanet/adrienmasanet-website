@@ -26,28 +26,6 @@
     }
   }
 
-  button {
-    background: $cl-darkblue;
-    color: $cl-white;
-    border: none;
-    padding: 0.5em 1em;
-    font-size: 1.25em;
-    font-weight: 700;
-    cursor: pointer;
-    width: fit-content;
-    margin: auto;
-    border: solid 1px $cl-darkblue;
-    text-shadow: $sd-hard-darkblue-sm;
-    background-image: radial-gradient($cl-blue, $cl-darkblue);
-    background-size: 200% 200%;
-    transition: all 0.5s $eg-out-cubic;
-    user-select: none;
-
-    &:hover {
-      box-shadow: 1px 3px 15px rgba($cl-blue, 0.4);
-    }
-  }
-
   * {
     border-radius: $default-border-radius;
   }

@@ -1,10 +1,13 @@
 import styles from "./ContactForm.module.scss";
+import Button from "../Button/Button";
 
+// TODO : Implement Google reCaptcha
 const ContactForm = () => {
   const submitMessage = async (event: React.FormEvent) => {
     event.preventDefault();
     // Console log key values of the form
     const formData = new FormData(event.target as HTMLFormElement);
+    console.log("Submitted form data");
   };
 
   return (
@@ -14,9 +17,7 @@ const ContactForm = () => {
         <input className={`${styles.formelement} ${styles.inputcompany}`} type="text" name="company" id="company" placeholder="Entreprise" />
       </div>
       <textarea className={styles.formelement} rows={15} placeholder="Écrivez votre gentil message ici !" required />
-      <button className="hoverable" type="submit">
-        Envoyer
-      </button>
+      <Button isSubmit={true} text="Envoyer" color="primary" />
     </form>
   );
 };
