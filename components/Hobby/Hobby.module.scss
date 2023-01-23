@@ -1,0 +1,66 @@
+@import "../../styles/variables";
+
+.container {
+  position: relative;
+  background: $cl-white;
+  border-radius: $default-border-radius;
+  color: $cl-darkblue;
+  padding: 1em;
+  margin-bottom: 2em;
+  box-shadow: $sd-base-lg;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 3em;
+
+  hr {
+    margin: 1em 0;
+  }
+
+  &:nth-child(even) {
+    flex-direction: row-reverse;
+  }
+
+  @media screen and (max-width: $ss-mobile) {
+    flex-direction: column !important;
+    gap: 3em;
+  }
+}
+
+.title {
+  font-size: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.titleanddescriptioncontainer {
+  width: 75%;
+
+  @media screen and (max-width: $ss-mobile) {
+    width: 100%;
+  }
+}
+
+.imagescontainer {
+  width: 12em;
+  height: 12em;
+  position: relative;
+  border-radius: $default-border-radius;
+
+  .image {
+    box-shadow: $sd-base-md;
+    border-radius: $default-border-radius;
+    position: absolute;
+    z-index: 1;
+    user-select: none;
+    -webkit-user-drag: none;
+
+    &:hover {
+      z-index: 2;
+    }
+  }
+
+  @media screen and (max-width: $ss-mobile) {
+    margin-bottom: 2em;
+  }
+}
