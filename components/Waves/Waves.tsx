@@ -23,7 +23,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
   const startScreenWidth = useRef(0);
   const { ref: canvasRefIntersectionObserver, inView } = useInView();
 
-  // We set the 2 refs in a useCallback that will set the component logic ref and the IntersectionObserver ref
+  // Set the 2 refs in a useCallback that will set the HTML ref used to draw the canvas and the IntersectionObserver ref
   const setCanvasDoubleRefs = useCallback(
     (node: HTMLCanvasElement | null) => {
       canvasRef.current = node;
@@ -32,7 +32,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     [canvasRefIntersectionObserver]
   );
 
-  const initializeCanvas = () => {
+  const initializeCanvas = useCallback(() => {
     const canvas = canvasRef.current;
     if (!canvas) {
       return;
@@ -51,9 +51,9 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     }
 
     wavesLogicRef.current = new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
-  };
+  }, [wavesColor, wavesDirection, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences]);
 
-  const resizeCanvas = () => {
+  const resizeCanvas = useCallback(() => {
     if (startScreenWidth.current === window.innerWidth) {
       return;
     }
@@ -67,7 +67,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     }
 
     timeoutRedrawRef.current = setTimeout(initializeCanvas, 10);
-  };
+  }, [initializeCanvas]);
 
   useEffect(() => {
     // We need to store the initial width of the screen to avoid redrawing the canvas when resizing the window only on the height
@@ -99,7 +99,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
         wavesLogicRef.current = null;
       }
     };
-  }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences]);
+  }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences, initializeCanvas, resizeCanvas]);
 
   useEffect(() => {
     if (inView && wavesLogicRef.current) {
