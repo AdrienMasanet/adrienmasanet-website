@@ -85,10 +85,9 @@ input:-webkit-autofill:active {
 .paragraph {
   font-size: 1.25em;
   line-height: 1.25em;
-  margin: 0 5em;
 
   @media screen and (max-width: $ss-mobile) {
-    margin: 0 1.5em;
+    margin: 0;
   }
 }
 
