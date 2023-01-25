@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     domains: [process.env.POCKETBASE_API_DOMAIN],
   },
+  experimental: {
+    appDir: true,
+  },
 };
 
 module.exports = nextConfig;
