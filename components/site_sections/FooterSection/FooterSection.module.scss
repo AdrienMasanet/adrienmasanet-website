@@ -1,0 +1,14 @@
+@import "../../../styles/variables";
+
+.container {
+  border-top: 1px solid rgba($cl-darkblue, 7%);
+  background: $cl-white;
+  color: $cl-darkblue;
+  padding: 0.5em;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 0.75em;
+  line-height: 1.25em;
+}
