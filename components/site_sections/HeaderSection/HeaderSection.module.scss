@@ -1,0 +1,60 @@
+@import "../../../styles/variables";
+
+.background {
+  background: $cl-darkblue;
+  min-height: 30em;
+  position: relative;
+}
+
+.overlay {
+  background: $gd-blue;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait {
+  background: $cl-white-10;
+  width: 1em;
+}
+
+.portraitandtitlescontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5em;
+
+  @media screen and (max-width: $ss-mobile) {
+    padding: 0 1em;
+  }
+}
+
+.titlescontainer {
+  display: block;
+  z-index: 2;
+  align-self: baseline;
+  margin-top: 3em;
+  max-height: 20%;
+
+  * {
+    margin: 0.5em 0;
+    text-rendering: geometricPrecision;
+  }
+
+  @media screen and (max-width: $ss-mobile) {
+    margin-top: 1em;
+    word-spacing: 80em;
+  }
+}
+
+.title {
+  text-shadow: $sd-hard-darkblue-lg;
+  text-align: right;
+  font-size: 3em;
+}
+
+.subtitle {
+  text-align: right;
+  text-shadow: $sd-hard-darkblue-lg;
+  font-size: 1.5em;
+}
