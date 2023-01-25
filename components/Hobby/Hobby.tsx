@@ -1,5 +1,6 @@
+"use client";
+
 import styles from "./Hobby.module.scss";
-import { HobbyImage } from "./types";
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useInView } from "react-intersection-observer";
@@ -7,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 type HobbyProps = {
   name: string;
   description: string;
-  images: HobbyImage[];
+  images: string[];
   imagesScale?: number;
 };
 
@@ -37,9 +38,7 @@ const Hobby = ({ name, description, images, imagesScale = 100 }: HobbyProps) => 
         <p>{description}</p>
       </div>
       <div className={styles.imagescontainer} ref={imagesContainerRef}>
-        {images.map((image, index) => (
-          <Image key={image.id} className={styles.image} src={image.url} alt={image.name} width={imagesScale} height={imagesScale} style={{ transform: `translate(${Math.cos((index * 2 * Math.PI) / images.length + carouselRotation) * 80}%, ${Math.sin((index * 2 * Math.PI) / images.length + carouselRotation) * 80}%) translate(50%, 50%)` }} />
-        ))}
+        {images && images.length > 0 && images.map((image, index) => <Image key={index} className={styles.image} src={image} alt={image} width={imagesScale} height={imagesScale} style={{ transform: `translate(${Math.cos((index * 2 * Math.PI) / images.length + carouselRotation) * 80}%, ${Math.sin((index * 2 * Math.PI) / images.length + carouselRotation) * 80}%) translate(50%, 50%)` }} />)}
       </div>
     </div>
   );

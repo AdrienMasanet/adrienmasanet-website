@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./ContactForm.module.scss";
 import Button from "../Button/Button";
 
@@ -14,9 +16,9 @@ const ContactForm = () => {
     <form className={styles.container} name="message" id="email" onSubmit={submitMessage}>
       <div className={styles.inlineinputs}>
         <input className={`${styles.formelement} ${styles.inputname}`} type="email" name="email" id="email" placeholder="Adresse e-mail" required />
-        <input className={`${styles.formelement} ${styles.inputcompany}`} type="text" name="company" id="company" placeholder="Entreprise" />
+        <input className={`${styles.formelement} ${styles.inputcompany}`} type="text" name="company" id="company" placeholder="Entreprise (facultatif)" />
       </div>
-      <textarea className={styles.formelement} rows={15} placeholder="Écrivez votre gentil message ici !" required />
+      <textarea className={styles.formelement} rows={15} placeholder="Écrivez votre message ici" required />
       <Button isSubmit={true} text="Envoyer" color="primary" />
     </form>
   );

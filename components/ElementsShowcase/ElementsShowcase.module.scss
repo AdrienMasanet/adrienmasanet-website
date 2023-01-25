@@ -70,7 +70,6 @@
 
   .image {
     border-radius: $default-border-radius;
-    border: solid 1px $cl-darkblue;
   }
 
   &.reviewing {
@@ -88,7 +87,7 @@
 
         .image {
           opacity: 0.5;
-          filter: brightness(50%);
+          filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm) grayscale(50%);
         }
 
         .title {
@@ -103,6 +102,7 @@
     .image {
       float: left;
       margin: 1.5em;
+      filter: drop-shadow($sd-hard-darkblue-md) drop-shadow($sd-base-sm);
     }
 
     .description {
@@ -150,7 +150,6 @@
   position: relative;
   width: 5em;
   height: 5em;
-  background: $cl-black;
   color: $cl-white;
   border-radius: $default-border-radius;
   overflow: hidden;
@@ -159,6 +158,7 @@
 
   .image {
     z-index: -1;
+    filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm);
   }
 
   .title {

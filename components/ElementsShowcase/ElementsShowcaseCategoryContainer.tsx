@@ -1,7 +1,7 @@
 import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
 import ElementsShowcaseElementItem from "./ElementsShowcaseElementItem";
 import styles from "./ElementsShowcase.module.scss";
-import { useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
 
@@ -15,7 +15,7 @@ type ElementsShowcaseCategoryContainerProps = {
 const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: ElementsShowcaseCategoryContainerProps) => {
   const [itemReviewing, setItemReviewing] = useState<ElementsShowcaseItem | null>(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (position !== 0) {
       setItemReviewing(null);
     }
@@ -37,18 +37,19 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
         <h3 className={styles.title}>{category.name}</h3>
         <hr className={styles.divider} />
         <div className={styles.itemscontainer}>
-          {category.items.map((element) => (
-            <div
-              key={element.name}
-              onClick={() => {
-                if (position == 0) {
-                  setItemReviewing(element);
-                }
-              }}
-            >
-              <ElementsShowcaseElementItem item={element} />
-            </div>
-          ))}
+          {category.items &&
+            category.items.map((element) => (
+              <div
+                key={element.id}
+                onClick={() => {
+                  if (position == 0) {
+                    setItemReviewing(element);
+                  }
+                }}
+              >
+                <ElementsShowcaseElementItem item={element} />
+              </div>
+            ))}
         </div>
       </div>
       <div

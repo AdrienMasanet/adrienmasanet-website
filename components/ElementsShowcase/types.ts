@@ -1,6 +1,7 @@
 import { MedalRank } from "../MedalIcon/types";
 
 export type ElementsShowcaseItem = {
+  id: string;
   name: string;
   description: string;
   rank?: MedalRank;
@@ -9,6 +10,7 @@ export type ElementsShowcaseItem = {
 };
 
 export type ElementsShowcaseCategory = {
+  id: string;
   name: string;
   items: ElementsShowcaseItem[];
 };

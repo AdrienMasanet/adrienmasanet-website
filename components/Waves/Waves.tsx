@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useState, useCallback } from "react";
 import { CircleChartLogic } from "../Circlechart/logic";
 import { WavesLogic } from "./logic";

@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./Section.module.scss";
 import Waves from "../Waves/Waves";
 
@@ -35,7 +37,7 @@ const Section = ({ title, subtitle, sectionColor, nextSectionColor, textColor, c
 
           {spacerAfterTitlesSize != "" && <hr className={spacerAfterTitlesSize} />}
 
-          <div className={styles.children} style={{ maxWidth: maxWidth ? maxWidth + "px" : "", margin: "auto" }}>
+          <div className={styles.children} style={{ maxWidth: maxWidth ? maxWidth + "px" : "100%", margin: "auto" }}>
             {children}
           </div>
 

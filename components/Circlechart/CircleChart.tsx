@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useEffect, useCallback } from "react";
 import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";
@@ -13,7 +15,6 @@ type CircleChartProps = {
   labelsDistance?: number;
 };
 
-// TODO : Animate only when the element is in the viewport thanks to IntersectionObserver
 const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75, labelsDistance = 2 }: CircleChartProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   let circleChartLogicRef = useRef<CircleChartLogic | null>(null);

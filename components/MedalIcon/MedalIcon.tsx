@@ -1,3 +1,5 @@
+"use client";
+
 import { MedalRank } from "./types";
 import styles from "./MedalIcon.module.scss";
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
@@ -12,6 +14,9 @@ const MedalIcon = ({ rank, scale = 50 }: MedalIconProps) => {
     [MedalRank.Gold]: scssThemeVariables.scssThemeClGold,
     [MedalRank.Silver]: scssThemeVariables.scssThemeClSilver,
     [MedalRank.Bronze]: scssThemeVariables.scssThemeClBronze,
+    [3]: scssThemeVariables.scssThemeClGold,
+    [2]: scssThemeVariables.scssThemeClSilver,
+    [1]: scssThemeVariables.scssThemeClBronze,
   };
 
   const color = rankColors[rank];

@@ -1,4 +1,6 @@
-import { useState, useLayoutEffect, useRef, useCallback } from "react";
+"use client";
+
+import { useState, useEffect as useEffect, useRef, useCallback } from "react";
 import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
 import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
 import styles from "./ElementsShowcase.module.scss";
@@ -99,7 +101,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
     }
   }, []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // If the user is not dragging anymore, we scroll the slider to the closest category
     if (isDragging === false) {
       scrollSlider(currentDragSpeed, true, false);
@@ -116,7 +118,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
         </div>
         <div className={styles.slider}>
           {categoriesAndElements.map((category: ElementsShowcaseCategory, index) => (
-            <ElementsShowcaseCategoryContainer key={category.name} category={category} position={index - currentCategoryReviewing} isScrolling={isDragging} />
+            <ElementsShowcaseCategoryContainer key={category.id} category={category} position={index - currentCategoryReviewing} isScrolling={isDragging} />
           ))}
         </div>
         <div className={`${styles.arrow} ${styles.right}`} onClick={() => scrollSlider(1)}>
