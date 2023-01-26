@@ -13,7 +13,7 @@ export function fetchSkills() {
 
 import { MedalRank } from "../components/MedalIcon/types";
 
-export function fetchTechs() {
+export function fetchMasteredTechs() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
     method: "GET",
     next: {
@@ -22,7 +22,14 @@ export function fetchTechs() {
   })
     .then((response) => response.json())
     .then((data) => data.items)
+    .then((unfilteredCategories) => {
+      // Filter out categories to return only those that have at least one mastered tech
+      return unfilteredCategories.filter((category: any) => {
+        return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === true).length > 0;
+      });
+    })
     .then((techCategories) => {
+      // Filter out techs to return only those that are mastered
       return techCategories.map((category: any) => {
         return {
           id: category.id,
@@ -31,15 +38,57 @@ export function fetchTechs() {
             category.expand &&
             category.expand["tech(tech_category)"] &&
             category.expand["tech(tech_category)"].length > 0 &&
-            category.expand["tech(tech_category)"].map((tech: any) => {
-              return {
-                id: tech.id,
-                name: tech.name,
-                description: tech.description,
-                image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${tech.collectionId}/${tech.id}/${tech.image}`,
-                rank: tech.rank as MedalRank,
-              };
-            }),
+            category.expand["tech(tech_category)"]
+              .filter((tech: any) => tech.mastered === true)
+              .map((tech: any) => {
+                return {
+                  id: tech.id,
+                  name: tech.name,
+                  description: tech.description,
+                  image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${tech.collectionId}/${tech.id}/${tech.image}`,
+                  rank: tech.rank ? (tech.rank as MedalRank) : null,
+                };
+              }),
+        };
+      });
+    });
+}
+
+export function fetchNotMasteredTechs() {
+  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
+    method: "GET",
+    next: {
+      revalidate: 60,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => data.items)
+    .then((unfilteredCategories) => {
+      // Filter out categories to return only those that have at least one not mastered tech
+      return unfilteredCategories.filter((category: any) => {
+        return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === false).length > 0;
+      });
+    })
+    .then((techCategories) => {
+      // Filter out techs to return only those that are not mastered
+      return techCategories.map((category: any) => {
+        return {
+          id: category.id,
+          name: category.name,
+          items:
+            category.expand &&
+            category.expand["tech(tech_category)"] &&
+            category.expand["tech(tech_category)"].length > 0 &&
+            category.expand["tech(tech_category)"]
+              .filter((tech: any) => tech.mastered === false)
+              .map((tech: any) => {
+                return {
+                  id: tech.id,
+                  name: tech.name,
+                  description: tech.description,
+                  image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${tech.collectionId}/${tech.id}/${tech.image}`,
+                };
+              }),
         };
       });
     });
