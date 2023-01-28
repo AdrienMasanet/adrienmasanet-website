@@ -1,6 +1,7 @@
 @import "../../../styles/variables";
 
 .container {
+  font-size: 0.75em;
   border-top: 1px solid rgba($cl-darkblue, 7%);
   background: $cl-white;
   color: $cl-darkblue;
@@ -9,6 +10,12 @@
 
 .copyright {
   text-align: center;
-  font-size: 0.75em;
   line-height: 1.25em;
+}
+
+.legal {
+  color: $cl-darkblue-10;
+  text-align: center;
+  line-height: 1.25em;
+  margin: 0.5em 0 0 0;
 }

@@ -105,3 +105,9 @@ input:-webkit-autofill:active {
   height: 15em;
   visibility: hidden;
 }
+
+.grecaptcha-badge {
+  margin: auto;
+  height: 0;
+  visibility: hidden;
+}

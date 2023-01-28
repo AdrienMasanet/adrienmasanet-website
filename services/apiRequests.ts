@@ -139,3 +139,17 @@ export function fetchHobbies() {
       });
     });
 }
+
+export async function sendContactMessage(message: any): Promise<boolean> {
+  console.log("Sending message", message);
+
+  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "new-contact-message", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(message),
+  })
+    .then((response) => response.status === 200)
+    .catch((error) => false);
+}
