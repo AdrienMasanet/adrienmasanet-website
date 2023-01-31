@@ -18,7 +18,7 @@ const Hobby = ({ name, description, images, imagesScale = 100 }: HobbyProps) => 
   const [imagesContainerRef, isImagesContainerInView] = useInView();
 
   const AnimateCarousel = useCallback(() => {
-    setCarouselRotation((prev) => prev + 0.0005);
+    setCarouselRotation((prev) => prev + 0.0002);
     carouselAnimationRef.current = requestAnimationFrame(AnimateCarousel);
   }, []);
 
