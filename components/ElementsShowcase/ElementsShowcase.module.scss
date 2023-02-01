@@ -21,7 +21,9 @@
   }
 
   @media screen and (max-width: $ss-mobile) {
-    max-width: 100%;
+    width: 100vw;
+    transform: translate(-50%, 0);
+    left: 50%;
   }
 }
 
@@ -37,8 +39,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  min-height: 10em;
-  max-height: 35em;
+  min-height: 17em;
+  max-height: 30em;
   width: 25em;
   background-color: $cl-white;
   border-radius: $default-border-radius;
@@ -47,8 +49,8 @@
   overflow-y: auto;
 
   &.grabbing {
-    transition: scale 0.25s $eg-out-cubic;
-    scale: 0.9;
+    transition: scale 0.5s $eg-out-cubic;
+    scale: 0.95;
   }
 
   .title {
@@ -211,6 +213,10 @@
         transform: translate3d(0.1em, 0, 0);
       }
     }
+  }
+
+  @media screen and (max-width: $ss-mobile) {
+    flex-grow: 0.075;
   }
 }
 

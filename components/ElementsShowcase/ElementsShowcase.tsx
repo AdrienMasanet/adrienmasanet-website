@@ -62,6 +62,8 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
 
   const handleCursorMove = useCallback(
     (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+      event.preventDefault();
+
       // Assign the correct event's cursor X position depending on the event type
       const cursorX = "clientX" in event ? event.clientX : event.touches[0].clientX;
 
@@ -73,7 +75,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
         }
 
         // If the cursor has moved more than 10px while holding the click, we start dragging. It avoids grabbing the slider by mistake
-        if (previousCursorX < cursorX - 10 || previousCursorX > cursorX + 10) {
+        if (previousCursorX < cursorX - 15 || previousCursorX > cursorX + 15) {
           setIsDragging(true);
         }
 

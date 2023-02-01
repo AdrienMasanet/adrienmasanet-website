@@ -38,7 +38,7 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
         <hr className={styles.divider} />
         <div className={styles.itemscontainer}>
           {category.items &&
-            category.items.map((element) => (
+            category.items.map((element: ElementsShowcaseItem) => (
               <div
                 key={element.id}
                 onClick={() => {
