@@ -8,9 +8,9 @@ import { useState, useCallback } from "react";
 
 // TODO : Implement Google reCaptcha
 const ContactForm = () => {
-  const [reCaptchaToken, setReCaptchaToken] = useState("");
-  const [refreshReCaptcha, setRefreshReCaptcha] = useState(false);
-  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [reCaptchaToken, setReCaptchaToken] = useState<string>();
+  const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
+  const [formSubmitted, setFormSubmitted] = useState<boolean>(false);
   const [errorStrings, setErrorStrings] = useState<string[]>([]);
 
   const onReCaptchaVerify = useCallback((token: string) => {
