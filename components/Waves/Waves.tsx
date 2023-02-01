@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useEffect, useState, useCallback } from "react";
-import { CircleChartLogic } from "../Circlechart/logic";
 import { WavesLogic } from "./logic";
 import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
