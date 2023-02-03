@@ -14,5 +14,9 @@
     text-shadow: $sd-base-sm;
     text-align: center;
     font-size: 1em;
+
+    @media screen and (max-width: $ss-mobile) {
+      font-size: 0.75em;
+    }
   }
 }
