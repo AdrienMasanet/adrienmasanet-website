@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useLayoutEffect, useCallback } from "react";
 import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";
 import styles from "./CircleChart.module.scss";
@@ -29,7 +29,7 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
     [containerRefIntersectionObserver]
   );
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (containerRef.current === null) {
       return;
     }
@@ -41,7 +41,7 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
     };
   }, [containerRef, width, height, scale, elements, gapBetweenElements, labelsDistance]);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (inView && circleChartLogicRef.current) {
       circleChartLogicRef.current.enable();
     } else if (!inView && circleChartLogicRef.current) {
