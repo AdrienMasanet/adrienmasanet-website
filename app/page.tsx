@@ -1,3 +1,4 @@
+import ClientDelayedLoader from "../components/ClientDelayedLoader/ClientDelayedLoader";
 import HeaderSection from "../components/site_sections/HeaderSection/HeaderSection";
 import SkillsSection from "../components/site_sections/SkillsSection/SkillsSection";
 import TechsSection from "../components/site_sections/TechsSection/TechsSection";
@@ -17,6 +18,7 @@ export default async function MainPage() {
   return (
     <>
       <div className="main-container">
+        <ClientDelayedLoader />
         <HeaderSection />
         <SkillsSection skills={skills} />
         <TechsSection masteredCategoriesAndElements={masteredTechs} notMasteredCategoriesAndElements={notMasteredTechs} />

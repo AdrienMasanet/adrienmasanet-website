@@ -1,0 +1,9 @@
+@import "../../styles/variables";
+
+.container {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: $cl-white;
+  z-index: 1000;
+}
