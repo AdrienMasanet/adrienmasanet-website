@@ -1,11 +1,15 @@
 import styles from "./HeaderSection.module.scss";
 
+import Portrait from "../../Portrait/Portrait";
+
 const HeaderSection = () => {
   return (
     <header className={styles.background}>
       <div className={styles.overlay}>
         <div className={`${styles.portraitandtitlescontainer} maxed-container`}>
-          <div className={styles.portrait}></div>
+          <div className={styles.portrait}>
+            <Portrait />
+          </div>
           <div className={styles.titlescontainer}>
             <h1 className={styles.title}>
               Adrien
