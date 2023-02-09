@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useLayoutEffect, useState, useCallback } from "react";
+import { useRef, useEffect, useState, useCallback } from "react";
 import { WavesLogic } from "./logic";
 import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
@@ -70,7 +70,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     timeoutRedrawRef.current = setTimeout(initializeCanvas, 10);
   }, [initializeCanvas]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // We need to store the initial width of the screen to avoid redrawing the canvas when resizing the window only on the height
     startScreenWidth.current = window.innerWidth;
 
@@ -82,7 +82,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     }
   }, [canvasRef, absolute, wavesDirection]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     // We need to update the width of the canvas when resizing the window
     window.addEventListener("resize", resizeCanvas);
 
@@ -102,7 +102,7 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     };
   }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences, initializeCanvas, resizeCanvas]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (inView && wavesLogicRef.current) {
       wavesLogicRef.current.enable();
     } else if (!inView && wavesLogicRef.current) {

@@ -1,7 +1,7 @@
 "use client";
 
 import styles from "./ClientDelayedLoader.module.scss";
-import { useState, useLayoutEffect, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 
 type CircleChartProps = {
   delay?: number;
@@ -20,7 +20,7 @@ const ClientDelayedLoader = ({ delay = 1000 }: CircleChartProps) => {
     }
   };
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     let fadeDelayTimeout = setTimeout(() => {
       requestAnimationFrame(decreaseFade);
     }, delay);
