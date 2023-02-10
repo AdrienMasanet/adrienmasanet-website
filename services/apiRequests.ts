@@ -1,6 +1,6 @@
 // These functions are used to fetch data from the Pocketbase backend API and return the data in a format that is easy to use in the frontend.
 
-export function fetchSkills() {
+export async function fetchSkills() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/skill/records?sort=order", {
     method: "GET",
     next: {
@@ -13,7 +13,7 @@ export function fetchSkills() {
 
 import { MedalRank } from "../components/MedalIcon/types";
 
-export function fetchMasteredTechs() {
+export async function fetchMasteredTechs() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
     method: "GET",
     next: {
@@ -55,7 +55,7 @@ export function fetchMasteredTechs() {
     });
 }
 
-export function fetchNotMasteredTechs() {
+export async function fetchNotMasteredTechs() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
     method: "GET",
     next: {
@@ -96,7 +96,7 @@ export function fetchNotMasteredTechs() {
     });
 }
 
-export function fetchPersonalityTraits() {
+export async function fetchPersonalityTraits() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/personality_trait/records?sort=order", {
     method: "GET",
     next: {
@@ -117,7 +117,7 @@ export function fetchPersonalityTraits() {
     });
 }
 
-export function fetchHobbies() {
+export async function fetchHobbies() {
   return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/hobbies/records?sort=order", {
     method: "GET",
     next: {
@@ -152,4 +152,25 @@ export async function sendContactMessage(message: any): Promise<boolean> {
   })
     .then((response) => response.status === 200)
     .catch((error) => false);
+}
+
+export async function fetchLanguages() {
+  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/languages/records", {
+    method: "GET",
+    next: {
+      revalidate: 60,
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => data.items)
+    .then((languages) => {
+      return languages.map((language: any) => {
+        return {
+          id: language.id,
+          name: language.name,
+          description: language.description,
+          image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${language.collectionId}/${language.id}/${language.image}`,
+        };
+      });
+    });
 }
