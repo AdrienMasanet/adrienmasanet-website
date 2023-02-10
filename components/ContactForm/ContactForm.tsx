@@ -6,7 +6,6 @@ import { sendContactMessage } from "../../services/apiRequests";
 import { GoogleReCaptcha } from "react-google-recaptcha-v3";
 import { useState, useCallback } from "react";
 
-// TODO : Implement Google reCaptcha
 const ContactForm = () => {
   const [reCaptchaToken, setReCaptchaToken] = useState<string>();
   const [refreshReCaptcha, setRefreshReCaptcha] = useState<boolean>(false);
