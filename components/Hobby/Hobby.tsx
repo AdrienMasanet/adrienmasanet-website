@@ -13,7 +13,7 @@ type HobbyProps = {
 };
 
 const Hobby = ({ name, description, images, imagesScale = 100 }: HobbyProps) => {
-  const [carouselRotation, setCarouselRotation] = useState(0);
+  const [carouselRotation, setCarouselRotation] = useState<number>(0);
   const carouselAnimationRef = useRef<any>();
   const [imagesContainerRef, isImagesContainerInView] = useInView();
 
