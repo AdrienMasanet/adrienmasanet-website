@@ -149,6 +149,7 @@
 }
 
 .itemcontainer {
+  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: relative;
   width: 5em;
   height: 5em;
