@@ -3,3 +3,16 @@
 .container {
   width: 100%;
 }
+
+.introductioncontainer {
+  border: solid 1px $cl-darkblue;
+  padding: 0 1em;
+  border-radius: $default-border-radius;
+  box-shadow: $sd-hard-darkblue-sm, $sd-base-sm;
+}
+
+.paragraph {
+  font-size: 1.25em;
+  line-height: 1.25em;
+  margin: 1em 0;
+}
