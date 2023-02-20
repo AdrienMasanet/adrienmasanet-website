@@ -1,3 +1,5 @@
+"use client";
+
 import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
 import ElementsShowcaseElementItem from "./ElementsShowcaseElementItem";
 import styles from "./ElementsShowcase.module.scss";

@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./ContactSection.module.scss";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import Section from "../../Section/Section";
