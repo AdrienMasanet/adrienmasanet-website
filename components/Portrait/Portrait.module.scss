@@ -5,4 +5,13 @@
   height: 27.5em;
   position: absolute;
   bottom: 0;
+
+  canvas {
+    filter: drop-shadow($sd-base-xl) drop-shadow($sd-base-sm);
+  }
+
+  @media screen and (max-width: $ss-mobile) {
+    left: 0;
+    width: 15em;
+  }
 }

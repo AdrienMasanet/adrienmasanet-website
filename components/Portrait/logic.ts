@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
 export class PortraitLogic {
   private containerRef: React.RefObject<HTMLDivElement>;
@@ -6,18 +7,20 @@ export class PortraitLogic {
   private scene: THREE.Scene;
   private camera: THREE.PerspectiveCamera;
   private raycaster: THREE.Raycaster;
-  private portraitMesh: THREE.Mesh;
+  private portraitMesh: THREE.Mesh | undefined = undefined;
   private mouse: THREE.Vector2;
-  private active: boolean;
+  private loader: GLTFLoader;
+  private active: boolean = false;
+  private animationLoopLerp: number = 2.5;
+  private time: number = 0;
 
   constructor(containerRef: React.RefObject<HTMLDivElement>) {
-    // Sets the width and height to the size of the container
-    const width = containerRef.current?.clientWidth || 0;
-    const height = containerRef.current?.clientHeight || 0;
-
-    this.active = true;
     // Append the ThreeJs canvas to the React component's container ref
     this.containerRef = containerRef;
+
+    // Sets the width and height to the size of the container
+    const width = this.containerRef.current?.clientWidth || 0;
+    const height = this.containerRef.current?.clientHeight || 0;
 
     this.scene = new THREE.Scene();
     this.camera = new THREE.PerspectiveCamera(20, width / height, 0.1, 1000);
@@ -27,6 +30,7 @@ export class PortraitLogic {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setClearColor(0xffffff, 0);
     this.renderer.setSize(width, height);
+    this.renderer.outputEncoding = THREE.sRGBEncoding;
     this.containerRef.current?.appendChild(this.renderer.domElement);
 
     // Setup a raycaster to detect mouse
@@ -38,20 +42,28 @@ export class PortraitLogic {
       this.onMouseMove(event);
     });
 
-    // Create a cube to simulate a portrait
-    this.portraitMesh = new THREE.Mesh(new THREE.BoxGeometry(1, 1, 1), new THREE.MeshBasicMaterial({ color: 0x00ff00 }));
-    this.scene.add(this.portraitMesh);
-    this.portraitMesh.position.y = -1.5;
-    this.portraitMesh.position.z = -2;
-    this.portraitMesh.rotation.y = 4;
-
-    this.makeLights();
-
     // Move the camera back to see the graph
     this.camera.position.z = 5;
 
-    // Start the animation
-    this.update();
+    // Add lights to the scene
+    this.makeLights();
+
+    // Load the portrait texture
+    this.loader = new GLTFLoader();
+    this.loader
+      .loadAsync("/3d/adrienmasanet_model.glb", (gltf) => {})
+      .then((gltf) => {
+        this.portraitMesh = gltf.scene.children[0] as THREE.Mesh;
+        this.scene.add(this.portraitMesh);
+        this.portraitMesh.position.y = -2;
+        this.portraitMesh.rotation.z = Math.PI / 2;
+
+        // Activate the animation if not already active
+        this.active = true;
+
+        // Start the animation
+        this.update();
+      });
   }
 
   makeLights() {
@@ -93,7 +105,7 @@ export class PortraitLogic {
   }
 
   update() {
-    if (!this.active) {
+    if (!this.active || !this.portraitMesh) {
       return;
     }
 
@@ -102,23 +114,37 @@ export class PortraitLogic {
 
     this.animateOpening();
     this.animateMouseSwing();
+    this.animateLoopLerp(3.9, 1.75, 25);
 
     this.renderer.render(this.scene, this.camera);
+
+    this.time += 1 / 60;
 
     requestAnimationFrame(this.update.bind(this));
   }
 
   animateOpening() {
-    this.camera.position.z = THREE.MathUtils.lerp(this.camera.position.z, 4, 0.01);
-    this.portraitMesh.position.y = THREE.MathUtils.lerp(this.portraitMesh.position.y, 0, 0.01);
-    this.portraitMesh.rotation.x = THREE.MathUtils.lerp(this.portraitMesh.rotation.x, 0, 0.01);
-    this.portraitMesh.rotation.y = THREE.MathUtils.lerp(this.portraitMesh.rotation.y, 0.25, 0.007);
+    if (!this.portraitMesh) {
+      return;
+    }
+
+    this.camera.position.z = this.animationLoopLerp;
+    this.portraitMesh.position.y = -0.75 + this.animationLoopLerp / 12;
+    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(this.portraitMesh.rotation.z, 11, 0.007);
   }
 
   animateMouseSwing() {
+    if (!this.portraitMesh) {
+      return;
+    }
+
     // Slighly rotate the portrait depending on the mouse X and Y to enforce the 3D effect
-    this.portraitMesh.rotation.x = THREE.MathUtils.lerp(this.portraitMesh.rotation.x, -this.mouse.y * 0.25, 0.01);
-    this.portraitMesh.rotation.y = THREE.MathUtils.lerp(this.portraitMesh.rotation.y, this.mouse.x * 0.25, 0.01);
+    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(this.portraitMesh.rotation.z, -this.mouse.x * 1.5 + 11, 0.01);
+  }
+
+  animateLoopLerp(min: number, max: number, speed: number) {
+    // Use a sine wave to animate a value between min and max
+    this.animationLoopLerp = THREE.MathUtils.lerp(min, max, (Math.sin((this.time / speed) * Math.PI) + 1) / 2);
   }
 
   onMouseMove(event: MouseEvent) {
