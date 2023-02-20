@@ -9,7 +9,7 @@ type AboutMeSectionProps = {
 
 const AboutMeSection = ({ personalityTraits }: AboutMeSectionProps) => {
   return (
-    <Section waveSection={true} title="Mes traits de personnalité" subtitle="Mais qui est donc cet énergumène ?" sectionColor={scssThemeVariables.scssThemeClWhite} nextSectionColor={scssThemeVariables.scssThemeClDarkblue} textColor={scssThemeVariables.scssThemeClDarkblue} spaceAfterTitles="spacer-md" maxWidth={900}>
+    <Section waveSection={true} title="Mes traits de personnalité" subtitle="Qui suis-je vraiment ?" sectionColor={scssThemeVariables.scssThemeClWhite} nextSectionColor={scssThemeVariables.scssThemeClDarkblue} textColor={scssThemeVariables.scssThemeClDarkblue} spaceAfterTitles="spacer-md" maxWidth={900}>
       {personalityTraits &&
         personalityTraits.map((trait: any) => {
           return <PersonalityTrait key={trait.id} name={trait.name} description={trait.description} image={trait.image} />;
