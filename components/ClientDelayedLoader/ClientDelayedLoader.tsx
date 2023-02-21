@@ -28,13 +28,13 @@ const ClientDelayedLoader = ({ delay = 1000 }: CircleChartProps) => {
     return () => {
       clearTimeout(fadeDelayTimeout);
     };
-  }, []);
+  }, [decreaseFade, delay]);
 
   useEffect(() => {
     if (fadePercentage < 100) {
       requestAnimationFrame(decreaseFade);
     }
-  }, [fadePercentage]);
+  }, [decreaseFade, fadePercentage]);
 
   return <div className={styles.container} style={{ opacity: fadePercentage + "%" }}></div>;
 };
