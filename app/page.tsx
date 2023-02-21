@@ -29,8 +29,8 @@ export default async function MainPage() {
         <HeaderSection />
         <SkillsSection skills={skills} />
         <TechsSection masteredCategoriesAndElements={masteredTechs} notMasteredCategoriesAndElements={notMasteredTechs} />
-        <LanguagesSection languages={languages} />
-        <AchievementsSection />
+        {/* <LanguagesSection languages={languages} />
+        <AchievementsSection /> */}
         <AboutMeSection personalityTraits={personalityTraits} />
         <HobbiesSection hobbies={hobbies} />
         <ContactSection />
