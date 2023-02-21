@@ -2,6 +2,7 @@
 
 import "../styles/globals.scss";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
+import { Analytics } from "@vercel/analytics/react";
 
 export default function MainPageLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -14,6 +15,7 @@ export default function MainPageLayout({ children }: { children: React.ReactNode
       </head>
       <body>
         <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_V3_PUBLIC_API_KEY as string}>{children}</ReCaptchaProvider>
+        <Analytics />
       </body>
     </html>
   );
