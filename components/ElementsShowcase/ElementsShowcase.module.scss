@@ -28,14 +28,15 @@
 }
 
 .slider {
+  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: relative;
-  width: fit-content;
+  width: 80%;
   min-height: 30em;
   display: inline;
-  flex-grow: 1;
 }
 
 .categorycontainer {
+  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: absolute;
   top: 50%;
   left: 50%;
@@ -105,6 +106,10 @@
       float: left;
       margin: 1.5em;
       filter: drop-shadow($sd-hard-darkblue-md) drop-shadow($sd-base-sm);
+
+      @media screen and (max-width: $ss-mobile) {
+        filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm) grayscale(50%);
+      }
     }
 
     .description {
@@ -185,7 +190,8 @@
 }
 
 .arrow {
-  flex-grow: 0.1;
+  width: 10%;
+  height: 4em;
   font-size: 4em;
   color: $cl-white;
   cursor: pointer;
@@ -214,10 +220,6 @@
         transform: translate3d(0.1em, 0, 0);
       }
     }
-  }
-
-  @media screen and (max-width: $ss-mobile) {
-    flex-grow: 0.075;
   }
 }
 
