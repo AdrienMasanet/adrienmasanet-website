@@ -14,7 +14,7 @@ export default async function MainPage() {
   const skills = await fetchSkills();
   const masteredTechs = await fetchMasteredTechs();
   const notMasteredTechs = await fetchNotMasteredTechs();
-  const languages = await fetchLanguages();
+  //const languages = await fetchLanguages();
   const personalityTraits = await fetchPersonalityTraits();
   const hobbies = await fetchHobbies();
 
