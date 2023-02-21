@@ -17,26 +17,30 @@ type ElementsShowcaseCategoryContainerProps = {
 const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: ElementsShowcaseCategoryContainerProps) => {
   const [itemReviewing, setItemReviewing] = useState<ElementsShowcaseItem | null>(null);
 
-  const handleClick = useCallback(
-    (element: ElementsShowcaseItem) => {
-      if (position === 0) {
-        setItemReviewing(element);
+  const handleClick = (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    const target: HTMLElement = event.target as HTMLElement;
+    const itemElement: HTMLElement | null = target.closest(".item");
+
+    if (itemElement) {
+      const itemId = itemElement.dataset.id;
+      const item: ElementsShowcaseItem | undefined = category.items.find((element: ElementsShowcaseItem) => element.id === itemId);
+      if (item && position === 0) {
+        setItemReviewing(item);
       }
-    },
-    [position]
-  );
+    }
+  };
 
   // Use memo to prevent the items from being re-rendered every time the position changes
   const items = useMemo(() => {
     if (category.items) {
       return category.items.map((element: ElementsShowcaseItem) => (
-        <div key={element.id} onClick={() => handleClick(element)}>
+        <div key={element.id} data-id={element.id} className="item">
           <ElementsShowcaseElementItem item={element} />
         </div>
       ));
     }
     return [];
-  }, [category.items, handleClick]);
+  }, [category.items]);
 
   useEffect(() => {
     if (position !== 0) {
@@ -47,6 +51,7 @@ const ElementsShowcaseCategoryContainer = ({ category, position, isScrolling }: 
   return (
     <>
       <div
+        onClick={handleClick}
         className={`
           ${styles.categorycontainer}
           ${isScrolling ? styles.grabbing : ""}
