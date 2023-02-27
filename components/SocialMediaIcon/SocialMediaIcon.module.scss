@@ -5,4 +5,11 @@
   filter: drop-shadow($sd-base-sm);
   border-color: palevioletred;
   user-select: none;
+
+  > img {
+    @media screen and (max-width: $ss-mobile) {
+      width: 2em;
+      height: 2em;
+    }
+  }
 }
