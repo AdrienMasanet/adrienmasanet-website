@@ -31,7 +31,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
   }, []);
 
   return (
-    <Section waveSection={true} title="Quelles sont mes compétences ?" sectionColor={scssThemeVariables.scssThemeClWhite} nextSectionColor={scssThemeVariables.scssThemeClDarkblue} textColor={scssThemeVariables.scssThemeClDarkblue}>
+    <Section waveSection={true} title="Mes compétences" sectionColor={scssThemeVariables.scssThemeClWhite} nextSectionColor={scssThemeVariables.scssThemeClDarkblue} textColor={scssThemeVariables.scssThemeClDarkblue}>
       <CircleChart width={canvasWidthAndHeight.width} height={canvasWidthAndHeight.height} elements={skills} />
       <div className={styles.introductioncontainer}>
         <p className={styles.paragraph}>Développeur web full-stack, je suis spécialisé dans le développement d&apos;applications web responsives, d&apos;applications natives (smartphones / desktop), de microservices ou d&apos;APIs.</p>
