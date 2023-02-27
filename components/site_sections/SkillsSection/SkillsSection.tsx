@@ -37,7 +37,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
         <p className={styles.paragraph}>Développeur web full-stack, je suis spécialisé dans le développement d&apos;applications web responsives, d&apos;applications natives (smartphones / desktop), de microservices ou d&apos;APIs.</p>
         <p className={styles.paragraph}>J&apos;ai obtenu le diplôme de Concepteur Développeur d&apos;Applications en 2022 à l&apos;Idem Creative Arts School suite à des études en alternance et je suis passionné par la programmation et la technologie en général depuis mon plus jeune âge.</p>
         <p className={styles.paragraph}>Les bonnes pratiques de développement, la qualité du code, le respect des diverses normes, la sécurité sont des points qui me tiennent à cœur et je mets tout en oeuvre pour les respecter.</p>
-        <p className={styles.paragraph}>Sociable, j’apprécie fortement le travail d’équipe et sais me montrer force de proposition au cours d’un projet.</p>
+        <p className={styles.paragraph}>Sociable, j&apos;aime le travail d&apos;équipe et je suis toujours prêt à proposer de nouvelles idées pour contribuer à la qualité d&apos;un projet !</p>
       </div>
     </Section>
   );
