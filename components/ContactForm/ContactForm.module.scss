@@ -25,6 +25,7 @@
     border: solid 1px $cl-darkblue-10;
     padding: 0.5em;
     transition: all 0.75s $eg-out-cubic;
+    min-height: 2.5em;
 
     &::placeholder {
       color: $cl-darkblue-10;
