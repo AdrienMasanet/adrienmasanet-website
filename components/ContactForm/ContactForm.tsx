@@ -32,7 +32,7 @@ const ContactForm = () => {
   return (
     <>
       {formSubmitted && <div className={styles.success}>Votre message a bien été envoyé ✅</div>}
-      <form className={`${styles.container} ${formSubmitted ? styles.submitted : ""}`} name="message" id="email" onSubmit={submitMessage}>
+      <form className={`${styles.container} ${formSubmitted ? styles.submitted : ""}`} name="message" onSubmit={submitMessage}>
         <div className={styles.inlineinputs}>
           <input className={`${styles.formelement} ${styles.inputname}`} type="email" name="email" id="email" placeholder="Adresse e-mail" required />
           <input className={`${styles.formelement} ${styles.inputcompany}`} type="text" name="company" id="company" placeholder="Entreprise (facultatif)" />
