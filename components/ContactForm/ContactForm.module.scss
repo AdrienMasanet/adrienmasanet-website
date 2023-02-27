@@ -12,6 +12,10 @@
   overflow: hidden;
   transition: all 1s $eg-out-cubic;
 
+  @media screen and (max-width: $ss-mobile) {
+    padding: 0;
+  }
+
   &.submitted {
     padding: 0 1em;
     max-height: 0px;
@@ -25,7 +29,11 @@
     border: solid 1px $cl-darkblue-10;
     padding: 0.5em;
     transition: all 0.75s $eg-out-cubic;
-    min-height: 2.5em;
+    min-height: 2.75em;
+
+    @media screen and (max-width: $ss-mobile) {
+      font-size: 1em;
+    }
 
     &::placeholder {
       color: $cl-darkblue-10;
@@ -48,6 +56,10 @@
   flex-direction: row;
   justify-content: stretch;
   gap: 1em;
+
+  @media screen and (max-width: $ss-mobile) {
+    flex-direction: column;
+  }
 }
 
 .inputname {
