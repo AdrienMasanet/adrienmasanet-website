@@ -14,7 +14,7 @@ export class PortraitLogic {
   private animationLoopLerp: number = 2.5;
   private time: number = 0;
 
-  constructor(containerRef: React.RefObject<HTMLDivElement>) {
+  constructor(containerRef: React.RefObject<HTMLDivElement>, setLoading: any) {
     // Append the ThreeJs canvas to the React component's container ref
     this.containerRef = containerRef;
 
@@ -38,7 +38,7 @@ export class PortraitLogic {
     this.mouse = new THREE.Vector2();
 
     // Add a mouse move listener to the ThreeJs canvas to detect mouse position
-    const mouseMoveListener = window.addEventListener("mousemove", (event) => {
+    window.addEventListener("mousemove", (event) => {
       this.onMouseMove(event);
     });
 
@@ -48,7 +48,7 @@ export class PortraitLogic {
     // Add lights to the scene
     this.makeLights();
 
-    // Load the portrait texture
+    // Load the portrait glb model
     this.loader = new GLTFLoader();
     this.loader
       .loadAsync("/3d/adrienmasanet_model.glb", (gltf) => {})
@@ -60,6 +60,9 @@ export class PortraitLogic {
 
         // Activate the animation if not already active
         this.active = true;
+
+        // Change React component loading state to false
+        setLoading(false);
 
         // Start the animation
         this.update();
@@ -114,7 +117,7 @@ export class PortraitLogic {
 
     this.animateOpening();
     this.animateMouseSwing();
-    this.animateLoopLerp(3.9, 1.75, 25);
+    this.animateLoopLerp(3.9, 1.75, 35);
 
     this.renderer.render(this.scene, this.camera);
 

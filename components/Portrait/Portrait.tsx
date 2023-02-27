@@ -1,11 +1,13 @@
 "use client";
 
 import styles from "./Portrait.module.scss";
-import { useRef, useEffect, useCallback } from "react";
+import { useRef, useEffect, useCallback, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import { PortraitLogic } from "./logic";
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
 
 const Portrait = () => {
+  const [loading, setLoading] = useState<boolean>(true);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const portraitLogicRef = useRef<PortraitLogic | null>(null);
   const { ref: containerRefIntersectionObserver, inView } = useInView();
@@ -24,7 +26,7 @@ const Portrait = () => {
       return;
     }
 
-    portraitLogicRef.current = new PortraitLogic(containerRef);
+    portraitLogicRef.current = new PortraitLogic(containerRef, setLoading);
 
     return () => {
       portraitLogicRef.current && portraitLogicRef.current.destroy();
@@ -39,7 +41,12 @@ const Portrait = () => {
     }
   }, [inView]);
 
-  return <div className={styles.container} ref={setContainerDoubleRefs}></div>;
+  return (
+    <div className={styles.maincontainer}>
+      <div className={`${styles.portraitcontainer} ${!loading ? styles.active : ""}`} ref={setContainerDoubleRefs}></div>
+      <LoadingSpinner active={loading} />
+    </div>
+  );
 };
 
 export default Portrait;

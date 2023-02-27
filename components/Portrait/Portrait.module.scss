@@ -1,17 +1,29 @@
 @import "../../styles/variables";
 
-.container {
+.maincontainer {
   width: 27.5em;
   height: 27.5em;
   position: absolute;
   bottom: 0;
 
-  canvas {
-    filter: drop-shadow($sd-base-xl) drop-shadow($sd-base-sm);
-  }
-
   @media screen and (max-width: $ss-mobile) {
     left: 0;
     width: 15em;
+  }
+}
+
+.portraitcontainer {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 2.5s ease-in-out;
+  position: absolute;
+
+  &.active {
+    opacity: 1;
+  }
+
+  canvas {
+    filter: drop-shadow($sd-base-xl) drop-shadow($sd-base-sm);
   }
 }
