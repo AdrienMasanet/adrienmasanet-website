@@ -27,6 +27,7 @@ export async function fetchMasteredTechs() {
         techCategories
           // Filter out categories to return only those that have at least one mastered tech
           .filter((category: any) => {
+            console.log(category);
             return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === true).length > 0;
           })
           .map((category: any) => {
@@ -48,6 +49,12 @@ export async function fetchMasteredTechs() {
                       image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${tech.collectionId}/${tech.id}/${tech.image}`,
                       rank: tech.rank ? (tech.rank as MedalRank) : null,
                     };
+                  })
+                  .sort((a: any, b: any) => {
+                    if (!a.rank && !b.rank) return 0;
+                    if (a.rank === null) return 1;
+                    if (b.rank === null) return -1;
+                    return b.rank - a.rank;
                   }),
             };
           })
