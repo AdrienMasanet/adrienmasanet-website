@@ -2,6 +2,7 @@
 
 import styles from "./Section.module.scss";
 import Waves from "../Waves/Waves";
+import { forwardRef } from "react";
 
 type SectionProps = {
   title: string;
@@ -15,9 +16,10 @@ type SectionProps = {
   spaceBelow?: string;
   spaceAfterTitles?: string;
   maxWidth?: number;
+  ref?: React.RefObject<HTMLDivElement>;
 };
 
-const Section = ({ title, subtitle, sectionColor, nextSectionColor, textColor, children, waveSection, lastSection, spaceBelow = "", spaceAfterTitles = "", maxWidth }: SectionProps) => {
+const Section = forwardRef<HTMLDivElement, SectionProps>(({ title, subtitle, sectionColor, nextSectionColor, textColor, children, waveSection, lastSection, spaceBelow = "", spaceAfterTitles = "", maxWidth }, ref) => {
   let spacerBelowSize: string = spaceBelow.toString();
   let spacerAfterTitlesSize: string = spaceAfterTitles.toString();
 
@@ -37,7 +39,7 @@ const Section = ({ title, subtitle, sectionColor, nextSectionColor, textColor, c
 
           {spacerAfterTitlesSize != "" && <hr className={spacerAfterTitlesSize} />}
 
-          <div className={styles.children} style={{ maxWidth: maxWidth ? maxWidth + "px" : "100%", margin: "auto" }}>
+          <div ref={ref} className={styles.children} style={{ maxWidth: maxWidth ? maxWidth + "px" : "100%", margin: "auto" }}>
             {children}
           </div>
 
@@ -47,6 +49,8 @@ const Section = ({ title, subtitle, sectionColor, nextSectionColor, textColor, c
       </section>
     </>
   );
-};
+});
+
+Section.displayName = "Section";
 
 export default Section;

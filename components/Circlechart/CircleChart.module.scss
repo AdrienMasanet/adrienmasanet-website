@@ -6,6 +6,10 @@
   margin: auto;
   width: fit-content;
 
+  > div {
+    overflow: visible !important;
+  }
+
   .label {
     padding: 0.25em;
     border-radius: 0.25em;

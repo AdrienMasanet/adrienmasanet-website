@@ -56,6 +56,7 @@ export class CircleChartLogic {
     // Create a dummy mesh at the center of the scene to hold all the pieces that will shape the donut
     this.graphMesh = new THREE.Mesh();
     this.scene.add(this.graphMesh);
+    this.graphMesh.rotation.z = 80;
 
     this.makeGraph(elements, gapBetweenElements);
     this.makeLights();
