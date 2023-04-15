@@ -27,7 +27,6 @@ export async function fetchMasteredTechs() {
         techCategories
           // Filter out categories to return only those that have at least one mastered tech
           .filter((category: any) => {
-            console.log(category);
             return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === true).length > 0;
           })
           .map((category: any) => {
