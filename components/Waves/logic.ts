@@ -1,5 +1,5 @@
+import { MaxRange,Segment, Wave } from "./types";
 import { hexToRgb } from "./utils";
-import { Wave, Segment, MaxRange } from "./types";
 
 const DEBUG = false;
 

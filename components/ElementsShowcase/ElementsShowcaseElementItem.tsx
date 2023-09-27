@@ -1,8 +1,9 @@
-import { ElementsShowcaseItem } from "./types";
+import Image from "next/image";
+
 import MedalIcon from "../MedalIcon/MedalIcon";
 import { MedalRank } from "../MedalIcon/types";
 import styles from "./ElementsShowcase.module.scss";
-import Image from "next/image";
+import { ElementsShowcaseItem } from "./types";
 
 type ElementsShowcaseElementItemProps = {
   item: ElementsShowcaseItem;

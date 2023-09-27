@@ -1,5 +1,6 @@
-import styles from "./LanguagesSection.module.scss";
 import Image from "next/image";
+
+import styles from "./LanguagesSection.module.scss";
 
 type LanguageItemProps = {
   image: string;

@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useEffect as useEffect, useRef, useCallback } from "react";
-import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
-import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
-import styles from "./ElementsShowcase.module.scss";
+import { useCallback,useEffect as useEffect, useRef, useState } from "react";
+
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
+import styles from "./ElementsShowcase.module.scss";
+import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
+import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
 
 type ElementsShowcaseProps = {
   categoriesAndElements: ElementsShowcaseCategory[];

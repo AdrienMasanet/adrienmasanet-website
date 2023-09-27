@@ -1,8 +1,9 @@
 "use client";
 
-import styles from "./PersonalityTrait.module.scss";
 import { useInView } from "react-intersection-observer";
 import Image from "next/image";
+
+import styles from "./PersonalityTrait.module.scss";
 
 type PersonalityTraitProps = {
   name: string;

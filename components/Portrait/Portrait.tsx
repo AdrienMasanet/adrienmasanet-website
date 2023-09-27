@@ -1,10 +1,11 @@
 "use client";
 
-import styles from "./Portrait.module.scss";
-import { useRef, useEffect, useCallback, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { PortraitLogic } from "./logic";
+
 import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import { PortraitLogic } from "./logic";
+import styles from "./Portrait.module.scss";
 
 const Portrait = () => {
   const [loading, setLoading] = useState<boolean>(true);

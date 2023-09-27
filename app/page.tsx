@@ -1,13 +1,14 @@
 import dynamic from "next/dynamic";
+
 import ClientDelayedLoader from "../components/ClientDelayedLoader/ClientDelayedLoader";
+import AboutMeSection from "../components/site_sections/AboutMeSection/AboutMeSection";
+import AchievementsSection from "../components/site_sections/AchievementsSection/AchievementsSection";
+import FooterSection from "../components/site_sections/FooterSection/FooterSection";
 import HeaderSection from "../components/site_sections/HeaderSection/HeaderSection";
+import LanguagesSection from "../components/site_sections/LanguagesSection/LanguagesSection";
 import SkillsSection from "../components/site_sections/SkillsSection/SkillsSection";
 import TechsSection from "../components/site_sections/TechsSection/TechsSection";
-import LanguagesSection from "../components/site_sections/LanguagesSection/LanguagesSection";
-import AchievementsSection from "../components/site_sections/AchievementsSection/AchievementsSection";
-import AboutMeSection from "../components/site_sections/AboutMeSection/AboutMeSection";
-import FooterSection from "../components/site_sections/FooterSection/FooterSection";
-import { fetchSkills, fetchMasteredTechs, fetchNotMasteredTechs, fetchLanguages, fetchPersonalityTraits, fetchHobbies } from "../services/apiRequests";
+import { fetchHobbies,fetchLanguages, fetchMasteredTechs, fetchNotMasteredTechs, fetchPersonalityTraits, fetchSkills } from "../services/apiRequests";
 
 export default async function MainPage() {
   // Fetch data from the API for the sections containing data

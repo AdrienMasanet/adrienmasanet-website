@@ -1,8 +1,9 @@
 "use client";
 
-import styles from "./Section.module.scss";
-import Waves from "../Waves/Waves";
 import { forwardRef } from "react";
+
+import Waves from "../Waves/Waves";
+import styles from "./Section.module.scss";
 
 type SectionProps = {
   title: string;

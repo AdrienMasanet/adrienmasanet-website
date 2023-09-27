@@ -1,7 +1,7 @@
-import styles from "./HobbiesSection.module.scss";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import Section from "../../Section/Section";
 import Hobby from "../../Hobby/Hobby";
+import Section from "../../Section/Section";
+import styles from "./HobbiesSection.module.scss";
 
 type HobbiesSectionProps = {
   hobbies: any;

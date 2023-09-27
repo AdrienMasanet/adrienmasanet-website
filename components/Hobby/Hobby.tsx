@@ -1,9 +1,10 @@
 "use client";
 
-import styles from "./Hobby.module.scss";
-import Image from "next/image";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useCallback,useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
+import Image from "next/image";
+
+import styles from "./Hobby.module.scss";
 
 type HobbyProps = {
   name: string;

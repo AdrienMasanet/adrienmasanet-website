@@ -1,6 +1,6 @@
-import styles from "./AchievementsSection.module.scss";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import Section from "../../Section/Section";
+import styles from "./AchievementsSection.module.scss";
 
 type AchievementsSectionProps = {};
 

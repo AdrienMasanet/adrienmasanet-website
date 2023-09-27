@@ -1,8 +1,9 @@
 "use client";
 
 import "../styles/globals.scss";
-import { ReCaptchaProvider } from "next-recaptcha-v3";
+
 import { Analytics } from "@vercel/analytics/react";
+import { ReCaptchaProvider } from "next-recaptcha-v3";
 
 export default function MainPageLayout({ children }: { children: React.ReactNode }) {
   return (

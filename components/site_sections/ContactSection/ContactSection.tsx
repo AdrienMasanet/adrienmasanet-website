@@ -1,10 +1,10 @@
 "use client";
 
-import styles from "./ContactSection.module.scss";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
+import ContactForm from "../../ContactForm/ContactForm";
 import Section from "../../Section/Section";
 import SocialMediaIcon from "../../SocialMediaIcon/SocialMediaIcon";
-import ContactForm from "../../ContactForm/ContactForm";
+import styles from "./ContactSection.module.scss";
 
 const ContactSection = () => {
   return (

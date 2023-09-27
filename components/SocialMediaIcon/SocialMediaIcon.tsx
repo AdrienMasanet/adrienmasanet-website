@@ -1,8 +1,9 @@
 "use client";
 
-import styles from "./SocialMediaIcon.module.scss";
 import Image from "next/image";
 import Link from "next/link";
+
+import styles from "./SocialMediaIcon.module.scss";
 
 type SocialMediaIconProps = {
   name: string;

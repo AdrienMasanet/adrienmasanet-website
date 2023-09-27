@@ -1,9 +1,9 @@
 "use client";
 
-import styles from "./LanguagesSection.module.scss";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import Section from "../../Section/Section";
 import LanguageItem from "./LanguageItem";
+import styles from "./LanguagesSection.module.scss";
 
 type LanguagesSectionProps = {
   languages: any;

@@ -1,8 +1,8 @@
 "use client";
 
-import { MedalRank } from "./types";
-import styles from "./MedalIcon.module.scss";
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
+import styles from "./MedalIcon.module.scss";
+import { MedalRank } from "./types";
 
 type MedalIconProps = {
   rank: MedalRank;

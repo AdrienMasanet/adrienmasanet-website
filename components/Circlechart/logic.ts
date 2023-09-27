@@ -1,5 +1,6 @@
 import * as THREE from "three";
-import { CSS2DRenderer, CSS2DObject } from "three/examples/jsm/renderers/CSS2DRenderer.js";
+import { CSS2DObject,CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
+
 import { CircleChartElement, CircleChartElementObject } from "./types";
 
 const extrudeSettings = { depth: 0.1, bevelEnabled: true, bevelSegments: 1, samples: 1, curveSegments: 30, bevelSize: 0.04, bevelThickness: 0.04 };

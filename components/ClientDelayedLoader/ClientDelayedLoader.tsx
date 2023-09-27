@@ -1,7 +1,8 @@
 "use client";
 
+import { useEffect,useRef, useState } from "react";
+
 import styles from "./ClientDelayedLoader.module.scss";
-import { useState, useRef, useEffect } from "react";
 
 type CircleChartProps = {
   delay?: number;

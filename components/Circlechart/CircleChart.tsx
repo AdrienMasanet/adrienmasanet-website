@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useEffect, useCallback } from "react";
+import { useCallback,useEffect, useRef } from "react";
+import { useInView } from "react-intersection-observer";
+
+import styles from "./CircleChart.module.scss";
 import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";
-import styles from "./CircleChart.module.scss";
-import { useInView } from "react-intersection-observer";
 
 type CircleChartProps = {
   width: number;

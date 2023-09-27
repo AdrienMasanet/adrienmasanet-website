@@ -1,10 +1,11 @@
 "use client";
 
-import { useRef, useEffect, useState, useCallback } from "react";
+import { useCallback,useEffect, useRef, useState } from "react";
+import { useInView } from "react-intersection-observer";
+
 import { WavesLogic } from "./logic";
 import { WavesDirection } from "./types";
 import styles from "./Waves.module.scss";
-import { useInView } from "react-intersection-observer";
 
 type WavesProps = {
   wavesDirection?: WavesDirection;

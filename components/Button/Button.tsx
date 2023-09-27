@@ -1,7 +1,8 @@
 "use client";
 
-import styles from "./Button.module.scss";
 import { useState } from "react";
+
+import styles from "./Button.module.scss";
 
 type ButtonProps = {
   text: string;

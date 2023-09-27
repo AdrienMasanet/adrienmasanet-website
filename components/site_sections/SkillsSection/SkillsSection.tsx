@@ -1,11 +1,12 @@
 "use client";
 
-import styles from "./SkillsSection.module.scss";
+import { useEffect, useRef,useState } from "react";
+
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
+import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";
 import CircleChart from "../../Circlechart/CircleChart";
 import Section from "../../Section/Section";
-import { useEffect, useState, useRef } from "react";
-import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";
+import styles from "./SkillsSection.module.scss";
 
 type SkillsSectionProps = {
   skills: any;
