@@ -29,11 +29,11 @@ export default async function MainPage() {
   // Dynamic imports for sections that are not needed on the server side
   const HobbiesSection = dynamic(
     () => import("../components/site_sections/HobbiesSection/HobbiesSection"),
-    { ssr: false }
+    { ssr: false },
   );
   const ContactSection = dynamic(
     () => import("../components/site_sections/ContactSection/ContactSection"),
-    { ssr: false }
+    { ssr: false },
   );
 
   return (

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback,useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
 import styles from "./CircleChart.module.scss";
@@ -16,7 +16,14 @@ type CircleChartProps = {
   labelsDistance?: number;
 };
 
-const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements = 0.75, labelsDistance = 2 }: CircleChartProps) => {
+const CircleChart = ({
+  width,
+  height,
+  scale = 0.75,
+  elements,
+  gapBetweenElements = 0.75,
+  labelsDistance = 2,
+}: CircleChartProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const circleChartLogicRef = useRef<CircleChartLogic | null>(null);
   const { ref: containerRefIntersectionObserver, inView } = useInView();
@@ -27,7 +34,7 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
       containerRef.current = node;
       containerRefIntersectionObserver(node);
     },
-    [containerRefIntersectionObserver]
+    [containerRefIntersectionObserver],
   );
 
   useEffect(() => {
@@ -35,12 +42,29 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
       return;
     }
 
-    circleChartLogicRef.current = new CircleChartLogic(containerRef, width, height, scale, elements, gapBetweenElements, styles, labelsDistance);
+    circleChartLogicRef.current = new CircleChartLogic(
+      containerRef,
+      width,
+      height,
+      scale,
+      elements,
+      gapBetweenElements,
+      styles,
+      labelsDistance,
+    );
 
     return () => {
       circleChartLogicRef.current && circleChartLogicRef.current.destroy();
     };
-  }, [containerRef, width, height, scale, elements, gapBetweenElements, labelsDistance]);
+  }, [
+    containerRef,
+    width,
+    height,
+    scale,
+    elements,
+    gapBetweenElements,
+    labelsDistance,
+  ]);
 
   useEffect(() => {
     if (inView && circleChartLogicRef.current) {
@@ -50,7 +74,9 @@ const CircleChart = ({ width, height, scale = 0.75, elements, gapBetweenElements
     }
   }, [inView]);
 
-  return <div className={styles.circlechart} ref={setContainerDoubleRefs}></div>;
+  return (
+    <div className={styles.circlechart} ref={setContainerDoubleRefs}></div>
+  );
 };
 
 export default CircleChart;

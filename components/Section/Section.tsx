@@ -35,7 +35,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
       spaceAfterTitles = "",
       maxWidth,
     },
-    ref
+    ref,
   ) => {
     let spacerBelowSize: string = spaceBelow.toString();
     let spacerAfterTitlesSize: string = spaceAfterTitles.toString();
@@ -93,7 +93,7 @@ const Section = forwardRef<HTMLDivElement, SectionProps>(
         </section>
       </>
     );
-  }
+  },
 );
 
 Section.displayName = "Section";

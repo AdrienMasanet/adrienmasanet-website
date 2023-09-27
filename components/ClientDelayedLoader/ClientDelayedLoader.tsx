@@ -37,7 +37,12 @@ const ClientDelayedLoader = ({ delay = 1000 }: CircleChartProps) => {
     }
   }, [decreaseFade, fadePercentage]);
 
-  return <div className={styles.container} style={{ opacity: fadePercentage + "%" }}></div>;
+  return (
+    <div
+      className={styles.container}
+      style={{ opacity: fadePercentage + "%" }}
+    ></div>
+  );
 };
 
 export default ClientDelayedLoader;

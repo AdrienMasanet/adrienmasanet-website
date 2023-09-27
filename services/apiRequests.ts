@@ -1,12 +1,16 @@
 // These functions are used to fetch data from the Pocketbase backend API and return the data in a format that is easy to use in the frontend.
 
 export async function fetchSkills() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/skill/records?sort=order", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/skill/records?sort=order",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items);
 }
@@ -14,12 +18,16 @@ export async function fetchSkills() {
 import { MedalRank } from "../components/MedalIcon/types";
 
 export async function fetchMasteredTechs() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/tech_category/records?expand=tech(tech_category)",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items)
     .then((techCategories) => {
@@ -27,7 +35,14 @@ export async function fetchMasteredTechs() {
         techCategories
           // Filter out categories to return only those that have at least one mastered tech
           .filter((category: any) => {
-            return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === true).length > 0;
+            return (
+              category.expand &&
+              category.expand["tech(tech_category)"] &&
+              category.expand["tech(tech_category)"].length > 0 &&
+              category.expand["tech(tech_category)"].filter(
+                (tech: any) => tech.mastered === true,
+              ).length > 0
+            );
           })
           .map((category: any) => {
             return {
@@ -62,12 +77,16 @@ export async function fetchMasteredTechs() {
 }
 
 export async function fetchNotMasteredTechs() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/tech_category/records?expand=tech(tech_category)", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/tech_category/records?expand=tech(tech_category)",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items)
     .then((techCategories) => {
@@ -75,7 +94,14 @@ export async function fetchNotMasteredTechs() {
         techCategories
           // Filter out categories to return only those that have at least one not mastered tech
           .filter((category: any) => {
-            return category.expand && category.expand["tech(tech_category)"] && category.expand["tech(tech_category)"].length > 0 && category.expand["tech(tech_category)"].filter((tech: any) => tech.mastered === false).length > 0;
+            return (
+              category.expand &&
+              category.expand["tech(tech_category)"] &&
+              category.expand["tech(tech_category)"].length > 0 &&
+              category.expand["tech(tech_category)"].filter(
+                (tech: any) => tech.mastered === false,
+              ).length > 0
+            );
           })
           .map((category: any) => {
             return {
@@ -103,12 +129,16 @@ export async function fetchNotMasteredTechs() {
 }
 
 export async function fetchPersonalityTraits() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/personality_trait/records?sort=order", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/personality_trait/records?sort=order",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items)
     .then((personalityTraits) => {
@@ -124,12 +154,16 @@ export async function fetchPersonalityTraits() {
 }
 
 export async function fetchHobbies() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/hobbies/records?sort=order", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/hobbies/records?sort=order",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items)
     .then((hobbies) => {
@@ -147,24 +181,31 @@ export async function fetchHobbies() {
 }
 
 export async function sendContactMessage(message: any): Promise<boolean> {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "new-contact-message", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "new-contact-message",
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(message),
     },
-    body: JSON.stringify(message),
-  })
+  )
     .then((response) => response.status === 200)
     .catch((error) => false);
 }
 
 export async function fetchLanguages() {
-  return fetch(process.env.NEXT_PUBLIC_POCKETBASE_API_URL + "collections/languages/records", {
-    method: "GET",
-    next: {
-      revalidate: 60,
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/languages/records",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
     },
-  })
+  )
     .then((response) => response.json())
     .then((data) => data.items)
     .then((languages) => {

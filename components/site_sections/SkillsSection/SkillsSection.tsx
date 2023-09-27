@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef,useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";

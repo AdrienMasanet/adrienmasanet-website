@@ -1,10 +1,21 @@
 import React from "react";
 import * as THREE from "three";
-import { CSS2DObject,CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
+import {
+  CSS2DObject,
+  CSS2DRenderer,
+} from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
 import { CircleChartElement, CircleChartElementObject } from "./types";
 
-const extrudeSettings = { depth: 0.1, bevelEnabled: true, bevelSegments: 1, samples: 1, curveSegments: 30, bevelSize: 0.04, bevelThickness: 0.04 };
+const extrudeSettings = {
+  depth: 0.1,
+  bevelEnabled: true,
+  bevelSegments: 1,
+  samples: 1,
+  curveSegments: 30,
+  bevelSize: 0.04,
+  bevelThickness: 0.04,
+};
 
 export class CircleChartLogic {
   private containerRef: React.RefObject<HTMLDivElement>;
@@ -21,7 +32,16 @@ export class CircleChartLogic {
   private labelsDistance: number;
   private active: boolean;
 
-  constructor(containerRef: React.RefObject<HTMLDivElement>, width: number, height: number, scale: number, elements: CircleChartElement[], gapBetweenElements: number, styles: { readonly [key: string]: string }, labelsDistance: number) {
+  constructor(
+    containerRef: React.RefObject<HTMLDivElement>,
+    width: number,
+    height: number,
+    scale: number,
+    elements: CircleChartElement[],
+    gapBetweenElements: number,
+    styles: { readonly [key: string]: string },
+    labelsDistance: number,
+  ) {
     this.active = true;
     // Append the ThreeJs canvas to the React component's container ref
     this.containerRef = containerRef;
@@ -109,25 +129,51 @@ export class CircleChartLogic {
       // Calculate the angle offset of the current ring considering the gap and the total added percentages of the previous elements
       const angleOffset = (Math.PI * 2 * totalAddedPercentage) / 100;
 
-      baseRingShape.absarc(0, 0, this.scale, angleOffset + gapBetweenElements * 1.5, angleLength + angleOffset - gapBetweenElements * 1.5, false);
-      baseRingShape.absarc(0, 0, this.scale * 1.5, angleLength + angleOffset - gapBetweenElements, angleOffset + gapBetweenElements, true);
+      baseRingShape.absarc(
+        0,
+        0,
+        this.scale,
+        angleOffset + gapBetweenElements * 1.5,
+        angleLength + angleOffset - gapBetweenElements * 1.5,
+        false,
+      );
+      baseRingShape.absarc(
+        0,
+        0,
+        this.scale * 1.5,
+        angleLength + angleOffset - gapBetweenElements,
+        angleOffset + gapBetweenElements,
+        true,
+      );
       baseRingShape.closePath();
 
-      const geometry = new THREE.ExtrudeGeometry(baseRingShape, extrudeSettings);
+      const geometry = new THREE.ExtrudeGeometry(
+        baseRingShape,
+        extrudeSettings,
+      );
       geometry.computeVertexNormals();
 
-      const material = new THREE.MeshPhongMaterial({ color: element.color, wireframe: false, flatShading: false });
+      const material = new THREE.MeshPhongMaterial({
+        color: element.color,
+        wireframe: false,
+        flatShading: false,
+      });
       const mesh = new THREE.Mesh(geometry, material);
 
       this.graphMesh.add(mesh);
 
       const elementLabelDiv = document.createElement("div");
       elementLabelDiv.className = this.styles["label"];
-      elementLabelDiv.innerText = element.name + "\n" + element.percentage + "%";
+      elementLabelDiv.innerText =
+        element.name + "\n" + element.percentage + "%";
       const elementLabel = new CSS2DObject(elementLabelDiv);
       // Calculate the angle between the center of the canvas and the center of the element's ring 3d mesh
       const angle = angleOffset + angleLength / 2;
-      elementLabel.position.set(Math.cos(angle) * this.labelsDistance * this.scale, Math.sin(angle) * this.labelsDistance * this.scale, 0);
+      elementLabel.position.set(
+        Math.cos(angle) * this.labelsDistance * this.scale,
+        Math.sin(angle) * this.labelsDistance * this.scale,
+        0,
+      );
       mesh.add(elementLabel);
 
       // Create an object that will hold the element data and the mesh
@@ -151,7 +197,9 @@ export class CircleChartLogic {
 
     // Remove all HTML children from the container ref to avoid duplicate elements
     while (this.containerRef.current?.firstChild) {
-      this.containerRef.current.removeChild(this.containerRef.current.firstChild);
+      this.containerRef.current.removeChild(
+        this.containerRef.current.firstChild,
+      );
     }
   }
 
@@ -173,17 +221,37 @@ export class CircleChartLogic {
   }
 
   animateOpening() {
-    this.camera.position.z = THREE.MathUtils.lerp(this.camera.position.z, 11, 0.003);
-    this.graphMesh.rotation.x = THREE.MathUtils.lerp(this.graphMesh.rotation.x, -0.6, 0.01);
-    this.graphMesh.rotation.y = THREE.MathUtils.lerp(this.graphMesh.rotation.y, -0.2, 0.007);
+    this.camera.position.z = THREE.MathUtils.lerp(
+      this.camera.position.z,
+      11,
+      0.003,
+    );
+    this.graphMesh.rotation.x = THREE.MathUtils.lerp(
+      this.graphMesh.rotation.x,
+      -0.6,
+      0.01,
+    );
+    this.graphMesh.rotation.y = THREE.MathUtils.lerp(
+      this.graphMesh.rotation.y,
+      -0.2,
+      0.007,
+    );
 
     this.graphMesh.rotation.z += 0.0002;
   }
 
   animateMouseSwing() {
     // Slighly rotate the graph mesh depending on the mouse X and Y to give the impression of a 3D object
-    this.graphMesh.rotation.x = THREE.MathUtils.lerp(this.graphMesh.rotation.x, -this.mouse.y * 0.5, 0.01);
-    this.graphMesh.rotation.y = THREE.MathUtils.lerp(this.graphMesh.rotation.y, this.mouse.x * 0.5, 0.01);
+    this.graphMesh.rotation.x = THREE.MathUtils.lerp(
+      this.graphMesh.rotation.x,
+      -this.mouse.y * 0.5,
+      0.01,
+    );
+    this.graphMesh.rotation.y = THREE.MathUtils.lerp(
+      this.graphMesh.rotation.y,
+      this.mouse.x * 0.5,
+      0.01,
+    );
   }
 
   onMouseMove(event: MouseEvent) {

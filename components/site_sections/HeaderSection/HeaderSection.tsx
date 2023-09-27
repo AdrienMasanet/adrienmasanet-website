@@ -15,7 +15,9 @@ const HeaderSection = () => {
               <br />
               Masanet
             </h1>
-            <h2 className={styles.subtitle}>Développeur polyvalent passionné</h2>
+            <h2 className={styles.subtitle}>
+              Développeur polyvalent passionné
+            </h2>
           </div>
         </div>
       </div>

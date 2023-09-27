@@ -39,7 +39,7 @@ const Waves = ({
       canvasRef.current = node;
       canvasRefIntersectionObserver(node);
     },
-    [canvasRefIntersectionObserver]
+    [canvasRefIntersectionObserver],
   );
 
   const initializeCanvas = useCallback(() => {
@@ -66,7 +66,7 @@ const Waves = ({
       wavesNumber,
       wavesSmoothing,
       wavesSpeed,
-      wavesTurbulences
+      wavesTurbulences,
     );
   }, [
     wavesColor,

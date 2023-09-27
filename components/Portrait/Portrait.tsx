@@ -19,7 +19,7 @@ const Portrait = () => {
       containerRef.current = node;
       containerRefIntersectionObserver(node);
     },
-    [containerRefIntersectionObserver]
+    [containerRefIntersectionObserver],
   );
 
   useEffect(() => {
@@ -44,7 +44,12 @@ const Portrait = () => {
 
   return (
     <div className={styles.maincontainer}>
-      <div className={`${styles.portraitcontainer} ${!loading ? styles.active : ""}`} ref={setContainerDoubleRefs}></div>
+      <div
+        className={`${styles.portraitcontainer} ${
+          !loading ? styles.active : ""
+        }`}
+        ref={setContainerDoubleRefs}
+      ></div>
       <LoadingSpinner active={loading} />
     </div>
   );

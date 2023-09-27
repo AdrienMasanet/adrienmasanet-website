@@ -19,7 +19,7 @@ export class WavesLogic {
     numberOfWaves: number,
     wavesSmoothing: number,
     speed: number,
-    turbulence: number
+    turbulence: number,
   ) {
     if (!context) {
       throw new Error("Canvas context is required to draw waves");
@@ -35,11 +35,11 @@ export class WavesLogic {
       // Sets the minHeight and maxHeight of the wave
       const minHeight = Math.max(
         this.canvasHeight - this.gapTop,
-        (this.canvasHeight / numberOfWaves) * i + Math.random() * turbulence
+        (this.canvasHeight / numberOfWaves) * i + Math.random() * turbulence,
       );
       const maxHeight = Math.max(
         this.gapBottom,
-        (this.canvasHeight / numberOfWaves) * i - Math.random() * turbulence
+        (this.canvasHeight / numberOfWaves) * i - Math.random() * turbulence,
       );
 
       // Creates the segments of the wave
@@ -48,10 +48,10 @@ export class WavesLogic {
       let newWaveSegments: Segment[] = [];
       for (let j = 0; j < numberOfSegments; j++) {
         const newSegmentX = Math.round(
-          (this.canvasWidth / (numberOfSegments - 1)) * j
+          (this.canvasWidth / (numberOfSegments - 1)) * j,
         );
         const newSegmentY = Math.floor(
-          Math.random() * (maxHeight - minHeight + 1) + minHeight
+          Math.random() * (maxHeight - minHeight + 1) + minHeight,
         );
 
         let maxRange: MaxRange = {
@@ -142,12 +142,12 @@ export class WavesLogic {
           const segmentNextPositionNewX = Math.floor(
             Math.random() *
               (segment.maxRange.xMax - segment.maxRange.xMin + 1) +
-              segment.maxRange.xMin
+              segment.maxRange.xMin,
           );
           const segmentNextPositionNewY = Math.floor(
             Math.random() *
               (segment.maxRange.yMax - segment.maxRange.yMin + 1) +
-              segment.maxRange.yMin
+              segment.maxRange.yMin,
           );
 
           segment.nextPosition = {
@@ -158,7 +158,7 @@ export class WavesLogic {
             segmentInitialY: segment.y,
             initialDistance: Math.sqrt(
               Math.pow(segmentNextPositionNewX - segment.x, 2) +
-                Math.pow(segmentNextPositionNewY - segment.y, 2)
+                Math.pow(segmentNextPositionNewY - segment.y, 2),
             ),
           };
         }
@@ -167,13 +167,13 @@ export class WavesLogic {
         // Rotates slowly the segment towards its next position
         const direction = Math.atan2(
           segment.nextPosition.y - segment.y,
-          segment.nextPosition.x - segment.x
+          segment.nextPosition.x - segment.x,
         );
 
         // Accelerates the segment towards its next position before the mid of the distance and decelerates after the mid of the distance
         const distanceFromInitialPosition = Math.sqrt(
           Math.pow(segment.x - segment.nextPosition.segmentInitialX, 2) +
-            Math.pow(segment.y - segment.nextPosition.segmentInitialY, 2)
+            Math.pow(segment.y - segment.nextPosition.segmentInitialY, 2),
         );
 
         if (
@@ -215,7 +215,7 @@ export class WavesLogic {
             segment.nextPosition.y,
             3,
             0,
-            2 * Math.PI
+            2 * Math.PI,
           );
           this.context.fill();
 
@@ -232,7 +232,7 @@ export class WavesLogic {
             segment.x + (nextSegment.x - segment.x) / 2,
             nextSegment.y,
             nextSegment.x,
-            nextSegment.y
+            nextSegment.y,
           );
         } else {
           // If there is no segment after this one, this is the last segment, we draw a line to the bottom right of the canvas to close the wave

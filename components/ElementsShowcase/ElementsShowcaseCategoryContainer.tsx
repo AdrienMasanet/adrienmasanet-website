@@ -25,7 +25,7 @@ const ElementsShowcaseCategoryContainer = ({
     useState<ElementsShowcaseItem | null>(null);
 
   const handleClick = (
-    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+    event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>,
   ) => {
     const target: HTMLElement = event.target as HTMLElement;
     const itemElement: HTMLElement | null = target.closest(".item");
@@ -33,7 +33,7 @@ const ElementsShowcaseCategoryContainer = ({
     if (itemElement) {
       const itemId = itemElement.dataset.id;
       const item: ElementsShowcaseItem | undefined = category.items.find(
-        (element: ElementsShowcaseItem) => element.id === itemId
+        (element: ElementsShowcaseItem) => element.id === itemId,
       );
       if (item && position === 0) {
         setItemReviewing(item);
