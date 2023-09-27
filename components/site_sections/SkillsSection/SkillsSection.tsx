@@ -33,13 +33,42 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
   }, []);
 
   return (
-    <Section ref={sectionRef} waveSection={true} title="Mes compétences" sectionColor={scssThemeVariables.scssThemeClWhite} nextSectionColor={scssThemeVariables.scssThemeClDarkblue} textColor={scssThemeVariables.scssThemeClDarkblue}>
-      <CircleChart width={canvasWidthAndHeight.width} height={canvasWidthAndHeight.height} elements={skills} />
+    <Section
+      ref={sectionRef}
+      waveSection={true}
+      title="Mes compétences"
+      sectionColor={scssThemeVariables.scssThemeClWhite}
+      nextSectionColor={scssThemeVariables.scssThemeClDarkblue}
+      textColor={scssThemeVariables.scssThemeClDarkblue}
+    >
+      <CircleChart
+        width={canvasWidthAndHeight.width}
+        height={canvasWidthAndHeight.height}
+        elements={skills}
+      />
       <div className={styles.introductioncontainer}>
-        <p className={styles.paragraph}>Développeur web full-stack, je suis spécialisé dans le développement d&apos;applications web responsives, d&apos;applications natives (smartphones / desktop), de microservices ou d&apos;APIs.</p>
-        <p className={styles.paragraph}>J&apos;ai obtenu le diplôme de Concepteur Développeur d&apos;Applications en 2022 à l&apos;Idem Creative Arts School suite à des études en alternance et je suis passionné par la programmation et la technologie en général depuis mon plus jeune âge.</p>
-        <p className={styles.paragraph}>Les bonnes pratiques de développement, la qualité du code, le respect des diverses normes, la sécurité sont des points qui me tiennent à cœur et je mets tout en oeuvre pour les respecter.</p>
-        <p className={styles.paragraph}>Sociable, j&apos;aime le travail d&apos;équipe et je suis toujours prêt à proposer de nouvelles idées pour contribuer à la qualité d&apos;un projet !</p>
+        <p className={styles.paragraph}>
+          Développeur curieux et passionné, je m&apos;épanouis dans la
+          découverte, l&apos;assimilation et l&apos;application de nouvelles
+          compétences, toujours à l&apos;affût de l&apos;evolution constante de
+          la technologie.
+        </p>
+        <p className={styles.paragraph}>
+          Mon expérience englobe le développement d&apos;applications web
+          responsives, d&apos;applications natives, de microservices et
+          d&apos;APIs ou bien encore de projets plus spécifiques
+          s&apos;éloignant parfois du développement web traditionnel.
+        </p>
+        <p className={styles.paragraph}>
+          Les bonnes pratiques, la qualité du code, la sécurité et le travail
+          d&apos;équipe sont des points qui me tiennent à cœur et je
+          m&apos;investis activement dans l&apos;amélioration continue des
+          projets sur lesquels je travaille.
+        </p>
+        <p className={styles.paragraph}>
+          Agréable et à l&apos;écoute, je suis également de ceux qui croient
+          fermement que l&apos;aspect humain a toute son importance !
+        </p>
       </div>
     </Section>
   );
