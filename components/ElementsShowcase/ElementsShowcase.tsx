@@ -1,11 +1,12 @@
 "use client";
 
-import { useCallback,useEffect as useEffect, useRef, useState } from "react";
+import { useCallback, useEffect as useEffect, useRef, useState } from "react";
+import React from "react";
 
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
 import styles from "./ElementsShowcase.module.scss";
 import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
-import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
+import { ElementsShowcaseCategory } from "./types";
 
 type ElementsShowcaseProps = {
   categoriesAndElements: ElementsShowcaseCategory[];
@@ -28,10 +29,17 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
         currentCategoryReviewingTemp = Math.round(currentCategoryReviewingTemp);
       }
 
-      if (currentCategoryReviewingTemp + amount >= categoriesAndElements.length) {
-        setCurrentCategoryReviewing(warp ? 0 : categoriesAndElements.length - 1);
+      if (
+        currentCategoryReviewingTemp + amount >=
+        categoriesAndElements.length
+      ) {
+        setCurrentCategoryReviewing(
+          warp ? 0 : categoriesAndElements.length - 1
+        );
       } else if (currentCategoryReviewingTemp + amount < 0) {
-        setCurrentCategoryReviewing(warp ? categoriesAndElements.length - 1 : 0);
+        setCurrentCategoryReviewing(
+          warp ? categoriesAndElements.length - 1 : 0
+        );
       } else {
         let move = currentCategoryReviewingTemp + amount;
 
@@ -62,11 +70,14 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
   }, []);
 
   const handleCursorMove = useCallback(
-    (event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>) => {
+    (
+      event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
+    ) => {
       event.preventDefault();
 
       // Assign the correct event's cursor X position depending on the event type
-      const cursorX = "clientX" in event ? event.clientX : event.touches[0].clientX;
+      const cursorX =
+        "clientX" in event ? event.clientX : event.touches[0].clientX;
 
       if (isHoldingClick) {
         // If the previous cursor X position is not set it means that the user just started holding the click, so we set it
@@ -86,7 +97,9 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
             return;
           }
 
-          animationFrameId.current = requestAnimationFrame(() => animateGrabbing(cursorX));
+          animationFrameId.current = requestAnimationFrame(() =>
+            animateGrabbing(cursorX)
+          );
         }
       }
     },
@@ -112,21 +125,70 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
   }, [isDragging, currentDragSpeed, scrollSlider]);
 
   return (
-    <div onMouseDown={handleCursorDown} onMouseMove={handleCursorMove} onMouseUp={handleCursorUp} onMouseLeave={handleCursorUp} onTouchStart={handleCursorDown} onTouchMove={handleCursorMove} onTouchEnd={handleCursorUp}>
-      <div className={`${styles.maincontainer} ${isDragging ? styles.grabbing : ""}`}>
-        <div className={`${styles.arrow} ${styles.left}`} onClick={() => scrollSlider(-1)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M15 18L9 12L15 6" stroke={scssThemeVariables.scssThemeClWhite} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+    <div
+      onMouseDown={handleCursorDown}
+      onMouseMove={handleCursorMove}
+      onMouseUp={handleCursorUp}
+      onMouseLeave={handleCursorUp}
+      onTouchStart={handleCursorDown}
+      onTouchMove={handleCursorMove}
+      onTouchEnd={handleCursorUp}
+    >
+      <div
+        className={`${styles.maincontainer} ${
+          isDragging ? styles.grabbing : ""
+        }`}
+      >
+        <div
+          className={`${styles.arrow} ${styles.left}`}
+          onClick={() => scrollSlider(-1)}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M15 18L9 12L15 6"
+              stroke={scssThemeVariables.scssThemeClWhite}
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
         <div className={styles.slider}>
-          {categoriesAndElements.map((category: ElementsShowcaseCategory, index) => (
-            <ElementsShowcaseCategoryContainer key={category.id} category={category} position={index - currentCategoryReviewing} isScrolling={isDragging} />
-          ))}
+          {categoriesAndElements.map(
+            (category: ElementsShowcaseCategory, index) => (
+              <ElementsShowcaseCategoryContainer
+                key={category.id}
+                category={category}
+                position={index - currentCategoryReviewing}
+                isScrolling={isDragging}
+              />
+            )
+          )}
         </div>
-        <div className={`${styles.arrow} ${styles.right}`} onClick={() => scrollSlider(1)}>
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M9 18L15 12L9 6" stroke={scssThemeVariables.scssThemeClWhite} strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
+        <div
+          className={`${styles.arrow} ${styles.right}`}
+          onClick={() => scrollSlider(1)}
+        >
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M9 18L15 12L9 6"
+              stroke={scssThemeVariables.scssThemeClWhite}
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
         </div>
       </div>

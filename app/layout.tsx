@@ -2,20 +2,34 @@
 
 import "../styles/globals.scss";
 
+import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
 
-export default function MainPageLayout({ children }: { children: React.ReactNode }) {
+export default function MainPageLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="fr">
       <head>
         <title>Adrien Masanet</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="description" content="Adrien Masanet, développeur polyvalent et passionné." />
+        <meta
+          name="description"
+          content="Adrien Masanet, développeur polyvalent et passionné."
+        />
         <meta name="author" content="Adrien Masanet" />
       </head>
       <body>
-        <ReCaptchaProvider reCaptchaKey={process.env.NEXT_PUBLIC_RECAPTCHA_V3_PUBLIC_API_KEY as string}>{children}</ReCaptchaProvider>
+        <ReCaptchaProvider
+          reCaptchaKey={
+            process.env.NEXT_PUBLIC_RECAPTCHA_V3_PUBLIC_API_KEY as string
+          }
+        >
+          {children}
+        </ReCaptchaProvider>
         <Analytics />
       </body>
     </html>

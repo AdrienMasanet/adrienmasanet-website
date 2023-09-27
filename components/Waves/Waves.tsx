@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback,useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
 import { WavesLogic } from "./logic";
@@ -17,7 +17,15 @@ type WavesProps = {
   absolute?: boolean;
 };
 
-const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesColor, wavesSmoothing = 250, wavesSpeed = 15, wavesTurbulences = 70, absolute = false }: WavesProps) => {
+const Waves = ({
+  wavesDirection = WavesDirection.Down,
+  wavesNumber = 3,
+  wavesColor,
+  wavesSmoothing = 250,
+  wavesSpeed = 15,
+  wavesTurbulences = 70,
+  absolute = false,
+}: WavesProps) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const wavesLogicRef = useRef<WavesLogic | null>(null);
   const [yOffset, setYOffset] = useState("0px");
@@ -52,8 +60,22 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
       canvasContext.scale(1, -1);
     }
 
-    wavesLogicRef.current = new WavesLogic(canvasContext, wavesColor, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences);
-  }, [wavesColor, wavesDirection, wavesNumber, wavesSmoothing, wavesSpeed, wavesTurbulences]);
+    wavesLogicRef.current = new WavesLogic(
+      canvasContext,
+      wavesColor,
+      wavesNumber,
+      wavesSmoothing,
+      wavesSpeed,
+      wavesTurbulences
+    );
+  }, [
+    wavesColor,
+    wavesDirection,
+    wavesNumber,
+    wavesSmoothing,
+    wavesSpeed,
+    wavesTurbulences,
+  ]);
 
   const resizeCanvas = useCallback(() => {
     if (startScreenWidth.current === window.innerWidth) {
@@ -76,7 +98,11 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     startScreenWidth.current = window.innerWidth;
 
     // Add an offset to the canvas to make it appear as if it was under the previous element
-    if (canvasRef.current && absolute && wavesDirection === WavesDirection.Down) {
+    if (
+      canvasRef.current &&
+      absolute &&
+      wavesDirection === WavesDirection.Down
+    ) {
       setYOffset(`-${canvasRef.current?.height - 2}px`);
     } else {
       setYOffset("0px");
@@ -101,7 +127,16 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
         wavesLogicRef.current = null;
       }
     };
-  }, [wavesDirection, wavesNumber, wavesColor, wavesSmoothing, wavesSpeed, wavesTurbulences, initializeCanvas, resizeCanvas]);
+  }, [
+    wavesDirection,
+    wavesNumber,
+    wavesColor,
+    wavesSmoothing,
+    wavesSpeed,
+    wavesTurbulences,
+    initializeCanvas,
+    resizeCanvas,
+  ]);
 
   useEffect(() => {
     if (inView && wavesLogicRef.current) {
@@ -111,7 +146,17 @@ const Waves = ({ wavesDirection = WavesDirection.Down, wavesNumber = 3, wavesCol
     }
   }, [inView]);
 
-  return <canvas style={{ position: absolute ? "absolute" : "relative", marginTop: yOffset }} className={styles.canvas} height={200} ref={setCanvasDoubleRefs} />;
+  return (
+    <canvas
+      style={{
+        position: absolute ? "absolute" : "relative",
+        marginTop: yOffset,
+      }}
+      className={styles.canvas}
+      height={200}
+      ref={setCanvasDoubleRefs}
+    />
+  );
 };
 
 export default Waves;

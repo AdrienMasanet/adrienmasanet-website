@@ -1,3 +1,5 @@
+import THREE from "three";
+
 export type CircleChartElement = {
   name: string;
   percentage: number;

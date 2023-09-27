@@ -1,3 +1,4 @@
+import React from "react";
 import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 
@@ -51,7 +52,7 @@ export class PortraitLogic {
     // Load the portrait glb model
     this.loader = new GLTFLoader();
     this.loader
-      .loadAsync("/3d/adrienmasanet_model.glb", (gltf) => {})
+      .loadAsync("/3d/adrienmasanet_model.glb", () => {})
       .then((gltf) => {
         this.portraitMesh = gltf.scene.children[0] as THREE.Mesh;
         this.scene.add(this.portraitMesh);
@@ -103,7 +104,9 @@ export class PortraitLogic {
 
     // Remove all HTML children from the container ref to avoid duplicate elements
     while (this.containerRef.current?.firstChild) {
-      this.containerRef.current.removeChild(this.containerRef.current.firstChild);
+      this.containerRef.current.removeChild(
+        this.containerRef.current.firstChild
+      );
     }
   }
 
@@ -133,7 +136,11 @@ export class PortraitLogic {
 
     this.camera.position.z = this.animationLoopLerp;
     this.portraitMesh.position.y = -0.75 + this.animationLoopLerp / 12;
-    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(this.portraitMesh.rotation.z, 11, 0.007);
+    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(
+      this.portraitMesh.rotation.z,
+      11,
+      0.007
+    );
   }
 
   animateMouseSwing() {
@@ -142,12 +149,20 @@ export class PortraitLogic {
     }
 
     // Slighly rotate the portrait depending on the mouse X and Y to enforce the 3D effect
-    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(this.portraitMesh.rotation.z, -this.mouse.x * 1.5 + 11, 0.01);
+    this.portraitMesh.rotation.z = THREE.MathUtils.lerp(
+      this.portraitMesh.rotation.z,
+      -this.mouse.x * 1.5 + 11,
+      0.01
+    );
   }
 
   animateLoopLerp(min: number, max: number, speed: number) {
     // Use a sine wave to animate a value between min and max
-    this.animationLoopLerp = THREE.MathUtils.lerp(min, max, (Math.sin((this.time / speed) * Math.PI) + 1) / 2);
+    this.animationLoopLerp = THREE.MathUtils.lerp(
+      min,
+      max,
+      (Math.sin((this.time / speed) * Math.PI) + 1) / 2
+    );
   }
 
   onMouseMove(event: MouseEvent) {

@@ -1,3 +1,4 @@
+import React from "react";
 import * as THREE from "three";
 import { CSS2DObject,CSS2DRenderer } from "three/examples/jsm/renderers/CSS2DRenderer.js";
 
@@ -50,7 +51,7 @@ export class CircleChartLogic {
     this.mouse = new THREE.Vector2();
 
     // Add a mouse move listener to the ThreeJs canvas to detect mouse position
-    const mouseMoveListener = window.addEventListener("mousemove", (event) => {
+    window.addEventListener("mousemove", (event) => {
       this.onMouseMove(event);
     });
 

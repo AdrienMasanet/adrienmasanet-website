@@ -1,7 +1,10 @@
 {
-  "extends": "next/core-web-vitals",
+  "extends": ["eslint:recommended", "next/core-web-vitals"],
   "plugins": ["simple-import-sort"],
   "rules": {
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "simple-import-sort/exports": "error",
     "simple-import-sort/imports": [
       "error",
       {

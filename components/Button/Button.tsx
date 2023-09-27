@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import React from "react";
 
 import styles from "./Button.module.scss";
 
@@ -24,9 +25,22 @@ const Button = ({ text, color, isSubmit }: ButtonProps) => {
   };
 
   return (
-    <button className={`${styles.container} ${color === "primary" ? styles.primary : styles.secondary}`} type={isSubmit ? "submit" : "button"} onMouseEnter={() => setMouseHovering(true)} onMouseMove={moveShiny} onMouseLeave={() => setMouseHovering(false)}>
+    <button
+      className={`${styles.container} ${
+        color === "primary" ? styles.primary : styles.secondary
+      }`}
+      type={isSubmit ? "submit" : "button"}
+      onMouseEnter={() => setMouseHovering(true)}
+      onMouseMove={moveShiny}
+      onMouseLeave={() => setMouseHovering(false)}
+    >
       {text}
-      <div className={`${styles.shinyeffect} ${mouseHovering ? styles.active : ""}`} style={{ left: shinyX, top: shinyY }}></div>
+      <div
+        className={`${styles.shinyeffect} ${
+          mouseHovering ? styles.active : ""
+        }`}
+        style={{ left: shinyX, top: shinyY }}
+      ></div>
     </button>
   );
 };

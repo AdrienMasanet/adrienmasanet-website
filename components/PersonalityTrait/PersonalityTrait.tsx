@@ -11,8 +11,12 @@ type PersonalityTraitProps = {
   image: string;
 };
 
-const PersonalityTrait = ({ name, description, image }: PersonalityTraitProps) => {
-  const [imageRef, isImageInView, entry] = useInView({
+const PersonalityTrait = ({
+  name,
+  description,
+  image,
+}: PersonalityTraitProps) => {
+  const [imageRef, isImageInView] = useInView({
     threshold: 0.5,
     rootMargin: "-5.5% 0px -5.5% 0px",
   });
@@ -23,7 +27,14 @@ const PersonalityTrait = ({ name, description, image }: PersonalityTraitProps) =
         <h3 className={styles.name}>{name}</h3>
         <p className={styles.description}>{description}</p>
       </div>
-      <Image className={`${styles.image} ${isImageInView ? styles.active : ""}`} ref={imageRef} src={image} alt={name} width={160} height={160} />
+      <Image
+        className={`${styles.image} ${isImageInView ? styles.active : ""}`}
+        ref={imageRef}
+        src={image}
+        alt={name}
+        width={160}
+        height={160}
+      />
     </div>
   );
 };
