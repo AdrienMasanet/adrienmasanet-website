@@ -20,7 +20,7 @@ const TechsSection = ({
         sectionColor={scssThemeVariables.scssThemeClDarkblue}
         nextSectionColor={scssThemeVariables.scssThemeClDarkblue}
         textColor={scssThemeVariables.scssThemeClWhite}
-        spaceBelow={"spacer-md"}
+        spaceBelow="spacer-md"
         spaceAfterTitles="spacer-sm"
       >
         <ElementsShowcase

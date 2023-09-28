@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect as useEffect, useRef, useState } from "react";
-import React from "react";
+import React, { useCallback, useEffect as useEffect, useRef, useState } from "react";
 
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
 import styles from "./ElementsShowcase.module.scss";

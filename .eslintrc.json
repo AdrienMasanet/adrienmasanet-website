@@ -14,15 +14,20 @@
           // Node.js builtins prefixed with `node:`.
           ["^node:"],
           // Packages.
-          ["^react", "^@?\\w"],
+          // Things that start with a letter (or digit or underscore), or `@` followed by a letter.
+          ["^@?\\w"],
           // Absolute imports and other imports such as Vue-style `@/foo`.
           // Anything not matched in another group.
-          ["^", "^@app/", "^@testing/"],
+          ["^"],
           // Relative imports.
           // Anything that starts with a dot.
           ["^\\."]
         ]
       }
-    ]
+    ],
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "react/jsx-curly-brace-presence": "error"
   }
 }

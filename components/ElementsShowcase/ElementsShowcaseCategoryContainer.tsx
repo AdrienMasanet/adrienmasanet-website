@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
-import React from "react";
 import Image from "next/image";
+import React, { useEffect, useMemo, useState } from "react";
 
 import scssThemeVariables from "../../styles/javascript_variables.module.scss";
 import styles from "./ElementsShowcase.module.scss";

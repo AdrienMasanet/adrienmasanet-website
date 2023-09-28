@@ -12,7 +12,7 @@ const AchievementsSection = (/* {}: AchievementsSectionProps */) => {
         sectionColor={scssThemeVariables.scssThemeClDarkblue}
         nextSectionColor={scssThemeVariables.scssThemeClDarkblue}
         textColor={scssThemeVariables.scssThemeClWhite}
-        spaceBelow={"spacer-md"}
+        spaceBelow="spacer-md"
         spaceAfterTitles="spacer-md"
         maxWidth={900}
       >

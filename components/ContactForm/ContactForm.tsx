@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import React from "react";
 import { useReCaptcha } from "next-recaptcha-v3";
+import React, { useState } from "react";
 
 import { sendContactMessage } from "../../services/apiRequests";
 import Button from "../Button/Button";

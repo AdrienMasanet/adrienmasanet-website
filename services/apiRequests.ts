@@ -1,5 +1,7 @@
 // These functions are used to fetch data from the Pocketbase backend API and return the data in a format that is easy to use in the frontend.
 
+import { MedalRank } from "../components/MedalIcon/types";
+
 export async function fetchSkills() {
   return fetch(
     process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
@@ -14,8 +16,6 @@ export async function fetchSkills() {
     .then((response) => response.json())
     .then((data) => data.items);
 }
-
-import { MedalRank } from "../components/MedalIcon/types";
 
 export async function fetchMasteredTechs() {
   return fetch(

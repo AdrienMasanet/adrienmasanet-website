@@ -1,7 +1,7 @@
 "use client";
 
-import { useInView } from "react-intersection-observer";
 import Image from "next/image";
+import { useInView } from "react-intersection-observer";
 
 import styles from "./PersonalityTrait.module.scss";
 
