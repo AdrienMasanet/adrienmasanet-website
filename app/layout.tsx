@@ -2,9 +2,11 @@
 
 import "../styles/globals.scss";
 
-import React from "react";
 import { Analytics } from "@vercel/analytics/react";
 import { ReCaptchaProvider } from "next-recaptcha-v3";
+import React from "react";
+
+import { LoadingCompleteProvider } from "../context/LoadingCompleteContext";
 
 export default function MainPageLayout({
   children,
@@ -28,7 +30,7 @@ export default function MainPageLayout({
             process.env.NEXT_PUBLIC_RECAPTCHA_V3_PUBLIC_API_KEY as string
           }
         >
-          {children}
+          <LoadingCompleteProvider>{children}</LoadingCompleteProvider>
         </ReCaptchaProvider>
         <Analytics />
       </body>

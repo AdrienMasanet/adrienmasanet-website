@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
+import { useLoadingComplete } from "../../hooks/useLoadingComplete";
 import styles from "./CircleChart.module.scss";
 import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";
@@ -27,6 +28,7 @@ const CircleChart = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
   const circleChartLogicRef = useRef<CircleChartLogic | null>(null);
   const { ref: containerRefIntersectionObserver, inView } = useInView();
+  const { setLoadingComplete } = useLoadingComplete();
 
   // We set the 2 refs in a useCallback that will set the HTML ref used to contain the Threejs canvas and the IntersectionObserver ref
   const setContainerDoubleRefs = useCallback(
@@ -34,7 +36,7 @@ const CircleChart = ({
       containerRef.current = node;
       containerRefIntersectionObserver(node);
     },
-    [containerRefIntersectionObserver],
+    [containerRefIntersectionObserver]
   );
 
   useEffect(() => {
@@ -51,6 +53,7 @@ const CircleChart = ({
       gapBetweenElements,
       styles,
       labelsDistance,
+      setLoadingComplete
     );
 
     return () => {
@@ -64,6 +67,7 @@ const CircleChart = ({
     elements,
     gapBetweenElements,
     labelsDistance,
+    setLoadingComplete,
   ]);
 
   useEffect(() => {

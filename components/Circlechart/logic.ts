@@ -41,6 +41,7 @@ export class CircleChartLogic {
     gapBetweenElements: number,
     styles: { readonly [key: string]: string },
     labelsDistance: number,
+    onLoadedCallback: () => void
   ) {
     this.active = true;
     // Append the ThreeJs canvas to the React component's container ref
@@ -85,6 +86,9 @@ export class CircleChartLogic {
 
     // Move the camera back to see the graph
     this.camera.position.z = 9;
+
+    // Call the callback to notify the parent component that the graph is ready
+    onLoadedCallback();
 
     // Start the animation
     this.update();
@@ -135,7 +139,7 @@ export class CircleChartLogic {
         this.scale,
         angleOffset + gapBetweenElements * 1.5,
         angleLength + angleOffset - gapBetweenElements * 1.5,
-        false,
+        false
       );
       baseRingShape.absarc(
         0,
@@ -143,13 +147,13 @@ export class CircleChartLogic {
         this.scale * 1.5,
         angleLength + angleOffset - gapBetweenElements,
         angleOffset + gapBetweenElements,
-        true,
+        true
       );
       baseRingShape.closePath();
 
       const geometry = new THREE.ExtrudeGeometry(
         baseRingShape,
-        extrudeSettings,
+        extrudeSettings
       );
       geometry.computeVertexNormals();
 
@@ -172,7 +176,7 @@ export class CircleChartLogic {
       elementLabel.position.set(
         Math.cos(angle) * this.labelsDistance * this.scale,
         Math.sin(angle) * this.labelsDistance * this.scale,
-        0,
+        0
       );
       mesh.add(elementLabel);
 
@@ -198,7 +202,7 @@ export class CircleChartLogic {
     // Remove all HTML children from the container ref to avoid duplicate elements
     while (this.containerRef.current?.firstChild) {
       this.containerRef.current.removeChild(
-        this.containerRef.current.firstChild,
+        this.containerRef.current.firstChild
       );
     }
   }
@@ -224,17 +228,17 @@ export class CircleChartLogic {
     this.camera.position.z = THREE.MathUtils.lerp(
       this.camera.position.z,
       11,
-      0.003,
+      0.003
     );
     this.graphMesh.rotation.x = THREE.MathUtils.lerp(
       this.graphMesh.rotation.x,
       -0.6,
-      0.01,
+      0.01
     );
     this.graphMesh.rotation.y = THREE.MathUtils.lerp(
       this.graphMesh.rotation.y,
       -0.2,
-      0.007,
+      0.007
     );
 
     this.graphMesh.rotation.z += 0.0002;
@@ -245,12 +249,12 @@ export class CircleChartLogic {
     this.graphMesh.rotation.x = THREE.MathUtils.lerp(
       this.graphMesh.rotation.x,
       -this.mouse.y * 0.5,
-      0.01,
+      0.01
     );
     this.graphMesh.rotation.y = THREE.MathUtils.lerp(
       this.graphMesh.rotation.y,
       this.mouse.x * 0.5,
-      0.01,
+      0.01
     );
   }
 
