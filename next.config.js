@@ -7,6 +7,9 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
+  eslint: {
+    dirs: ["app", "components", "context", "hooks", "services", "utils"],
+  },
 };
 
 module.exports = nextConfig;
