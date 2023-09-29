@@ -28,7 +28,9 @@
 }
 
 .slider {
-  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
+  transform: translateZ(
+    0px
+  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: relative;
   width: 80%;
   min-height: 30em;
@@ -36,7 +38,9 @@
 }
 
 .categorycontainer {
-  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
+  transform: translateZ(
+    0px
+  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: absolute;
   top: 50%;
   left: 50%;
@@ -46,7 +50,10 @@
   width: 25em;
   background-color: $cl-white;
   border-radius: $default-border-radius;
-  transition: transform 1.25s $eg-out-cubic, opacity 0.2s $eg-out-cubic, scale 2s ease-in-out;
+  transition:
+    transform 1.25s $eg-out-cubic,
+    opacity 0.2s $eg-out-cubic,
+    scale 2s ease-in-out;
   box-shadow: $sd-base-lg;
   overflow-y: auto;
 
@@ -91,7 +98,8 @@
 
         .image {
           opacity: 0.5;
-          filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm) grayscale(50%);
+          filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm)
+            grayscale(50%);
         }
 
         .title {
@@ -109,7 +117,8 @@
       filter: drop-shadow($sd-hard-darkblue-md) drop-shadow($sd-base-sm);
 
       @media screen and (max-width: $ss-mobile) {
-        filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm) grayscale(50%);
+        filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm)
+          grayscale(50%);
       }
     }
 
@@ -148,6 +157,7 @@
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 1em;
   padding: 1em;
+  filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm);
 
   @media screen and (max-width: $ss-mobile) {
     grid-template-columns: repeat(3, 1fr);
@@ -155,7 +165,9 @@
 }
 
 .itemcontainer {
-  transform: translateZ(0px); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
+  transform: translateZ(
+    0px
+  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: relative;
   width: 5em;
   height: 5em;
@@ -167,7 +179,6 @@
 
   .image {
     z-index: -1;
-    filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm);
   }
 
   .title {
@@ -201,7 +212,8 @@
   z-index: 100;
 
   svg {
-    filter: drop-shadow($sd-base-md) drop-shadow($sd-base-lg) drop-shadow($sd-hard-darkblue-lg);
+    filter: drop-shadow($sd-base-md) drop-shadow($sd-base-lg)
+      drop-shadow($sd-hard-darkblue-lg);
     width: 100%;
     height: 100%;
     transition: transform 0.5s $eg-out-cubic;
