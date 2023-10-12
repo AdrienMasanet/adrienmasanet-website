@@ -2,13 +2,18 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [process.env.POCKETBASE_API_DOMAIN],
-  },
-  experimental: {
-    appDir: true,
+    domains: [process.env.POCKETBASE_API_DOMAIN ?? ""],
   },
   eslint: {
-    dirs: ["app", "components", "context", "hooks", "services", "utils"],
+    dirs: [
+      "app",
+      "components",
+      "context",
+      "hooks",
+      "services",
+      "utils",
+      "testing",
+    ],
   },
 };
 
