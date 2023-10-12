@@ -199,6 +199,24 @@ export class CircleChartLogic {
     // Get rid of the mouse move listener
     window.removeEventListener("mousemove", this.onMouseMove);
 
+    // Free renderer memory usage
+    this.renderer.dispose();
+
+    // Free graphMesh material(s)
+    if (Array.isArray(this.graphMesh.material)) {
+      this.graphMesh.material.forEach((material) => {
+        material.dispose();
+      });
+    } else if (this.graphMesh.material) {
+      this.graphMesh.material.dispose();
+    }
+
+    // Free graphMesh geometry
+    this.graphMesh.geometry.dispose();
+
+    // Remove graphMesh from scene
+    this.scene.remove(this.graphMesh);
+
     // Remove all HTML children from the container ref to avoid duplicate elements
     while (this.containerRef.current?.firstChild) {
       this.containerRef.current.removeChild(
