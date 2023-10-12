@@ -17,10 +17,8 @@ const Button = ({ text, color, isSubmit }: ButtonProps) => {
 
   const moveShiny = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setShinyX(x);
-    setShinyY(y);
+    setShinyX(e.clientX - rect.left);
+    setShinyY(e.clientY - rect.top);
   };
 
   return (
@@ -39,6 +37,7 @@ const Button = ({ text, color, isSubmit }: ButtonProps) => {
           mouseHovering ? styles.active : ""
         }`}
         style={{ left: shinyX, top: shinyY }}
+        data-testid="shiny-effect"
       ></div>
     </button>
   );
