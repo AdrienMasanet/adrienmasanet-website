@@ -16,7 +16,7 @@ const PersonalityTrait = ({
   description,
   image,
 }: PersonalityTraitProps) => {
-  const [imageRef, isImageInView] = useInView({
+  const { ref: imageRef, inView } = useInView({
     threshold: 0.5,
     rootMargin: "-5.5% 0px -5.5% 0px",
   });
@@ -28,7 +28,7 @@ const PersonalityTrait = ({
         <p className={styles.description}>{description}</p>
       </div>
       <Image
-        className={`${styles.image} ${isImageInView ? styles.active : ""}`}
+        className={`${styles.image} ${inView ? styles.active : ""}`}
         ref={imageRef}
         src={image}
         alt={name}

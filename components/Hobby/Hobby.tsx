@@ -21,7 +21,8 @@ const Hobby = ({
 }: HobbyProps) => {
   const [carouselRotation, setCarouselRotation] = useState<number>(0);
   const carouselAnimationRef = useRef<any>();
-  const [imagesContainerRef, isImagesContainerInView] = useInView();
+  const { ref: imagesContainerRef, inView: isImagesContainerInView } =
+    useInView();
 
   const AnimateCarousel = useCallback(() => {
     setCarouselRotation((prev) => prev + 0.0002);
@@ -57,11 +58,11 @@ const Hobby = ({
               style={{
                 transform: `translate(${
                   Math.cos(
-                    (index * 2 * Math.PI) / images.length + carouselRotation,
+                    (index * 2 * Math.PI) / images.length + carouselRotation
                   ) * 80
                 }%, ${
                   Math.sin(
-                    (index * 2 * Math.PI) / images.length + carouselRotation,
+                    (index * 2 * Math.PI) / images.length + carouselRotation
                   ) * 80
                 }%) translate(50%, 50%)`,
               }}
