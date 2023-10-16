@@ -9,6 +9,7 @@ const createJestConfig = nextJest({
 });
 
 const config: Config = {
+  setupFilesAfterEnv: ["<rootDir>/testing/setup.ts"],
   testEnvironment: "jest-environment-jsdom",
   fakeTimers: {
     enableGlobally: true,
