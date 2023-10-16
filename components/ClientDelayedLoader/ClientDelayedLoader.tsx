@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import { useLoadingComplete } from "../../hooks/useLoadingComplete";
 import styles from "./ClientDelayedLoader.module.scss";
@@ -13,11 +13,11 @@ const ClientDelayedLoader = ({
   transitionDelay = 2000,
 }: ClientDelayedLoaderProps) => {
   const { loadingComplete } = useLoadingComplete();
-  const mainContainerRef = useRef<HTMLDivElement>(null);
+  const [loaderRemoved, setLoaderRemoved] = useState<boolean>(false);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      if (loadingComplete) mainContainerRef.current?.remove();
+      if (loadingComplete) setLoaderRemoved(true);
     }, transitionDelay);
 
     return () => {
@@ -25,14 +25,16 @@ const ClientDelayedLoader = ({
     };
   }, [loadingComplete, transitionDelay]);
 
+  if (loaderRemoved) return null;
+
   return (
     <div
-      ref={mainContainerRef}
       className={styles.container}
       style={{
         transition: `opacity ${transitionDelay}ms ease-in-out`,
         opacity: loadingComplete ? "0" : "1",
       }}
+      data-testid="loader"
     ></div>
   );
 };
