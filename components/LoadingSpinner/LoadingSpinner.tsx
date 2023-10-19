@@ -6,7 +6,10 @@ type LoadingSpinnerProps = {
 
 const LoadingSpinner = ({ active }: LoadingSpinnerProps) => {
   return (
-    <div className={`${styles.container} ${active ? styles.active : ""}`}>
+    <div
+      className={`${styles.container} ${active ? styles.active : ""}`}
+      data-testid="loading-spinner"
+    >
       <div></div>
       <div></div>
       <div></div>
