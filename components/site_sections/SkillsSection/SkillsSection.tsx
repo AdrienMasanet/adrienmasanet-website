@@ -51,7 +51,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
         <p className={styles.paragraph}>
           Développeur curieux et passionné, je m&apos;épanouis dans la
           découverte, l&apos;assimilation et l&apos;application de nouvelles
-          compétences, toujours à l&apos;affût de l&apos;evolution constante de
+          compétences, toujours à l&apos;affût de l&apos;évolution constante de
           la technologie.
         </p>
         <p className={styles.paragraph}>
