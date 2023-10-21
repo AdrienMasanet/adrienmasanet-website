@@ -50,12 +50,6 @@ $image-translation-anim: 2em;
   }
 }
 
-.nameanddescriptioncontainer {
-  border-radius: $default-border-radius;
-  background: $cl-darkblue-006;
-  padding: 1em;
-}
-
 .name {
   position: relative;
   font-size: 1.75em;
@@ -67,7 +61,15 @@ $image-translation-anim: 2em;
   101
   111
   */
-  text-shadow: 1px 1px 0 $cl-white, -1px 1px 0 $cl-white, 1px -1px 0 $cl-white, -1px -1px 0 $cl-white, 1px 0 0 $cl-white, -1px 0 0 $cl-white, 0 1px 0 $cl-white, 0 -1px 0 $cl-white;
+  text-shadow:
+    1px 1px 0 $cl-white,
+    -1px 1px 0 $cl-white,
+    1px -1px 0 $cl-white,
+    -1px -1px 0 $cl-white,
+    1px 0 0 $cl-white,
+    -1px 0 0 $cl-white,
+    0 1px 0 $cl-white,
+    0 -1px 0 $cl-white;
 }
 
 .description {

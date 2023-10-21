@@ -1,5 +1,6 @@
 "use client";
 
+import OutlinedContainer from "components/OutlinedContainer/OutlinedContainer";
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 
@@ -23,10 +24,10 @@ const PersonalityTrait = ({
 
   return (
     <div className={styles.container}>
-      <div className={styles.nameanddescriptioncontainer}>
+      <OutlinedContainer>
         <h3 className={styles.name}>{name}</h3>
         <p className={styles.description}>{description}</p>
-      </div>
+      </OutlinedContainer>
       <Image
         className={`${styles.image} ${inView ? styles.active : ""}`}
         ref={imageRef}
