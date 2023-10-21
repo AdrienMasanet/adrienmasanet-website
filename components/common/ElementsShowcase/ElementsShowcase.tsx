@@ -1,8 +1,13 @@
 "use client";
 
-import React, { useCallback, useEffect as useEffect, useRef, useState } from "react";
+import React, {
+  useCallback,
+  useEffect as useEffect,
+  useRef,
+  useState,
+} from "react";
 
-import scssThemeVariables from "../../styles/javascript_variables.module.scss";
+import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import styles from "./ElementsShowcase.module.scss";
 import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
 import { ElementsShowcaseCategory } from "./types";
@@ -33,11 +38,11 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
         categoriesAndElements.length
       ) {
         setCurrentCategoryReviewing(
-          warp ? 0 : categoriesAndElements.length - 1,
+          warp ? 0 : categoriesAndElements.length - 1
         );
       } else if (currentCategoryReviewingTemp + amount < 0) {
         setCurrentCategoryReviewing(
-          warp ? categoriesAndElements.length - 1 : 0,
+          warp ? categoriesAndElements.length - 1 : 0
         );
       } else {
         let move = currentCategoryReviewingTemp + amount;
@@ -50,7 +55,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
         setCurrentCategoryReviewing(move);
       }
     },
-    [categoriesAndElements.length, currentCategoryReviewing],
+    [categoriesAndElements.length, currentCategoryReviewing]
   );
 
   const animateGrabbing = useCallback(
@@ -61,7 +66,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
       scrollSlider(newCurrentDragSpeed, false, false);
       animationFrameId.current = null; // Reset the animation frame id to allow the next animation frame to be called
     },
-    [scrollSlider, previousCursorX],
+    [scrollSlider, previousCursorX]
   );
 
   const handleCursorDown = useCallback(() => {
@@ -70,9 +75,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
 
   const handleCursorMove = useCallback(
     (
-      event:
-        | React.MouseEvent<HTMLDivElement>
-        | React.TouchEvent<HTMLDivElement>,
+      event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
     ) => {
       event.preventDefault();
 
@@ -99,12 +102,12 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
           }
 
           animationFrameId.current = requestAnimationFrame(() =>
-            animateGrabbing(cursorX),
+            animateGrabbing(cursorX)
           );
         }
       }
     },
-    [isHoldingClick, isDragging, previousCursorX, animateGrabbing],
+    [isHoldingClick, isDragging, previousCursorX, animateGrabbing]
   );
 
   const handleCursorUp = useCallback(() => {
@@ -169,7 +172,7 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
                 position={index - currentCategoryReviewing}
                 isScrolling={isDragging}
               />
-            ),
+            )
           )}
         </div>
         <div
