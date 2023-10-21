@@ -3,13 +3,13 @@ import "@/testing/__mocks__/reCaptchaMock";
 import { render, screen } from "@testing-library/react";
 import { userEvent } from "@testing-library/user-event";
 
-import * as apiRequests from "../../services/apiRequests";
+import * as apiRequests from "../../../../services/apiRequests";
 import ContactForm from "./ContactForm";
 
-jest.mock("../../services/apiRequests", () => {
+jest.mock("../../../../services/apiRequests", () => {
   return {
     __esModule: true,
-    ...jest.requireActual("../../services/apiRequests"),
+    ...jest.requireActual("../../../../services/apiRequests"),
   };
 });
 
@@ -70,8 +70,6 @@ describe("ContactForm component", () => {
     const submitButton = screen.getByRole("button");
     await user.click(submitButton);
 
-    screen.debug();
-
     expect(sendContactMessageMock).toHaveBeenCalled();
     expect(
       screen.getByText("Votre message a bien été envoyé ✅")
@@ -99,8 +97,6 @@ describe("ContactForm component", () => {
 
     const submitButton = screen.getByRole("button");
     await user.click(submitButton);
-
-    screen.debug();
 
     expect(sendContactMessageMock).toHaveBeenCalled();
     expect(screen.getByText(/Une erreur est survenue/i)).toBeInTheDocument();
