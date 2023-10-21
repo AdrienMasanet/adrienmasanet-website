@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";
 import CircleChart from "../../Circlechart/CircleChart";
+import OutlinedContainer from "../../OutlinedContainer/OutlinedContainer";
 import Section from "../../Section/Section";
 import styles from "./SkillsSection.module.scss";
 
@@ -47,7 +48,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
         height={canvasWidthAndHeight.height}
         elements={skills}
       />
-      <div className={styles.introductioncontainer}>
+      <OutlinedContainer>
         <p className={styles.paragraph}>
           Développeur curieux et passionné, je m&apos;épanouis dans la
           découverte, l&apos;assimilation et l&apos;application de nouvelles
@@ -70,7 +71,7 @@ const SkillsSection = ({ skills }: SkillsSectionProps) => {
           Agréable et à l&apos;écoute, je suis également de ceux qui croient
           fermement que l&apos;aspect humain a toute son importance !
         </p>
-      </div>
+      </OutlinedContainer>
     </Section>
   );
 };
