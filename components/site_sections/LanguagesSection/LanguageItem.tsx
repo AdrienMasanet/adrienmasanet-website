@@ -1,3 +1,4 @@
+import OutlinedContainer from "../../OutlinedContainer/OutlinedContainer";
 import Image from "next/image";
 
 import styles from "./LanguagesSection.module.scss";
@@ -10,10 +11,12 @@ type LanguageItemProps = {
 
 const LanguageItem = ({ image, name, description }: LanguageItemProps) => {
   return (
-    <div className={`${styles.container} ${styles.language}`}>
+    <div className={`${styles.languagecontainer}`}>
       <div className={styles.title}>{name}</div>
       <Image src={image} width={166} height={111} alt={name} />
-      <div className={styles.description}>{description}</div>
+      <OutlinedContainer>
+        <div className={styles.description}>{description}</div>
+      </OutlinedContainer>
     </div>
   );
 };
