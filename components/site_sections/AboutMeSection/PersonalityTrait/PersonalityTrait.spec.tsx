@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 
 import PersonalityTrait from "./PersonalityTrait";
 
-describe("PersonnalityTrait component", () => {
+describe("PersonalityTrait component", () => {
   it("should render the passed name", () => {
     render(
       <PersonalityTrait
