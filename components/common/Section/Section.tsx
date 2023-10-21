@@ -2,7 +2,7 @@
 
 import React, { forwardRef } from "react";
 
-import Waves from "../common/Waves/Waves";
+import Waves from "../Waves/Waves";
 import styles from "./Section.module.scss";
 
 type SectionProps = {

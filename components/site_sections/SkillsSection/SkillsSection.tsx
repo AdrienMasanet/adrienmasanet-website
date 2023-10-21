@@ -6,7 +6,7 @@ import scssThemeVariables from "../../../styles/javascript_variables.module.scss
 import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";
 import CircleChart from "../../Circlechart/CircleChart";
 import OutlinedContainer from "../../OutlinedContainer/OutlinedContainer";
-import Section from "../../Section/Section";
+import Section from "../../common/Section/Section";
 import styles from "./SkillsSection.module.scss";
 
 type SkillsSectionProps = {

@@ -1,7 +1,7 @@
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import ElementsShowcase from "../../ElementsShowcase/ElementsShowcase";
 import { ElementsShowcaseCategory } from "../../ElementsShowcase/types";
-import Section from "../../Section/Section";
+import Section from "../../common/Section/Section";
 
 type TechsSectionProps = {
   masteredCategoriesAndElements: ElementsShowcaseCategory[];

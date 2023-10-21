@@ -1,5 +1,5 @@
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import Section from "../../Section/Section";
+import Section from "../../common/Section/Section";
 import HobbyItem from "./HobbyItem/HobbyItem";
 
 type HobbiesSectionProps = {

@@ -1,7 +1,7 @@
 "use client";
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import Section from "../../Section/Section";
+import Section from "../../common/Section/Section";
 import LanguageItem from "./LanguageItem";
 import styles from "./LanguagesSection.module.scss";
 
