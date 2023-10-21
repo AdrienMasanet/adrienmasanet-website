@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import LoadingSpinner from "../common/LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "../../../common/LoadingSpinner/LoadingSpinner";
 import { PortraitLogic } from "./logic";
 import styles from "./Portrait.module.scss";
 

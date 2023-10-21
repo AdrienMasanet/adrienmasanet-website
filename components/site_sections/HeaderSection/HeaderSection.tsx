@@ -1,4 +1,4 @@
-import Portrait from "../../Portrait/Portrait";
+import Portrait from "./Portrait/Portrait";
 import styles from "./HeaderSection.module.scss";
 
 const HeaderSection = () => {
