@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import getElementContentWidthAndHeight from "../../../utils/getElementContentWidthAndHeight";
-import CircleChart from "../../Circlechart/CircleChart";
+import CircleChart from "./Circlechart/CircleChart";
 import OutlinedContainer from "../../common/OutlinedContainer/OutlinedContainer";
 import Section from "../../common/Section/Section";
 import styles from "./SkillsSection.module.scss";
