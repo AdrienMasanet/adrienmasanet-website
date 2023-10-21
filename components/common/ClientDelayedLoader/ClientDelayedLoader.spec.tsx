@@ -1,6 +1,6 @@
 import { act, render, screen } from "@testing-library/react";
 
-import { LoadingCompleteContext } from "../../context/LoadingCompleteContext";
+import { LoadingCompleteContext } from "../../../context/LoadingCompleteContext";
 import ClientDelayedLoader from "./ClientDelayedLoader";
 
 describe("ClientDelayedLoader component", () => {

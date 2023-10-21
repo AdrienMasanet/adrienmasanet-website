@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useInView } from "react-intersection-observer";
 
-import OutlinedContainer from "../OutlinedContainer/OutlinedContainer";
+import OutlinedContainer from "../common/OutlinedContainer/OutlinedContainer";
 import styles from "./PersonalityTrait.module.scss";
 
 type PersonalityTraitProps = {

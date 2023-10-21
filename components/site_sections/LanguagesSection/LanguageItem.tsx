@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import OutlinedContainer from "../../OutlinedContainer/OutlinedContainer";
+import OutlinedContainer from "../../common/OutlinedContainer/OutlinedContainer";
 import styles from "./LanguagesSection.module.scss";
 
 type LanguageItemProps = {
