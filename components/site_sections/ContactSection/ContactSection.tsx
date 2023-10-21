@@ -2,7 +2,7 @@
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import Section from "../../common/Section/Section";
-import SocialMediaIcon from "../../SocialMediaIcon/SocialMediaIcon";
+import SocialMediaIcon from "../../common/SocialMediaIcon/SocialMediaIcon";
 import ContactForm from "./ContactForm/ContactForm";
 import styles from "./ContactSection.module.scss";
 
