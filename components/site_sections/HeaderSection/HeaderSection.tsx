@@ -1,5 +1,5 @@
-import Portrait from "./Portrait/Portrait";
 import styles from "./HeaderSection.module.scss";
+import Portrait from "./Portrait/Portrait";
 
 const HeaderSection = () => {
   return (

@@ -1,6 +1,6 @@
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import PersonalityTrait from "./PersonalityTrait/PersonalityTrait";
 import Section from "../../common/Section/Section";
+import PersonalityTrait from "./PersonalityTrait/PersonalityTrait";
 
 type AboutMeSectionProps = {
   personalityTraits: any;
