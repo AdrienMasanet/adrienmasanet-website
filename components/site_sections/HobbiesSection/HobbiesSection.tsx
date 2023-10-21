@@ -1,6 +1,6 @@
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import Hobby from "../../Hobby/Hobby";
 import Section from "../../Section/Section";
+import HobbyItem from "./HobbyItem/HobbyItem";
 
 type HobbiesSectionProps = {
   hobbies: any;
@@ -17,7 +17,7 @@ const HobbiesSection = ({ hobbies }: HobbiesSectionProps) => {
       spaceAfterTitles="spacer-md"
     >
       {hobbies.map((hobby: any) => (
-        <Hobby
+        <HobbyItem
           key={hobby.id}
           images={hobby.images}
           name={hobby.name}

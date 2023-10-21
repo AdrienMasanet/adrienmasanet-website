@@ -4,21 +4,21 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useInView } from "react-intersection-observer";
 
-import styles from "./Hobby.module.scss";
+import styles from "./HobbyItem.module.scss";
 
-type HobbyProps = {
+type HobbyItemProps = {
   name: string;
   description: string;
   images: string[];
   imagesScale?: number;
 };
 
-const Hobby = ({
+const HobbyItem = ({
   name,
   description,
   images,
   imagesScale = 100,
-}: HobbyProps) => {
+}: HobbyItemProps) => {
   const [carouselRotation, setCarouselRotation] = useState<number>(0);
   const carouselAnimationRef = useRef<any>();
   const { ref: imagesContainerRef, inView: isImagesContainerInView } =
@@ -73,4 +73,4 @@ const Hobby = ({
   );
 };
 
-export default Hobby;
+export default HobbyItem;
