@@ -4,7 +4,7 @@ import { useReCaptcha } from "next-recaptcha-v3";
 import React, { useState } from "react";
 
 import { sendContactMessage } from "../../../../services/apiRequests";
-import Button from "../../../shared/Button/Button";
+import Button from "../../../common/Button/Button";
 import styles from "./ContactForm.module.scss";
 
 const ContactForm = () => {
