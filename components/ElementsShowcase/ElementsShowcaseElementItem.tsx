@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import MedalIcon from "../MedalIcon/MedalIcon";
+import MedalIcon from "../common/MedalIcon/MedalIcon";
 import styles from "./ElementsShowcase.module.scss";
 import { ElementsShowcaseItem } from "./types";
 

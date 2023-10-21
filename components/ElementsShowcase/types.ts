@@ -1,4 +1,4 @@
-import { MedalRank } from "../MedalIcon/types";
+import { MedalRank } from "../common/MedalIcon/types";
 
 export type ElementsShowcaseItem = {
   id: string;

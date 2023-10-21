@@ -1,6 +1,6 @@
 "use client";
 
-import scssThemeVariables from "../../styles/javascript_variables.module.scss";
+import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import styles from "./MedalIcon.module.scss";
 import { MedalRank } from "./types";
 

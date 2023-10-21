@@ -1,6 +1,6 @@
 // These functions are used to fetch data from the Pocketbase backend API and return the data in a format that is easy to use in the frontend.
 
-import { MedalRank } from "../components/MedalIcon/types";
+import { MedalRank } from "../components/common/MedalIcon/types";
 
 export async function fetchSkills() {
   return fetch(
@@ -11,7 +11,7 @@ export async function fetchSkills() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items);
@@ -26,7 +26,7 @@ export async function fetchMasteredTechs() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items)
@@ -40,7 +40,7 @@ export async function fetchMasteredTechs() {
               category.expand["tech(tech_category)"] &&
               category.expand["tech(tech_category)"].length > 0 &&
               category.expand["tech(tech_category)"].filter(
-                (tech: any) => tech.mastered === true,
+                (tech: any) => tech.mastered === true
               ).length > 0
             );
           })
@@ -85,7 +85,7 @@ export async function fetchNotMasteredTechs() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items)
@@ -99,7 +99,7 @@ export async function fetchNotMasteredTechs() {
               category.expand["tech(tech_category)"] &&
               category.expand["tech(tech_category)"].length > 0 &&
               category.expand["tech(tech_category)"].filter(
-                (tech: any) => tech.mastered === false,
+                (tech: any) => tech.mastered === false
               ).length > 0
             );
           })
@@ -137,7 +137,7 @@ export async function fetchPersonalityTraits() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items)
@@ -162,7 +162,7 @@ export async function fetchHobbies() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items)
@@ -189,7 +189,7 @@ export async function sendContactMessage(message: any): Promise<boolean> {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(message),
-    },
+    }
   )
     .then((response) => response.status === 200)
     .catch((error) => false);
@@ -204,7 +204,7 @@ export async function fetchLanguages() {
       next: {
         revalidate: 60,
       },
-    },
+    }
   )
     .then((response) => response.json())
     .then((data) => data.items)
