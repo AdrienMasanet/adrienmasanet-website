@@ -1,5 +1,6 @@
+import Section from "components/common/Section/Section";
+
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import Section from "../../Section/Section";
 
 // type AchievementsSectionProps = {};
 
