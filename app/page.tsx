@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 
-import ClientDelayedLoader from "../components/ClientDelayedLoader/ClientDelayedLoader";
+import ClientDelayedLoader from "../components/common/ClientDelayedLoader/ClientDelayedLoader";
 import AboutMeSection from "../components/site_sections/AboutMeSection/AboutMeSection";
 // import AchievementsSection from "../components/site_sections/AchievementsSection/AchievementsSection";
 import FooterSection from "../components/site_sections/FooterSection/FooterSection";
