@@ -1,17 +1,20 @@
+import TechCategoryContainer from "components/site_sections/TechsSection/TechCategoryContainer/TechCategoryContainer";
+
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import ElementsShowcase from "../../common/ElementsShowcase/ElementsShowcase";
-import { ElementsShowcaseCategory } from "../../common/ElementsShowcase/types";
 import Section from "../../common/Section/Section";
+import { TechCategory } from "./TechCategoryContainer/types";
 
 type TechsSectionProps = {
-  masteredCategoriesAndElements: ElementsShowcaseCategory[];
-  notMasteredCategoriesAndElements: ElementsShowcaseCategory[];
+  masteredCategoriesAndElements: TechCategory[];
+  notMasteredCategoriesAndElements: TechCategory[];
 };
 
 const TechsSection = ({
   masteredCategoriesAndElements,
   notMasteredCategoriesAndElements,
 }: TechsSectionProps) => {
+  console.log(masteredCategoriesAndElements);
   return (
     <>
       <Section
@@ -24,7 +27,9 @@ const TechsSection = ({
         spaceAfterTitles="spacer-sm"
       >
         <ElementsShowcase
-          categoriesAndElements={masteredCategoriesAndElements}
+          slides={masteredCategoriesAndElements.map((category) => (
+            <TechCategoryContainer key={category.id} category={category} />
+          ))}
         />
       </Section>
       <Section
@@ -36,7 +41,9 @@ const TechsSection = ({
         spaceAfterTitles="spacer-sm"
       >
         <ElementsShowcase
-          categoriesAndElements={notMasteredCategoriesAndElements}
+          slides={notMasteredCategoriesAndElements.map((category) => (
+            <TechCategoryContainer key={category.id} category={category} />
+          ))}
         />
       </Section>
     </>

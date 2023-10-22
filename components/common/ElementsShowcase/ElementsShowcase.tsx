@@ -1,6 +1,7 @@
 "use client";
 
 import React, {
+  ReactElement,
   useCallback,
   useEffect as useEffect,
   useRef,
@@ -9,15 +10,14 @@ import React, {
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
 import styles from "./ElementsShowcase.module.scss";
-import ElementsShowcaseCategoryContainer from "./ElementsShowcaseCategoryContainer";
-import { ElementsShowcaseCategory } from "./types";
+import SlideContainer from "./SlideContainer";
 
 type ElementsShowcaseProps = {
-  categoriesAndElements: ElementsShowcaseCategory[];
+  slides: ReactElement[];
 };
 
-const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
-  const [currentCategoryReviewing, setCurrentCategoryReviewing] = useState(0);
+const ElementsShowcase = ({ slides }: ElementsShowcaseProps) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [isHoldingClick, setIsHoldingClick] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [currentDragSpeed, setCurrentDragSpeed] = useState(0);
@@ -26,36 +26,29 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
 
   const scrollSlider = useCallback(
     (amount: number, round: boolean = false, warp: boolean = true) => {
-      let currentCategoryReviewingTemp = currentCategoryReviewing;
+      let currentSlideTemp = currentSlide;
 
       if (round) {
         amount = Math.round(amount);
-        currentCategoryReviewingTemp = Math.round(currentCategoryReviewingTemp);
+        currentSlideTemp = Math.round(currentSlideTemp);
       }
 
-      if (
-        currentCategoryReviewingTemp + amount >=
-        categoriesAndElements.length
-      ) {
-        setCurrentCategoryReviewing(
-          warp ? 0 : categoriesAndElements.length - 1
-        );
-      } else if (currentCategoryReviewingTemp + amount < 0) {
-        setCurrentCategoryReviewing(
-          warp ? categoriesAndElements.length - 1 : 0
-        );
+      if (currentSlideTemp + amount >= slides.length) {
+        setCurrentSlide(warp ? 0 : slides.length - 1);
+      } else if (currentSlideTemp + amount < 0) {
+        setCurrentSlide(warp ? slides.length - 1 : 0);
       } else {
-        let move = currentCategoryReviewingTemp + amount;
+        let move = currentSlideTemp + amount;
 
         if (!warp) {
-          // Constraint move between 0 and categoriesAndElements.length - 1
-          move = Math.max(0, Math.min(move, categoriesAndElements.length - 1));
+          // Constraint move between 0 and slides.length - 1
+          move = Math.max(0, Math.min(move, slides.length - 1));
         }
 
-        setCurrentCategoryReviewing(move);
+        setCurrentSlide(move);
       }
     },
-    [categoriesAndElements.length, currentCategoryReviewing]
+    [slides.length, currentSlide]
   );
 
   const animateGrabbing = useCallback(
@@ -77,8 +70,6 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
     (
       event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
     ) => {
-      event.preventDefault();
-
       // Assign the correct event's cursor X position depending on the event type
       const cursorX =
         "clientX" in event ? event.clientX : event.touches[0].clientX;
@@ -164,16 +155,15 @@ const ElementsShowcase = ({ categoriesAndElements }: ElementsShowcaseProps) => {
           </svg>
         </div>
         <div className={styles.slider}>
-          {categoriesAndElements.map(
-            (category: ElementsShowcaseCategory, index) => (
-              <ElementsShowcaseCategoryContainer
-                key={category.id}
-                category={category}
-                position={index - currentCategoryReviewing}
-                isScrolling={isDragging}
-              />
-            )
-          )}
+          {slides.map((slideElement, index) => (
+            <SlideContainer
+              key={index}
+              position={index - currentSlide}
+              isDragging={isDragging}
+            >
+              {slideElement}
+            </SlideContainer>
+          ))}
         </div>
         <div
           className={`${styles.arrow} ${styles.right}`}

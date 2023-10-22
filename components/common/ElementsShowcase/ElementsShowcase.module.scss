@@ -6,6 +6,7 @@
   margin: auto;
   display: flex;
   justify-content: space-evenly;
+
   align-items: center;
   cursor: grab;
 
@@ -14,7 +15,6 @@
   }
 
   * {
-    backface-visibility: hidden;
     outline: 1px solid transparent;
     -webkit-user-drag: none;
     user-select: none;
@@ -28,176 +28,25 @@
 }
 
 .slider {
-  transform: translateZ(
-    0px
-  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
   position: relative;
   width: 80%;
   min-height: 30em;
   display: inline;
 }
 
-.categorycontainer {
-  transform: translateZ(
-    0px
-  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
+.slidecontainer {
   position: absolute;
   top: 50%;
   left: 50%;
-  min-height: 17em;
-  height: 23.5em;
-  max-height: 30em;
-  width: 25em;
-  background-color: $cl-white;
-  border-radius: $default-border-radius;
+  width: 90%;
   transition:
     transform 1.25s $eg-out-cubic,
     opacity 0.2s $eg-out-cubic,
     scale 2s ease-in-out;
-  box-shadow: $sd-base-lg;
-  overflow-y: auto;
 
   &.grabbing {
     transition: scale 0.5s $eg-out-cubic;
     scale: 0.95;
-  }
-
-  .title {
-    font-size: 2em;
-    color: $cl-darkblue;
-    padding: 0.5em;
-    text-align: center;
-    white-space: nowrap;
-  }
-
-  .divider {
-    background-color: $cl-darkblue;
-    border: none;
-    height: 1px;
-    max-width: 0%;
-    margin: auto;
-    transition: max-width 0.75s $eg-out-cubic;
-  }
-
-  .image {
-    border-radius: $default-border-radius;
-  }
-
-  &.reviewing {
-    z-index: 5;
-
-    .divider {
-      max-width: 50%;
-    }
-
-    .itemcontainer {
-      cursor: pointer;
-
-      &:hover {
-        transform: scale(1.05);
-
-        .image {
-          opacity: 0.5;
-          filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm)
-            grayscale(50%);
-        }
-
-        .title {
-          opacity: 1;
-          bottom: 0em;
-        }
-      }
-    }
-  }
-
-  &.flipped {
-    .image {
-      float: left;
-      margin: 1.5em;
-      filter: drop-shadow($sd-hard-darkblue-md) drop-shadow($sd-base-sm);
-
-      @media screen and (max-width: $ss-mobile) {
-        filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm)
-          grayscale(50%);
-      }
-    }
-
-    .description {
-      color: $cl-darkblue;
-      margin: 1.5em;
-      text-align: justify;
-    }
-
-    @media screen and (max-width: $ss-mobile) {
-      .image {
-        margin: 1em;
-        margin-top: 0.5em;
-        width: 3.5em;
-        height: 3.5em;
-      }
-
-      .description {
-        margin: 1em;
-        margin-top: 0.5em;
-      }
-    }
-  }
-
-  @media screen and (max-width: $ss-mobile) {
-    width: 90%;
-
-    .title {
-      font-size: 1.75em;
-    }
-  }
-}
-
-.itemscontainer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-gap: 1em;
-  padding: 1em;
-  filter: drop-shadow($sd-hard-darkblue-sm) drop-shadow($sd-base-sm);
-
-  @media screen and (max-width: $ss-mobile) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-.itemcontainer {
-  transform: translateZ(
-    0px
-  ); // This line is extremely important for performance as it keeps null 3D transform on the element containing the image to avoid stalls in the GPU when the element is 3D transformed
-  position: relative;
-  width: 5em;
-  height: 5em;
-  color: $cl-white;
-  border-radius: $default-border-radius;
-  overflow: hidden;
-  filter: brightness(100%);
-  transition: all 0.5s ease-out;
-
-  .image {
-    z-index: -1;
-  }
-
-  .title {
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-    background: $cl-black-50;
-    color: $cl-white;
-    font-size: 0.75em;
-    text-align: center;
-    white-space: normal;
-    opacity: 0;
-    bottom: -4em;
-    transition: all 0.5s $eg-out-cubic;
-  }
-
-  @media screen and (max-width: $ss-mobile) {
-    width: 3.25em;
-    height: 3.25em;
   }
 }
 
@@ -233,41 +82,5 @@
         transform: translate3d(0.1em, 0, 0);
       }
     }
-  }
-}
-
-.medalrank {
-  position: absolute;
-  top: 0;
-  right: 5%;
-}
-
-.backarrow {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 1em;
-  margin: 0.5em;
-  cursor: pointer;
-  border-radius: $default-border-radius;
-  transition: all 0.5s $eg-out-cubic;
-  z-index: 10;
-
-  svg {
-    transition: transform 0.5s $eg-out-cubic;
-  }
-
-  &:hover {
-    background: $cl-darkblue-10;
-
-    svg {
-      filter: drop-shadow($sd-hard-white-sm) drop-shadow(0 0 0 white);
-      transform: translateX(-0.1em);
-    }
-  }
-
-  @media screen and (max-width: $ss-mobile) {
-    padding: 0.75em;
-    margin: 0.5em;
   }
 }

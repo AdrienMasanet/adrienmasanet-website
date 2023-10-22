@@ -1,16 +1,14 @@
 import Image from "next/image";
 
-import MedalIcon from "../MedalIcon/MedalIcon";
-import styles from "./ElementsShowcase.module.scss";
-import { ElementsShowcaseItem } from "./types";
+import MedalIcon from "../../../common/MedalIcon/MedalIcon";
+import styles from "./TechCategoryContainer.module.scss";
+import { Tech } from "./types";
 
-type ElementsShowcaseElementItemProps = {
-  item: ElementsShowcaseItem;
+type TechItemProps = {
+  item: Tech;
 };
 
-const ElementsShowcaseElementItem = ({
-  item,
-}: ElementsShowcaseElementItemProps) => {
+const TechItem = ({ item }: TechItemProps) => {
   return (
     <div className={styles.itemcontainer}>
       <Image
@@ -30,4 +28,4 @@ const ElementsShowcaseElementItem = ({
   );
 };
 
-export default ElementsShowcaseElementItem;
+export default TechItem;

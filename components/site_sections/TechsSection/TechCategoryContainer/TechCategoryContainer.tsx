@@ -3,25 +3,21 @@
 import Image from "next/image";
 import React, { useEffect, useMemo, useState } from "react";
 
-import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
-import styles from "./ElementsShowcase.module.scss";
-import ElementsShowcaseElementItem from "./ElementsShowcaseElementItem";
-import { ElementsShowcaseCategory, ElementsShowcaseItem } from "./types";
+import scssThemeVariables from "../../../../styles/javascript_variables.module.scss";
+import styles from "./TechCategoryContainer.module.scss";
+import TechItem from "./TechItem";
+import { Tech, TechCategory } from "./types";
 
-type ElementsShowcaseCategoryContainerProps = {
-  category: ElementsShowcaseCategory;
-  reviewing?: boolean;
-  position: number;
-  isScrolling?: boolean;
+type TechCategoryContainerProps = {
+  category: TechCategory;
+  position?: number;
 };
 
-const ElementsShowcaseCategoryContainer = ({
+const TechCategoryContainer = ({
   category,
   position,
-  isScrolling,
-}: ElementsShowcaseCategoryContainerProps) => {
-  const [itemReviewing, setItemReviewing] =
-    useState<ElementsShowcaseItem | null>(null);
+}: TechCategoryContainerProps) => {
+  const [itemReviewing, setItemReviewing] = useState<Tech | null>(null);
 
   const handleClick = (
     event: React.MouseEvent<HTMLDivElement> | React.TouchEvent<HTMLDivElement>
@@ -31,8 +27,8 @@ const ElementsShowcaseCategoryContainer = ({
 
     if (itemElement) {
       const itemId = itemElement.dataset.id;
-      const item: ElementsShowcaseItem | undefined = category.items.find(
-        (element: ElementsShowcaseItem) => element.id === itemId
+      const item: Tech | undefined = category.items.find(
+        (element: Tech) => element.id === itemId
       );
       if (item && position === 0) {
         setItemReviewing(item);
@@ -43,9 +39,9 @@ const ElementsShowcaseCategoryContainer = ({
   // Use memo to prevent the items from being re-rendered every time the position changes
   const items = useMemo(() => {
     if (category.items) {
-      return category.items.map((element: ElementsShowcaseItem) => (
+      return category.items.map((element: Tech) => (
         <div key={element.id} data-id={element.id} className="item">
-          <ElementsShowcaseElementItem item={element} />
+          <TechItem item={element} />
         </div>
       ));
     }
@@ -59,21 +55,15 @@ const ElementsShowcaseCategoryContainer = ({
   }, [position]);
 
   return (
-    <>
+    <div className={styles.maincontainer}>
       <div
         onClick={handleClick}
         className={`
-          ${styles.categorycontainer}
-          ${isScrolling ? styles.grabbing : ""}
-          ${position === 0 && !isScrolling ? styles.reviewing : ""}`}
+          ${styles.container}
+          ${position === 0 ? styles.reviewing : ""}
+        `}
         style={{
-          transform: `translate3d(${-50 + position * 100}%, ${
-            -50 + Math.abs(position) * 10
-          }%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${
-            itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"
-          } `,
-          opacity: position === 0 ? 1 : 1 / Math.abs(position * 5),
-          zIndex: position === 0 ? 10 : 0,
+          transform: `${itemReviewing ? "rotateY(180deg)" : "rotateY(0deg)"} `,
         }}
       >
         <h3 className={styles.title}>{category.name}</h3>
@@ -81,19 +71,9 @@ const ElementsShowcaseCategoryContainer = ({
         <div className={styles.itemscontainer}>{items}</div>
       </div>
       <div
-        className={`
-          ${styles.flipped}
-          ${styles.categorycontainer}
-          ${isScrolling ? styles.grabbing : ""}
-          ${position === 0 ? styles.reviewing : ""}`}
+        className={styles.flipped}
         style={{
-          transform: `translate3d(${-50 + position * 100}%, ${
-            -50 + Math.abs(position) * 10
-          }%, 0) scale(${1 - Math.abs(position) * 0.1 + 0.1}) ${
-            itemReviewing ? "rotateY(0deg)" : "rotateY(180deg)"
-          }`,
-          opacity: position === 0 ? 1 : 1 / Math.abs(position * 5),
-          zIndex: position === 0 ? 10 : 0,
+          transform: `${itemReviewing ? "rotateY(0deg)" : "rotateY(180deg)"} `,
         }}
       >
         {itemReviewing && (
@@ -127,8 +107,8 @@ const ElementsShowcaseCategoryContainer = ({
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
-export default ElementsShowcaseCategoryContainer;
+export default TechCategoryContainer;
