@@ -14,7 +14,6 @@ const TechsSection = ({
   masteredCategoriesAndElements,
   notMasteredCategoriesAndElements,
 }: TechsSectionProps) => {
-  console.log(masteredCategoriesAndElements);
   return (
     <>
       <Section

@@ -2,7 +2,6 @@
 
 .maincontainer {
   position: relative;
-  max-width: 40em;
   margin: auto;
   display: flex;
   justify-content: space-evenly;
@@ -30,7 +29,6 @@
 .slider {
   position: relative;
   width: 80%;
-  min-height: 30em;
   display: inline;
 }
 
@@ -52,6 +50,7 @@
 
 .arrow {
   width: 10%;
+  max-width: 1em;
   height: 4em;
   font-size: 4em;
   color: $cl-white;

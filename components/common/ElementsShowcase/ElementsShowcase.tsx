@@ -4,6 +4,7 @@ import React, {
   ReactElement,
   useCallback,
   useEffect as useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
@@ -14,15 +15,20 @@ import SlideContainer from "./SlideContainer";
 
 type ElementsShowcaseProps = {
   slides: ReactElement[];
+  wide?: boolean;
 };
 
-const ElementsShowcase = ({ slides }: ElementsShowcaseProps) => {
+const ElementsShowcase = ({ slides, wide = false }: ElementsShowcaseProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isHoldingClick, setIsHoldingClick] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [currentDragSpeed, setCurrentDragSpeed] = useState(0);
   const animationFrameId = useRef<number | null>(null);
   const [previousCursorX, setPreviousCursorX] = useState<any>(null);
+  const [averageSlidesHeight, setAverageSlidesHeight] = useState<number | null>(
+    null
+  );
+  const sliderRef = useRef<HTMLDivElement>(null);
 
   const scrollSlider = useCallback(
     (amount: number, round: boolean = false, warp: boolean = true) => {
@@ -113,6 +119,21 @@ const ElementsShowcase = ({ slides }: ElementsShowcaseProps) => {
   }, []);
 
   useEffect(() => {
+    const slidesDomElements: HTMLCollection | null =
+      sliderRef.current?.children ?? null;
+
+    if (!slidesDomElements || slidesDomElements.length === 0) return;
+
+    let currentAverage: number = 0;
+
+    for (let i = 0; i < slidesDomElements.length; i++) {
+      currentAverage += slidesDomElements[i].scrollHeight;
+    }
+
+    setAverageSlidesHeight(currentAverage / slidesDomElements.length);
+  }, [slides, sliderRef]);
+
+  useEffect(() => {
     // If the user is not dragging anymore, we scroll the slider to the closest category
     if (isDragging === false) {
       scrollSlider(currentDragSpeed, true, false);
@@ -133,6 +154,7 @@ const ElementsShowcase = ({ slides }: ElementsShowcaseProps) => {
         className={`${styles.maincontainer} ${
           isDragging ? styles.grabbing : ""
         }`}
+        style={{ maxWidth: wide ? "none" : "40em" }}
       >
         <div
           className={`${styles.arrow} ${styles.left}`}
@@ -154,7 +176,11 @@ const ElementsShowcase = ({ slides }: ElementsShowcaseProps) => {
             />
           </svg>
         </div>
-        <div className={styles.slider}>
+        <div
+          ref={sliderRef}
+          className={styles.slider}
+          style={{ height: `${averageSlidesHeight}px` }}
+        >
           {slides.map((slideElement, index) => (
             <SlideContainer
               key={index}
