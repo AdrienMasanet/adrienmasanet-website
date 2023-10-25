@@ -19,10 +19,10 @@ type ElementsShowcaseProps = {
 };
 
 const ElementsShowcase = ({ slides, wide = false }: ElementsShowcaseProps) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isHoldingClick, setIsHoldingClick] = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-  const [currentDragSpeed, setCurrentDragSpeed] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState<number>(0);
+  const [isHoldingClick, setIsHoldingClick] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState<boolean>(false);
+  const [currentDragSpeed, setCurrentDragSpeed] = useState<number>(0);
   const animationFrameId = useRef<number | null>(null);
   const [previousCursorX, setPreviousCursorX] = useState<any>(null);
   const [averageSlidesHeight, setAverageSlidesHeight] = useState<number | null>(
