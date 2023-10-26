@@ -12,6 +12,7 @@
   transition: all 0.5s $eg-out-cubic;
   user-select: none;
   overflow: hidden;
+  border-radius: $default-border-radius;
 
   &.primary {
     background: $cl-darkblue;

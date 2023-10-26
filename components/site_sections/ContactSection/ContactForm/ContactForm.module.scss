@@ -30,6 +30,7 @@
     padding: 0.5em;
     transition: all 0.75s $eg-out-cubic;
     min-height: 2.75em;
+    border-radius: $default-border-radius;
 
     @media screen and (max-width: $ss-mobile) {
       font-size: 1em;
@@ -46,10 +47,6 @@
         2px 2px 15px rgba($cl-blue, 0.25);
       size: 1.21;
     }
-  }
-
-  * {
-    border-radius: $default-border-radius;
   }
 }
 
