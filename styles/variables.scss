@@ -1,5 +1,6 @@
 // Colors
 $cl-white: #eff0f4;
+$cl-white-80: rgba($cl-white, 0.8);
 $cl-white-50: rgba($cl-white, 0.5);
 $cl-white-10: rgba($cl-white, 0.1);
 $cl-darkblue: #1f1c9a;
@@ -17,10 +18,29 @@ $cl-silver: #a2a2a2;
 $cl-bronze: #79442d;
 
 // Gradients
-$gd-blue: linear-gradient(76.85deg, rgba($cl-blue, 0) 17.17%, rgba($cl-blue, 0.8) 77.98%);
-$gd-golden: linear-gradient(180deg, lighten($cl-gold, 40%) 10%, lighten($cl-gold, 10%) 60%, $cl-gold 100%);
-$gd-silver: linear-gradient(180deg, lighten($cl-silver, 100%) 10%, lighten($cl-silver, 10%) 50%, $cl-silver 100%);
-$gd-bronze: linear-gradient(180deg, lighten($cl-bronze, 50%) 10%, lighten($cl-bronze, 10%) 80%, $cl-bronze 100%);
+$gd-blue: linear-gradient(
+  76.85deg,
+  rgba($cl-blue, 0) 17.17%,
+  rgba($cl-blue, 0.8) 77.98%
+);
+$gd-golden: linear-gradient(
+  180deg,
+  lighten($cl-gold, 40%) 10%,
+  lighten($cl-gold, 10%) 60%,
+  $cl-gold 100%
+);
+$gd-silver: linear-gradient(
+  180deg,
+  lighten($cl-silver, 100%) 10%,
+  lighten($cl-silver, 10%) 50%,
+  $cl-silver 100%
+);
+$gd-bronze: linear-gradient(
+  180deg,
+  lighten($cl-bronze, 50%) 10%,
+  lighten($cl-bronze, 10%) 80%,
+  $cl-bronze 100%
+);
 
 // Shadows
 $sd-hard-darkblue-lg: 3px 3px 0px $cl-darkblue;
