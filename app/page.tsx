@@ -2,15 +2,16 @@ import dynamic from "next/dynamic";
 
 import ClientDelayedLoader from "../components/common/ClientDelayedLoader/ClientDelayedLoader";
 import AboutMeSection from "../components/site_sections/AboutMeSection/AboutMeSection";
-// import AchievementsSection from "../components/site_sections/AchievementsSection/AchievementsSection";
+import AchievementsSection from "../components/site_sections/AchievementsSection/AchievementsSection";
 import FooterSection from "../components/site_sections/FooterSection/FooterSection";
 import HeaderSection from "../components/site_sections/HeaderSection/HeaderSection";
-// import LanguagesSection from "../components/site_sections/LanguagesSection/LanguagesSection";
+import LanguagesSection from "../components/site_sections/LanguagesSection/LanguagesSection";
 import SkillsSection from "../components/site_sections/SkillsSection/SkillsSection";
 import TechsSection from "../components/site_sections/TechsSection/TechsSection";
 import {
+  fetchAchievements,
   fetchHobbies,
-  /* fetchLanguages ,*/
+  fetchLanguages,
   fetchMasteredTechs,
   fetchNotMasteredTechs,
   fetchPersonalityTraits,
@@ -22,9 +23,10 @@ export default async function MainPage() {
   const skills = await fetchSkills();
   const masteredTechs = await fetchMasteredTechs();
   const notMasteredTechs = await fetchNotMasteredTechs();
-  //const languages = await fetchLanguages();
+  const languages = await fetchLanguages();
   const personalityTraits = await fetchPersonalityTraits();
   const hobbies = await fetchHobbies();
+  const achievements = await fetchAchievements();
 
   // Dynamic imports for sections that are not needed on the server side
   const HobbiesSection = dynamic(
@@ -46,8 +48,8 @@ export default async function MainPage() {
           masteredCategoriesAndElements={masteredTechs}
           notMasteredCategoriesAndElements={notMasteredTechs}
         />
-        {/* <LanguagesSection languages={languages} />
-        <AchievementsSection /> */}
+        <LanguagesSection languages={languages} />
+        <AchievementsSection achievements={achievements} />
         <AboutMeSection personalityTraits={personalityTraits} />
         <HobbiesSection hobbies={hobbies} />
         <ContactSection />
