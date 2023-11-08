@@ -60,6 +60,7 @@ const Achievement = ({
       </div>
       {mediaMIMETypeCategory === "video" ? (
         <video
+          playsInline
           autoPlay
           loop
           muted
