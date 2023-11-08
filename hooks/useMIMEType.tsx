@@ -26,15 +26,13 @@ const useMIMEType = (mediaURI: string) => {
         break;
       case ".mp4":
       case ".webm":
+      case ".flv":
+      case ".avi":
         setMediaCategory("video");
         break;
       case ".mp3":
       case ".wav":
         setMediaCategory("audio");
-        break;
-      case ".flv":
-      case ".avi":
-        setMediaCategory("video");
         break;
     }
   }, [mediaURI, mediaExtension]);
