@@ -219,3 +219,33 @@ export async function fetchLanguages() {
       });
     });
 }
+
+export async function fetchAchievements() {
+  return fetch(
+    process.env.NEXT_PUBLIC_POCKETBASE_API_URL +
+      "collections/achievement/records?sort=order&expand=techs",
+    {
+      method: "GET",
+      next: {
+        revalidate: 60,
+      },
+    }
+  )
+    .then((response) => response.json())
+    .then((data) => data.items)
+    .then((achievements) =>
+      achievements.map((achievement: any) => ({
+        id: achievement.id,
+        name: achievement.name,
+        description: achievement.description,
+        techs: achievement.expand.techs.map((tech: any) => ({
+          id: tech.id,
+          name: tech.name,
+          image: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${tech.collectionId}/${tech.id}/${tech.image}`,
+        })),
+        link: achievement.link,
+        repoLink: achievement.repo_link,
+        media: `${process.env.NEXT_PUBLIC_POCKETBASE_API_URL}files/${achievement.collectionId}/${achievement.id}/${achievement.media}`,
+      }))
+    );
+}
