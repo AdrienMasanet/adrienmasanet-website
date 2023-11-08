@@ -1,10 +1,15 @@
-import Section from "components/common/Section/Section";
+import ElementsShowcase from "components/common/ElementsShowcase/ElementsShowcase";
+import { ReactElement } from "react";
 
 import scssThemeVariables from "../../../styles/javascript_variables.module.scss";
+import Section from "../../common/Section/Section";
+import Achievement from "./Achievement/Achievement";
 
-// type AchievementsSectionProps = {};
+type AchievementsSectionProps = {
+  achievements: any;
+};
 
-const AchievementsSection = (/* {}: AchievementsSectionProps */) => {
+const AchievementsSection = ({ achievements }: AchievementsSectionProps) => {
   return (
     <>
       <Section
@@ -13,11 +18,23 @@ const AchievementsSection = (/* {}: AchievementsSectionProps */) => {
         sectionColor={scssThemeVariables.scssThemeClDarkblue}
         nextSectionColor={scssThemeVariables.scssThemeClDarkblue}
         textColor={scssThemeVariables.scssThemeClWhite}
-        spaceBelow="spacer-md"
-        spaceAfterTitles="spacer-md"
-        maxWidth={900}
+        spaceAfterTitles="spacer-sm"
+        maxWidth={1200}
       >
-        <h4>Réalisations</h4>
+        <ElementsShowcase
+          wide
+          slides={achievements.map((achievement: any) => (
+            <Achievement
+              key={achievement.id}
+              name={achievement.name}
+              link={achievement.link}
+              repoLink={achievement.repoLink}
+              description={achievement.description}
+              techs={achievement.techs}
+              media={achievement.media}
+            />
+          ))}
+        />
       </Section>
     </>
   );
