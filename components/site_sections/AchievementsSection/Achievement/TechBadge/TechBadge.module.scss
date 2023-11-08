@@ -1,0 +1,27 @@
+@import "../../../../../styles/variables";
+
+.container {
+  display: inline-block;
+  padding: 0 0.25em 0.15em 0.25em;
+  background-color: $cl-white;
+  border-radius: $default-border-radius;
+  border: solid 1px $cl-darkblue;
+  box-shadow: $sd-hard-darkblue-sm;
+
+  &:not(:first-child) {
+    margin: 0.5em 0 0 0.5em;
+  }
+}
+
+.name {
+  font-size: 0.7em;
+  font-weight: 400;
+  margin-bottom: -0.05em;
+}
+
+.icon {
+  margin-left: 0.25em;
+  filter: drop-shadow($sd-hard-darkblue-sm);
+  translate: 0 0.15em;
+  pointer-events: none;
+}

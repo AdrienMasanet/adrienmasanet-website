@@ -1,0 +1,97 @@
+@import "../../../../styles/variables";
+
+.container {
+  z-index: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 20em;
+  background-color: $cl-white;
+  box-shadow: $sd-base-lg;
+  border-radius: $default-border-radius;
+  overflow: hidden;
+  color: $cl-darkblue;
+}
+
+.titleanddescriptioncontainer {
+  width: 100%;
+  padding: 1.5em 1em 0.75em;
+  background-color: $cl-white-80;
+  backdrop-filter: blur(5px);
+}
+
+.title {
+  max-width: 35em;
+  margin: auto auto 0.5em;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: 300;
+  color: $cl-darkblue;
+  text-shadow: $sd-hard-white-sm;
+
+  @media screen and (max-width: $ss-mobile) {
+    margin: auto auto 1em;
+    font-size: 1em;
+    font-weight: 500;
+  }
+}
+
+.description {
+  max-width: 35em;
+  margin: auto;
+  text-align: center;
+  text-shadow: $sd-hard-white-sm;
+
+  @media screen and (max-width: $ss-mobile) {
+    max-width: none;
+  }
+}
+
+.options {
+  display: flex;
+  gap: 0.5em;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.5em;
+
+  @media screen and (max-width: $ss-mobile) {
+    padding: 0.5em;
+  }
+}
+
+.link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+
+  img {
+    padding-bottom: 0.15em;
+    pointer-events: none;
+    filter: drop-shadow($sd-hard-white-sm);
+
+    @media screen and (max-width: $ss-mobile) {
+      width: 1.25em;
+      height: 1.25em;
+    }
+  }
+}
+
+.techstack {
+  width: 100%;
+  margin-top: auto;
+  padding: 0.5em 0.3em;
+  text-align: center;
+}
+
+.mediabackground {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  object-fit: cover;
+  pointer-events: none;
+}
