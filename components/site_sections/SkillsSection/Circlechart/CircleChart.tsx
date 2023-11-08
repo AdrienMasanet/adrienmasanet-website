@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useInView } from "react-intersection-observer";
 
-import { useLoadingComplete } from "../../../../hooks/useLoadingComplete";
+import useLoadingComplete from "../../../../hooks/useLoadingComplete";
 import styles from "./CircleChart.module.scss";
 import { CircleChartLogic } from "./logic";
 import { CircleChartElement } from "./types";

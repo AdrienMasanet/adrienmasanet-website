@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { useLoadingComplete } from "../../../hooks/useLoadingComplete";
+import useLoadingComplete from "../../../hooks/useLoadingComplete";
 import styles from "./ClientDelayedLoader.module.scss";
 
 type ClientDelayedLoaderProps = {
